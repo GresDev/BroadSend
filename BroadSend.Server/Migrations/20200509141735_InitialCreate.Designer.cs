@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BroadSend.Server.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20200211082005_IdentityAdded")]
-    partial class IdentityAdded
+    [Migration("20200509141735_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -124,6 +124,9 @@ namespace BroadSend.Server.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Name")
+                        .IsUnique();
+
                     b.ToTable("Composers");
                 });
 
@@ -141,6 +144,9 @@ namespace BroadSend.Server.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Name")
+                        .IsUnique();
+
                     b.ToTable("Countries");
                 });
 
@@ -156,40 +162,20 @@ namespace BroadSend.Server.Migrations
                         .HasColumnType("nvarchar(64)")
                         .HasMaxLength(64);
 
-                    b.Property<string>("FullName")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
 
                     b.HasKey("Id");
 
-                    b.ToTable("Directors");
+                    b.HasIndex("Alias")
+                        .IsUnique();
 
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Alias = "Антипов",
-                            FullName = "Антипов Василий Владимирович"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Alias = "Бурсина",
-                            FullName = "Бурсина Мария Владимировна"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Alias = "Лелякова",
-                            FullName = "Лелякова  Марина Георгиевна"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Alias = "Ростовцева",
-                            FullName = "Ростовцева"
-                        });
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("Directors");
                 });
 
             modelBuilder.Entity("BroadSend.Server.Models.Language", b =>
@@ -206,6 +192,9 @@ namespace BroadSend.Server.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Name")
+                        .IsUnique();
+
                     b.ToTable("Languages");
                 });
 
@@ -216,12 +205,14 @@ namespace BroadSend.Server.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("FullName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique()
+                        .HasFilter("[Name] IS NOT NULL");
 
                     b.ToTable("Presenters");
                 });
@@ -242,6 +233,9 @@ namespace BroadSend.Server.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Alias")
+                        .IsUnique();
 
                     b.HasIndex("PresenterId");
 
@@ -267,6 +261,9 @@ namespace BroadSend.Server.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Name")
+                        .IsUnique();
+
                     b.ToTable("Titles");
                 });
 
@@ -287,6 +284,9 @@ namespace BroadSend.Server.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Alias")
+                        .IsUnique();
+
                     b.HasIndex("TitleId");
 
                     b.ToTable("TitleAliases");
@@ -305,6 +305,9 @@ namespace BroadSend.Server.Migrations
                         .HasMaxLength(512);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
 
                     b.ToTable("Vendors");
                 });
