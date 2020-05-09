@@ -1,0 +1,260 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ButtonAdd" xml:space="preserve">
+    <value>Добавить</value>
+    <comment>Кнопка "Добавить"</comment>
+  </data>
+  <data name="ButtonBack" xml:space="preserve">
+    <value>Вернуться</value>
+    <comment>Кнопка "Вернуться"</comment>
+  </data>
+  <data name="ButtonBackToList" xml:space="preserve">
+    <value>Вернуться к списку</value>
+    <comment>Кнопка "Вернуться к списку"</comment>
+  </data>
+  <data name="ButtonBackToPresenters" xml:space="preserve">
+    <value>Вернуться к списку авторов/ведущих</value>
+    <comment>Вернйться к списку автров/ведущих</comment>
+  </data>
+  <data name="ButtonBackToTitles" xml:space="preserve">
+    <value>Вернуться к списку передач</value>
+    <comment>Кнопка "Вернуться к списку передач"</comment>
+  </data>
+  <data name="ButtonChangePassword" xml:space="preserve">
+    <value>Сменить пароль</value>
+    <comment>Кнопка "Сменить пароль"</comment>
+  </data>
+  <data name="ButtonDelete" xml:space="preserve">
+    <value>Удалить</value>
+    <comment>Кнопка "Удалить"</comment>
+  </data>
+  <data name="ButtonEdit" xml:space="preserve">
+    <value>Редактировать</value>
+    <comment>Кнопка "Редактировать"</comment>
+  </data>
+  <data name="ButtonSave" xml:space="preserve">
+    <value>Сохранить</value>
+    <comment>Кнопка "Сохранить"</comment>
+  </data>
+  <data name="ButtonToAliases" xml:space="preserve">
+    <value>Перейти к списку псевдонимов</value>
+    <comment>Перейти к списку псевдонимов</comment>
+  </data>
+  <data name="ErrorCantDeleteUniqueAdmin" xml:space="preserve">
+    <value>Невозможно удалить единственного администратора сайта</value>
+    <comment>Невозможно удалить единственного администратора сайта</comment>
+  </data>
+  <data name="ErrorDbConnection" xml:space="preserve">
+    <value>Ошибка доступа к базе данных</value>
+    <comment>Ошибка доступа к базе данных</comment>
+  </data>
+  <data name="ErrorDbUpdate" xml:space="preserve">
+    <value>Произошла ошибка при обновлении записи в базе данных.</value>
+    <comment>Ошибка при попытке выполнить операцию с несуществующей записью в БД при параллельном доступе.</comment>
+  </data>
+  <data name="ErrorDuplicateRecord" xml:space="preserve">
+    <value>Такая запись уже есть в списке, введите уникальное значение.</value>
+    <comment>Ошибка при попытке создать запись, дублирующую уже существующую в БД запись.</comment>
+  </data>
+  <data name="ErrorHttpResponse" xml:space="preserve">
+    <value>Ответ сервера: </value>
+    <comment>Http Response: X</comment>
+  </data>
+  <data name="ErrorHttpResponse404" xml:space="preserve">
+    <value>Запрашиваемый ресурс не найден.</value>
+    <comment>Http Responce 404</comment>
+  </data>
+  <data name="ErrorNotFound" xml:space="preserve">
+    <value>Запись не найдена</value>
+    <comment>Ошибка "Запись не найдена"</comment>
+  </data>
+  <data name="ErrorSiteProblem" xml:space="preserve">
+    <value>На сайте возникли некоторые проблемы, но мы о них уже в курсе и занимаемся их решением.</value>
+    <comment>Общая ошибка приложения</comment>
+  </data>
+  <data name="HeaderAddNewItem" xml:space="preserve">
+    <value>Добавить новую запись</value>
+    <comment>Заголовок "Добавить новую запись"</comment>
+  </data>
+  <data name="HeaderDeleteAllAliases" xml:space="preserve">
+    <value>Также, будут удалены все псевдонимы, относящиеся к выбранной записи</value>
+    <comment>Также, будут удалены все псевдонимы, относящиеся к выбранной записи</comment>
+  </data>
+  <data name="HeaderDeleteItem" xml:space="preserve">
+    <value>Вы уверены, что хотите удалить запись?</value>
+    <comment>Заголовок "Вы уверены, что хотите удалить запись?"</comment>
+  </data>
+  <data name="HeaderEditAliasesList" xml:space="preserve">
+    <value>Редактирование списка псевдонимов</value>
+    <comment>Редактирование списка псевдонимов</comment>
+  </data>
+  <data name="HeaderEditItem" xml:space="preserve">
+    <value>Редактирование записи</value>
+    <comment>Заголовок "Редактирование записи"</comment>
+  </data>
+  <data name="TableHeaderAlias" xml:space="preserve">
+    <value>Псевдоним</value>
+    <comment>Заголовок таблицы "Псевдоним"</comment>
+  </data>
+  <data name="TableHeaderAnons" xml:space="preserve">
+    <value>Анонс передачи</value>
+    <comment>Заголовок таблицы "Анонс передачи"</comment>
+  </data>
+  <data name="TableHeaderEmail" xml:space="preserve">
+    <value>Email</value>
+    <comment>Заголовок таблицы "Email"</comment>
+  </data>
+  <data name="TableHeaderFullName" xml:space="preserve">
+    <value>Полное имя</value>
+    <comment>Заголовок таблицы "Полное имя"</comment>
+  </data>
+  <data name="TableHeaderName" xml:space="preserve">
+    <value>Имя</value>
+    <comment>Заголовок таблицы "Имя"</comment>
+  </data>
+  <data name="TableHeaderNewPassword" xml:space="preserve">
+    <value>Новый пароль</value>
+    <comment>Заголовок таблицы "Новый пароль"</comment>
+  </data>
+  <data name="TableHeaderPassword" xml:space="preserve">
+    <value>Пароль</value>
+    <comment>Заголовок таблицы "Пароль"</comment>
+  </data>
+  <data name="TableHeaderPasswordConfirm" xml:space="preserve">
+    <value>Подтверждение пароля</value>
+    <comment>Заголовок таблицы "Подтверждение пароля"</comment>
+  </data>
+  <data name="TableHeaderRole" xml:space="preserve">
+    <value>Роль</value>
+    <comment>Заголовок таблицы "Роль"</comment>
+  </data>
+  <data name="TableHeaderTitle" xml:space="preserve">
+    <value>Наименование</value>
+    <comment>Заголовок таблицы "Наименование"</comment>
+  </data>
+  <data name="TableHeaderTitleName" xml:space="preserve">
+    <value>Название передачи</value>
+    <comment>Заголовок таблицы "Название передачи"</comment>
+  </data>
+  <data name="TableHeaderUserName" xml:space="preserve">
+    <value>Имя пользователя</value>
+    <comment>Заголовок таблицы "Имя пользователя"</comment>
+  </data>
+</root>

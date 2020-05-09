@@ -1,0 +1,18 @@
+﻿@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+@inject IViewLocalizer Localizer
+
+@model Presenter
+
+<div class="form-group">
+    <label asp-for="@Model.Name">@SharedLocalizer["TableHeaderFullName"]</label>
+    <input asp-for="@Model.Name" class="form-control" />
+    <span asp-validation-for="@Model.Name" class="text-danger"></span>
+    
+    <input type="hidden" asp-for="@Model.Id"/>
+</div>
+
+<div style="margin: 50px 0">
+    <button type="submit" class="btn btn-primary">@SharedLocalizer["ButtonSave"]</button>
+    <a class="btn btn-primary" asp-controller="Presenter" asp-action="Aliases" asp-route-Id="@Model.Id">@SharedLocalizer["ButtonToAliases"]</a>
+    <a asp-controller="Presenter" asp-action="Index" class="btn btn-secondary">@Localizer["ButtonToPresenters"]</a>
+</div>

@@ -1,0 +1,41 @@
+﻿@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+
+@model IEnumerable<IdentityUser>
+
+<partial name="_AdminTitle"/>
+
+<partial name="_UserManagementTitle"/>
+
+<div>
+    <a class="btn btn-success" asp-action="AddUser" style="margin: 50px 0px">@SharedLocalizer["ButtonAdd"]</a>
+</div>
+
+<div style="height: 500px; width: auto; margin-right: 250px; overflow: auto;">
+
+    <table class="table">
+        <thead class="thead-light text-left">
+            <tr>
+                <th>@SharedLocalizer["TableHeaderUserName"]</th>
+                <th>@SharedLocalizer["TableHeaderEmail"]</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (IdentityUser identityUser in Model)
+            {
+                <tr>
+                    <td>@identityUser.UserName</td>
+                    <td>@identityUser.Email</td>
+                    <td>
+                        <input type="hidden" asp-for="@identityUser.Id" />
+                        <a asp-action="EditUser" asp-route-userId="@identityUser.Id">@SharedLocalizer["ButtonEdit"]</a> |
+                        <a asp-action="ChangePassword" asp-route-userId="@identityUser.Id">@SharedLocalizer["ButtonChangePassword"]</a> |
+                        <a asp-action="DeleteUser" asp-route-userId="@identityUser.Id">@SharedLocalizer["ButtonDelete"]</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+
+</div>

@@ -1,0 +1,36 @@
+﻿@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+
+@model PresenterAliasCreateViewModel
+
+<partial name="_PresenterTitle"/>
+
+<h3>@ViewBag.PresenterName</h3>
+<h4>@SharedLocalizer["HeaderEditAliasesList"]</h4>
+<h4>@SharedLocalizer["HeaderAddNewItem"]</h4>
+
+@if (ViewBag.ErrorMessage != string.Empty)
+{
+    <h3 class="alert-danger">@ViewBag.ErrorMessage</h3>
+    <a asp-controller="Presenter" asp-action="index" class="btn btn-secondary">@SharedLocalizer["ButtonBackToPresenters"]</a>
+}
+else
+{
+    <div style="width: 50%">
+        <form asp-controller="Presenter" asp-action="AliasCreate">
+
+            <div class="form-group">
+                <label asp-for="Alias">@SharedLocalizer["TableHeaderAlias"]</label>
+                <input asp-for="Alias" class="form-control"/>
+                <span asp-validation-for="Alias" class="text-danger"></span>
+            </div>
+
+            <input type="hidden" asp-for="PresenterId"/>
+
+            <div style="margin: 50px 0">
+                <button type="submit" class="btn btn-primary">@SharedLocalizer["ButtonSave"]</button>
+                <a asp-controller="Presenter" asp-action="Aliases" asp-route-id="@Model.PresenterId" class="btn btn-secondary">@SharedLocalizer["ButtonToAliases"]</a>
+            </div>
+
+        </form>
+    </div>
+}

@@ -1,0 +1,18 @@
+﻿@model Language
+
+<partial name="_LanguageTitle" />
+
+<partial name="_CreateItem" />
+
+@if (ViewBag.Message != string.Empty)
+{
+    <h3 class="alert-danger">@ViewBag.Message</h3>
+}
+
+<div style="width: 50%">
+    <form asp-controller="Language" asp-action="Create">
+
+        <partial name="_LanguageCard" />
+
+    </form>
+</div>

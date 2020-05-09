@@ -1,0 +1,49 @@
+﻿@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+
+@model EditUserViewModel
+
+
+<hr style="margin: 25px 0" />
+
+<div class="form-group">
+    <label asp-for="@Model.UserName">@SharedLocalizer["TableHeaderName"]</label>
+    <input asp-for="@Model.UserName" class="form-control" value="@Model.UserName" />
+    <span asp-validation-for="@Model.UserName" class="text-danger"></span>
+</div>
+
+<div class="form-group">
+    <label asp-for="@Model.Email">@SharedLocalizer["TableHeaderEmail"]</label>
+    <input asp-for="@Model.Email" class="form-control" />
+    <span asp-validation-for="@Model.Email" class="text-danger"></span>
+</div>
+
+<hr />
+
+@if (ViewBag.Error != true)
+{
+
+    <div class="form-group">
+        <label asp-for="@Model.Roles">@SharedLocalizer["TableHeaderRole"]</label>
+        <select asp-for="SelectedRole" class="browser-default custom-select">
+            @foreach (var role in @Model.Roles)
+            {
+                if (@role.Name == @Model.CurrentRole)
+                {
+                    <option class="form-control" selected>@role.Name</option>
+                }
+                else
+                {
+                    <option class="form-control">@role.Name</option>
+                }
+            }
+        </select>
+    </div>
+}
+
+<div style="margin: 50px 0">
+    <button type="submit" class="btn btn-primary">@SharedLocalizer["ButtonSave"]</button>
+    <a asp-area="Admin" asp-controller="Home" asp-action="UserManagement" class="btn btn-secondary">@SharedLocalizer["ButtonBackToList"]</a>
+</div>
+
+<input type="hidden" asp-for="Id" />
+<input type="hidden" asp-for="CurrentRole" />

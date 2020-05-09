@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29306.81
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{2AC72730-E85D-4FC5-9AA6-729C901FDCD3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{A6A83EA3-6863-4F36-86C8-3CFFE61207A7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BroadSend.Server", "BroadSend.Server\BroadSend.Server.csproj", "{4CAA1644-4808-4574-A547-3210D17A15FC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4CAA1644-4808-4574-A547-3210D17A15FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CAA1644-4808-4574-A547-3210D17A15FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CAA1644-4808-4574-A547-3210D17A15FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CAA1644-4808-4574-A547-3210D17A15FC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4CAA1644-4808-4574-A547-3210D17A15FC} = {A6A83EA3-6863-4F36-86C8-3CFFE61207A7}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {35915221-1425-495A-99C7-ECE9D7F14374}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,20 @@
+﻿@model Vendor
+
+<partial name="_VendorTitle" />
+
+<partial name="_CreateItem" />
+
+@if (ViewBag.ErrorMessage != string.Empty)
+{
+    <partial name="_ErrorMessage"/>
+}
+else
+{
+    <div style="width: 50%">
+        <form asp-controller="Vendor" asp-action="Create">
+
+            <partial name="_VendorCard" />
+
+        </form>
+    </div>
+}

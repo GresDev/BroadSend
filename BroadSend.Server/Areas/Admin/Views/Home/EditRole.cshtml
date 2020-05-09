@@ -1,0 +1,13 @@
+﻿@model EditRoleViewModel
+
+@if (ViewBag.Message != string.Empty)
+{
+    <h3 class="alert-danger">@ViewBag.Message</h3>
+}
+<div style="width: 50%">
+    <form asp-area="Admin" asp-controller="Home" asp-action="EditRole">
+
+        <partial name="_EditRoleCard" />
+
+    </form>
+</div>

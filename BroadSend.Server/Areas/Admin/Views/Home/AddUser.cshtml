@@ -1,0 +1,15 @@
+﻿@model AddUserViewModel
+
+<partial name="_AdminTitle" />
+
+<partial name="_UserManagementTitle" />
+
+<partial name="_CreateItem"/>
+
+<div style="width: 50%">
+    <form asp-area="Admin" asp-controller="Home" asp-action="AddUser">
+
+        <partial name="_AddUserCard" />
+
+    </form>
+</div>

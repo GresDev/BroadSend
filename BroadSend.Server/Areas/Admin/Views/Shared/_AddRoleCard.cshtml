@@ -1,0 +1,12 @@
+﻿@model AddRoleViewModel
+
+<div class="form-group">
+    <label asp-for="@Model.Name"></label>
+    <input asp-for="@Model.Name" class="form-control" />
+    <span asp-validation-for="@Model.Name" class="text-danger"></span>
+</div>
+
+<div style="margin: 50px 0">
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+    <a asp-area="Admin" asp-controller="Home" asp-action="RoleManagement" class="btn btn-secondary">Вернуться к списку ролей</a>
+</div>

@@ -1,0 +1,47 @@
+﻿@inject IViewLocalizer Localizer
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="windows-1251"/>
+    <meta name="viewport" content="width=device-width"/>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css"/>
+    <link rel="stylesheet" href="~/content/site.css"/>
+
+    <title>@ViewBag.Title</title>
+</head>
+<body class="main-bg">
+
+
+<div class="container" style="height: 100vh">
+    <div class="row align-items-center h-100" >
+        <div class="mx-auto">
+        <div style="width: 25rem; background-color: rgba(240, 240, 240, 0.7)" class="mx-auto p-3 border rounded">
+            @RenderBody()
+        </div>
+
+            <div class="mx-auto mt-3 text-light text-center w-auto">
+            <span>Kakadu Studio, 2020 (C)</span>
+        </div>
+            </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="lib/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="lib/font-awesome/js/all.min.js"></script>
+
+<script asp-src-include="lib/jquery/jquery.min.js"></script>
+<script asp-src-include="lib/jquery-validate/jquery.validate.min.js"></script>
+<script asp-src-include="lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+<script type="text/javascript" src="lib/popper.js/popper.min.js"></script>
+
+
+@RenderSection("Scripts", required: false)
+
+</body>
+</html>

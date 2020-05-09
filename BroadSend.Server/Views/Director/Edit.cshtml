@@ -1,0 +1,18 @@
+﻿<partial name="_DirectorTitle"/>
+
+<partial name="_EditItem"/>
+
+@if (ViewBag.ErrorMessage != string.Empty)
+{
+    <partial name="_ErrorMessage"/>
+}
+else
+{
+    <div style="width: 50%">
+        <form asp-controller="Director" asp-action="Edit">
+
+            <partial name="_DirectorEditCard"/>
+
+        </form>
+    </div>
+}

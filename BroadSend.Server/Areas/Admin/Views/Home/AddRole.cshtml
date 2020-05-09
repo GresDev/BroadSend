@@ -1,0 +1,17 @@
+﻿@model AddRoleViewModel
+
+<h3 style="margin: 0 0 50px">Новая роль</h3>
+
+@if (ViewBag.Message != string.Empty)
+{
+    <h3 class="alert-danger">@ViewBag.Message</h3>
+}
+
+
+<div style="width: 50%">
+    <form asp-area="Admin" asp-controller="Home" asp-action="AddRole">
+
+        <partial name="_AddRoleCard" />
+
+    </form>
+</div>

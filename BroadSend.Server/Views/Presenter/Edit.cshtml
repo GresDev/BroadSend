@@ -1,0 +1,19 @@
+﻿
+<partial name="_PresenterTitle" />
+
+<partial name="_EditItem" />
+
+@if (ViewBag.ErrorMessage != string.Empty)
+{
+    <partial name="_ErrorMessage" />
+}
+else
+{
+    <div style="width: 50%">
+        <form asp-controller="Presenter" asp-action="Edit">
+
+            <partial name="_PresenterCard"/>
+
+        </form>
+    </div>
+}

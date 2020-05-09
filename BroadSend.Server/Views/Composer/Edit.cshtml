@@ -1,0 +1,17 @@
+﻿@model Composer
+
+<partial name="_ComposerTitle" />
+
+<partial name="_EditItem" />
+
+@if (ViewBag.ErrorMessage != string.Empty)
+{ 
+    <h3 class="alert-danger">@ViewBag.ErrorMessage</h3>
+}
+<div style="width: 50%">
+    <form asp-controller="Composer" asp-action="Edit">
+
+        <partial name="_ComposerCard" />
+
+    </form>
+</div>

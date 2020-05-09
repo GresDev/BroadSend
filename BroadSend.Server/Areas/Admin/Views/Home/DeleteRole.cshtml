@@ -1,0 +1,14 @@
+﻿@model IdentityRole
+
+<div style="width: 50%">
+    <h4 style="margin: 20px 0">Вы уверены, что хотите удалить запись?</h4>
+    <div class="alert alert-info">
+        <h4>@Model.Name</h4>
+    </div>
+
+    <form asp-area="Admin" asp-controller="Home" asp-action="DeleteRole" style="margin: 20px 0">
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-danger"><i class="fa fa-times"></i>&nbsp; Удалить</button>
+        <a class="btn btn-secondary" asp-area="Admin" asp-controller="Home" asp-action="RoleManagement">Вернуться к списку ролей</a>
+    </form>
+</div>
