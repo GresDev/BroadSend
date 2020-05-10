@@ -1,18 +1,7 @@
 ﻿<partial name="_CountryTitle"/>
 
-<partial name="_CreateItem"/>
-
-@if (ViewBag.ErrorMessage != string.Empty)
-{
-    <partial name="_ErrorMessage"/>
+@{
+    ViewData["TabHeader"] = "TableHeaderTitle";
 }
-else
-{
-    <div style="width: 50%">
-        <form asp-controller="Country" asp-action="Create">
 
-            <partial name="_CountryCard"/>
-
-        </form>
-    </div>
-}
+<partial name="_SimpleItemCreateCard" view-data="ViewData"/>

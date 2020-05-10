@@ -1,18 +1,7 @@
-﻿@model Composer
+﻿<partial name="_ComposerTitle"/>
 
-<partial name="_ComposerTitle"/>
-
-<partial name="_CreateItem" />
-
-@if (ViewBag.ErrorMessage != string.Empty)
-{
-    <h3 class="alert-danger">@ViewBag.ErrorMessage</h3>
+@{
+    ViewData["TabHeader"] = "TableHeaderName";
 }
 
-<div style="width: 50%">
-    <form asp-controller="Composer" asp-action="Create">
-
-        <partial name="_ComposerCard" />
-
-    </form>
-</div>
+<partial name="_SimpleItemCreateCard" view-data="ViewData"/>

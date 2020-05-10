@@ -1,5 +1,4 @@
 ﻿using BroadSend.Server.Models.Contracts;
-using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 
 namespace BroadSend.Server.Models
@@ -10,7 +9,6 @@ namespace BroadSend.Server.Models
 
         [Required (ErrorMessage = "NameRequired")]
         [StringLength(512, ErrorMessage = "NameLength", MinimumLength = 1)]
-        [Remote("CheckForItemNameIsUnique", "Vendor")]
         public string Name { get; set; }
 
     }

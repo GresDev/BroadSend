@@ -1,35 +1,7 @@
-﻿@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+﻿<partial name="_CountryTitle"/>
 
-@model IEnumerable<Country>
+@{
+    ViewData["TabHeader"] = "TableHeaderTitle";
+}
 
-<partial name="_CountryTitle"/>
-
-<div>
-    <a class="btn btn-success" asp-action="Create" style="margin-bottom: 50px">@SharedLocalizer["ButtonAdd"]</a>
-</div>
-
-<div style="height: 500px; width: auto; margin-right: 250px; overflow: auto;">
-
-    <table class="table">
-        <thead class="thead-light text-left">
-        <tr>
-            <th>@SharedLocalizer["TableHeaderTitle"]</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach (var country in Model)
-        {
-            <tr>
-                <td>@country.Name</td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@country.Id">@SharedLocalizer["ButtonEdit"]</a> |
-                    <a asp-action="Delete" asp-route-id="@country.Id">@SharedLocalizer["ButtonDelete"]</a>
-                </td>
-            </tr>
-        }
-        </tbody>
-
-    </table>
-
-</div>
+<partial name="_SimpleItemIndexCard" view-data="ViewData"/>

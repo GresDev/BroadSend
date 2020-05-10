@@ -1,0 +1,29 @@
+﻿@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+
+@model ISimpleItem
+
+<partial name="_EditItem"/>
+
+@if (ViewBag.ErrorMessage != string.Empty)
+{
+    <partial name="_ErrorMessage"/>
+}
+else
+{
+    <div style="width: 50%">
+        <form asp-action="Edit">
+
+            <div class="form-group">
+                <label asp-for="Name">@SharedLocalizer[@ViewData["TabHeader"].ToString()]</label>
+                <input asp-for="Name" class="form-control"/>
+                <span asp-validation-for="Name" class="text-danger"></span>
+                <input type="hidden" asp-for="Id"/>
+            </div>
+
+            <div style="margin: 50px 0">
+                <button type="submit" class="btn btn-primary">@SharedLocalizer["ButtonSave"]</button>
+                <a asp-action="Index" class="btn btn-secondary">@SharedLocalizer["ButtonBackToList"]</a>
+            </div>
+        </form>
+    </div>
+}

@@ -1,0 +1,34 @@
+﻿@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+
+@model IEnumerable<ISimpleItem>
+
+<div>
+    <a class="btn btn-success" asp-action="Create" style="margin-bottom: 50px">@SharedLocalizer["ButtonAdd"]</a>
+</div>
+
+
+<div style="height: 500px; width: auto; margin-right: 250px; overflow: auto;">
+
+    <table class="table">
+        <thead class="thead-light text-left">
+        <tr>
+            <th>@SharedLocalizer[@ViewData["TabHeader"].ToString()]</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">@SharedLocalizer["ButtonEdit"]</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">@SharedLocalizer["ButtonDelete"]</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+
+    </table>
+
+</div>

@@ -1,20 +1,7 @@
-﻿@model Vendor
+﻿<partial name="_VendorTitle"/>
 
-<partial name="_VendorTitle" />
-
-<partial name="_EditItem" />
-
-@if (ViewBag.ErrorMessage != string.Empty)
-{
-    <partial name="_ErrorMessage"/>
+@{
+    ViewData["TabHeader"] = "TableHeaderTitle";
 }
-else
-{
-    <div style="width: 50%">
-        <form asp-controller="Vendor" asp-action="Edit">
 
-            <partial name="_VendorCard" />
-
-        </form>
-    </div>
-}
+<partial name="_SimpleItemEditCard" view-data="ViewData"/>

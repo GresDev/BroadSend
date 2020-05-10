@@ -94,6 +94,7 @@ namespace BroadSend.Server.Controllers
                     if (!await _repository.ItemNameIsUniqueAsync(item.Name) && itemOriginal.Name != item.Name)
                     {
                         ModelState.AddModelError("Name", _sharedLocalizer["ErrorDuplicateRecord"]);
+                        ViewBag.ErrorMessage = string.Empty;
                         return View(item);
                     }
 
@@ -146,12 +147,5 @@ namespace BroadSend.Server.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult CheckForItemNameIsUnique(string name)
-        {
-            var itemNameIsUnique = _repository.ItemNameIsUniqueAsync(name).Result;
-            return itemNameIsUnique == true
-                ? Json(true)
-                : Json(_sharedLocalizer["ErrorDuplicateRecord"].ToString());
-        }
     }
 }

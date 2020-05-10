@@ -10,7 +10,6 @@ namespace BroadSend.Server.Models
 
         [Required (ErrorMessage = "NameRequired")]
         [StringLength(512, ErrorMessage = "NameLength", MinimumLength = 1)]
-        [Remote("CheckForItemNameIsUnique", "Composer")]
         public string Name { get; set; }
     }
 }

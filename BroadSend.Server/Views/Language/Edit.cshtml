@@ -1,17 +1,7 @@
-﻿@model Language
+﻿<partial name="_LanguageTitle"/>
 
-<partial name="_LanguageTitle" />
-
-<partial name="_EditItem"/>
-
-@if (ViewBag.ErrorMessage != string.Empty)
-{
-    <h3 class="alert-danger">@ViewBag.ErrorMessage</h3>
+@{
+    ViewData["TabHeader"] = "TableHeaderTitle";
 }
-<div style="width: 50%">
-    <form asp-controller="Language" asp-action="Edit">
 
-        <partial name="_LanguageCard" />
-
-    </form>
-</div>
+<partial name="_SimpleItemEditCard" view-data="ViewData"/>
