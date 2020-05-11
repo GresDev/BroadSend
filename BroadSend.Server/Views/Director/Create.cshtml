@@ -1,18 +1,18 @@
-﻿@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+﻿<partial name="_DirectorTitle"/>
 
-<partial name="_DirectorTitle" />
-
-<h3 style="margin: 0 0 50px">@SharedLocalizer["HeaderAddNewItem"]</h3>
+<partial name="_CreateItem"/>
 
 @if (ViewBag.ErrorMessage != string.Empty)
 {
-    <h3 class="alert-danger">@ViewBag.ErrorMessage</h3>
+    <partial name="_ErrorMessage"/>
 }
+else
+{
+    <div style="width: 50%">
+        <form asp-controller="Director" asp-action="Create">
 
-<div style="width: 50%">
-    <form asp-controller="Director" asp-action="Create">
+            <partial name="_DirectorCard"/>
 
-        <partial name="_DirectorCard" />
-
-    </form>
-</div>
+        </form>
+    </div>
+}

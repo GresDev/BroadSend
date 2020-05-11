@@ -1,5 +1,4 @@
 ﻿using BroadSend.Server.Models.Contracts;
-using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 
 namespace BroadSend.Server.Models

@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using BroadSend.Server.Models;
 using BroadSend.Server.Utils;
-using BroadSend.Server.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -49,12 +48,14 @@ namespace BroadSend.Server.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([Bind("Alias, Name")] Director director)
         {
+            ViewBag.ErrorMessage = string.Empty;
+
             if (ModelState.IsValid)
             {
                 try
                 {
                     if (await _repository.ItemNameIsUniqueAsync(director.Name) &&
-                        await _repository.ItemNameIsUniqueAsync(director.Alias))
+                        await _repository.ItemAliasIsUniqueAsync(director.Alias))
                     {
                         await _repository.CreateItemAsync(director);
                         Log.Information(
@@ -67,7 +68,7 @@ namespace BroadSend.Server.Controllers
                         ModelState.AddModelError("Name", _sharedLocalizer["ErrorDuplicateRecord"]);
                     }
 
-                    if (!await _repository.ItemNameIsUniqueAsync(director.Alias))
+                    if (!await _repository.ItemAliasIsUniqueAsync(director.Alias))
                     {
                         ModelState.AddModelError("Alias", _sharedLocalizer["ErrorDuplicateRecord"]);
                     }
@@ -80,12 +81,13 @@ namespace BroadSend.Server.Controllers
                 }
             }
 
-            ViewBag.ErrorMessage = string.Empty;
             return View(director);
         }
 
         public async Task<IActionResult> Edit(int id)
         {
+            ViewBag.ErrorMessage = string.Empty;
+
             Director director = await _repository.GetItemAsync(id);
 
             if (director == null)
@@ -94,55 +96,42 @@ namespace BroadSend.Server.Controllers
                 return View();
             }
 
-            DirectorEditViewModel directorEditViewModel = new DirectorEditViewModel
-            {
-                Id = director.Id,
-                Alias = director.Alias,
-                Name = director.Name
-            };
-
-            ViewBag.ErrorMessage = string.Empty;
-            return View(directorEditViewModel);
+            return View(director);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(DirectorEditViewModel directorEditViewModel)
+        public async Task<IActionResult> Edit(Director director)
         {
+            ViewBag.ErrorMessage = string.Empty;
+
             if (ModelState.IsValid)
             {
                 try
                 {
-                    Director directorOriginal = await _repository.GetItemAsync(directorEditViewModel.Id);
+                    Director directorOriginal = await _repository.GetItemAsync(director.Id);
 
-                    if (!await _repository.ItemAliasIsUniqueAsync(directorEditViewModel.Alias) &&
-                        directorEditViewModel.Alias != directorOriginal.Alias)
+                    if (!await _repository.ItemAliasIsUniqueAsync(director.Alias) &&
+                        director.Alias != directorOriginal.Alias)
                     {
                         ModelState.AddModelError("Alias", _sharedLocalizer["ErrorDuplicateRecord"]);
                     }
 
-                    if (!await _repository.ItemNameIsUniqueAsync(directorEditViewModel.Name) &&
-                        directorEditViewModel.Name != directorOriginal.Name)
+                    if (!await _repository.ItemNameIsUniqueAsync(director.Name) &&
+                        director.Name != directorOriginal.Name)
                     {
                         ModelState.AddModelError("Name", _sharedLocalizer["ErrorDuplicateRecord"]);
                     }
 
                     if (!ModelState.IsValid)
                     {
-                        return View(directorEditViewModel);
+                        return View(director);
                     }
-
-                    Director director = new Director
-                    {
-                        Id = directorEditViewModel.Id,
-                        Alias = directorEditViewModel.Alias,
-                        Name = directorEditViewModel.Name
-                    };
 
                     await _repository.UpdateItemAsync(director);
 
                     Log.Information(
                         $"User {_userManager.GetUserName(User)} edited entry: {directorOriginal.Alias}:{directorOriginal.Name}" +
-                        $" -> {directorEditViewModel.Alias}:{directorEditViewModel.Name}");
+                        $" -> {director.Alias}:{director.Name}");
 
                     return RedirectToAction("Index");
                 }
@@ -154,12 +143,13 @@ namespace BroadSend.Server.Controllers
                 }
             }
 
-            ViewBag.ErrorMessage = string.Empty;
-            return View(directorEditViewModel);
+            return View(director);
         }
 
         public async Task<IActionResult> Delete(int id)
         {
+            ViewBag.ErrorMessage = string.Empty;
+
             var director = await _repository.GetItemAsync(id);
 
             if (director == null)
@@ -168,13 +158,14 @@ namespace BroadSend.Server.Controllers
                 return View();
             }
 
-            ViewBag.ErrorMessage = string.Empty;
             return View(director);
         }
 
         [HttpPost]
         public async Task<IActionResult> Delete(Director director)
         {
+            ViewBag.ErrorMessage = string.Empty;
+
             try
             {
                 await _repository.DeleteItemAsync(director.Id);
@@ -188,22 +179,6 @@ namespace BroadSend.Server.Controllers
             }
 
             return RedirectToAction("Index");
-        }
-
-        public IActionResult CheckForItemNameIsUnique(string name)
-        {
-            var itemNameIsUnique = _repository.ItemNameIsUniqueAsync(name).Result;
-            return itemNameIsUnique == true
-                ? Json(true)
-                : Json(_sharedLocalizer["ErrorDuplicateRecord"].ToString());
-        }
-
-        public IActionResult CheckForItemAliasIsUnique(string alias)
-        {
-            var itemAliasIsUnique = _repository.ItemAliasIsUniqueAsync(alias).Result;
-            return itemAliasIsUnique == true
-                ? Json(true)
-                : Json(_sharedLocalizer["ErrorDuplicateRecord"].ToString());
         }
     }
 }

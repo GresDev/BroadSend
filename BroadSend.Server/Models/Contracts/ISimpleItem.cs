@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-namespace BroadSend.Server.Models.Contracts
+﻿namespace BroadSend.Server.Models.Contracts
 {
     public interface ISimpleItem
     {
