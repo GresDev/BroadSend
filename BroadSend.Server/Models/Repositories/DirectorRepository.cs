@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BroadSend.Server.Models.Repositories
 {
-    public class DirectorRepository : RepositorySimpleItem<Director>, IDirectorRepository
+    public class DirectorRepository : SimpleItemRepository<Director>, IDirectorRepository
     {
         public DirectorRepository(AppDbContext appDbContext) : base(appDbContext)
         {

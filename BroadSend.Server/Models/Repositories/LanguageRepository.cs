@@ -2,7 +2,7 @@
 
 namespace BroadSend.Server.Models.Repositories
 {
-    public class LanguageRepository : RepositorySimpleItem<Language>, ILanguageRepository
+    public class LanguageRepository : SimpleItemRepository<Language>, ILanguageRepository
     {
         public LanguageRepository(AppDbContext appDbContext) : base(appDbContext)
         {

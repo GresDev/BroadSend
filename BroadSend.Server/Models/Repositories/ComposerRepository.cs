@@ -2,7 +2,7 @@
 
 namespace BroadSend.Server.Models.Repositories
 {
-    public class ComposerRepository : RepositorySimpleItem<Composer>, IComposerRepository
+    public class ComposerRepository : SimpleItemRepository<Composer>, IComposerRepository
     {
         public ComposerRepository(AppDbContext appDbContext) : base(appDbContext)
         {

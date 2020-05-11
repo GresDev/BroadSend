@@ -1,22 +1,3 @@
-﻿@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+﻿<partial name="_ComposerTitle" />
 
-@model Composer
-
-<partial name="_ComposerTitle" />
-
-<partial name="_DeleteItem" />
-
-<div style="width: 50%">
-
-    <div class="alert alert-info">
-        <h4>@Model.Name</h4>
-    </div>
-
-    <form asp-action="Delete" style="margin: 20px 0">
-        <input type="hidden" asp-for="Name"/>
-        <input type="hidden" asp-for="Id"/>
-        <button type="submit" class="btn btn-danger"><i class="fa fa-times"></i>&nbsp; @SharedLocalizer["ButtonDelete"]</button>
-        <a class="btn btn-secondary" asp-action="Index">@SharedLocalizer["ButtonBackToList"]</a>
-    </form>
-
-</div>
+<partial name="_SimpleItemDeleteCard" />

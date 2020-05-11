@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace BroadSend.Server.Models.Repositories
 {
-    public class RepositorySimpleItem<T> : ISimpleItemRepository<T> where T : class, ISimpleItem
+    public class SimpleItemRepository<T> : ISimpleItemRepository<T> where T : class, ISimpleItem
     {
         internal readonly AppDbContext AppDbContext;
 
-        public RepositorySimpleItem(AppDbContext appDbContext)
+        public SimpleItemRepository(AppDbContext appDbContext)
         {
             AppDbContext = appDbContext;
         }
