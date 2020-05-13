@@ -91,6 +91,8 @@ namespace BroadSend.Server.Controllers
         public async Task<IActionResult> Edit(Presenter presenter)
         {
             ViewBag.ErrorMessage = string.Empty;
+
+
             if (ModelState.IsValid)
             {
                 try
@@ -291,26 +293,21 @@ namespace BroadSend.Server.Controllers
             }
 
             ViewBag.PresenterFullName = presenter.Name;
+
             if (ModelState.IsValid)
             {
+                PresenterAlias presenterAlias = new PresenterAlias
+                {
+                    Alias = presenterAliasCreateViewModel.Alias,
+                    PresenterId = presenterAliasCreateViewModel.PresenterId
+                };
+
                 try
                 {
-                    if (await _repository.ItemAliasIsUniqueAsync(presenterAliasCreateViewModel.Alias))
-                    {
-                        PresenterAlias presenterAlias = new PresenterAlias
-                        {
-                            Alias = presenterAliasCreateViewModel.Alias,
-                            PresenterId = presenterAliasCreateViewModel.PresenterId
-                        };
-                        await _repository.CreateItemAliasAsync(presenterAlias);
-                        Log.Information(
-                            $"User {_userManager.GetUserName(User)} added new entry: {presenterAlias.Alias}");
-                        return RedirectToAction("Aliases", new { id = presenterAliasCreateViewModel.PresenterId });
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("presenterAlias", _sharedLocalizer["ErrorDuplicateRecord"]);
-                    }
+                    await _repository.CreateItemAliasAsync(presenterAlias);
+                    Log.Information(
+                        $"User {_userManager.GetUserName(User)} added new entry: {presenterAlias.Alias}");
+                    return RedirectToAction("Aliases", new { id = presenterAliasCreateViewModel.PresenterId });
                 }
                 catch (DbUpdateException e)
                 {

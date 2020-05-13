@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using BroadSend.Server.Utils;
 
 namespace BroadSend.Server.ViewModels
 {
@@ -6,6 +7,7 @@ namespace BroadSend.Server.ViewModels
     {
         [Required (ErrorMessage = "AliasRequired")]
         [StringLength(64, ErrorMessage = "AliasLength", MinimumLength = 1)]
+        [PresenterAliasIsUnique]
         public string Alias { get; set; }
         public int PresenterId { get; set; }
     }

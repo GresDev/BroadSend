@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using BroadSend.Server.Models.Contracts;
+using BroadSend.Server.Utils;
 
 namespace BroadSend.Server.Models
 {
@@ -9,6 +10,7 @@ namespace BroadSend.Server.Models
 
         [Required(ErrorMessage = "NameRequired")]
         [StringLength(256, ErrorMessage = "NameLength"), MinLength(1)]
+        [CountryNameIsUnique]
         public string Name { get; set; }
     }
 }

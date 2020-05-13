@@ -1,12 +1,12 @@
-﻿using BroadSend.Server.Models.Contracts;
+﻿using System;
+using System.Threading.Tasks;
+using BroadSend.Server.Models.Contracts;
 using BroadSend.Server.Utils;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
 using Serilog;
-using System;
-using System.Threading.Tasks;
 
 namespace BroadSend.Server.Controllers
 {
@@ -50,14 +50,9 @@ namespace BroadSend.Server.Controllers
             {
                 try
                 {
-                    if (await _repository.ItemNameIsUniqueAsync(item.Name))
-                    {
-                        await _repository.CreateItemAsync(item);
-                        Log.Information($"User {_userManager.GetUserName(User)} added new entry: {item.Name}");
-                        return RedirectToAction("Index");
-                    }
-
-                    ModelState.AddModelError("Name", _sharedLocalizer["ErrorDuplicateRecord"]);
+                    await _repository.CreateItemAsync(item);
+                    Log.Information($"User {_userManager.GetUserName(User)} added new entry: {item.Name}");
+                    return RedirectToAction("Index");
                 }
                 catch (DbUpdateException e)
                 {
@@ -95,12 +90,6 @@ namespace BroadSend.Server.Controllers
                 try
                 {
                     T itemOriginal = await _repository.GetItemAsync(item.Id);
-                    if (!await _repository.ItemNameIsUniqueAsync(item.Name) && itemOriginal.Name != item.Name)
-                    {
-                        ModelState.AddModelError("Name", _sharedLocalizer["ErrorDuplicateRecord"]);
-                        ViewBag.ErrorMessage = string.Empty;
-                        return View(item);
-                    }
 
                     await _repository.UpdateItemAsync(item);
                     Log.Information(
@@ -150,6 +139,5 @@ namespace BroadSend.Server.Controllers
 
             return RedirectToAction("Index");
         }
-
     }
 }

@@ -54,24 +54,11 @@ namespace BroadSend.Server.Controllers
             {
                 try
                 {
-                    if (await _repository.ItemNameIsUniqueAsync(director.Name) &&
-                        await _repository.ItemAliasIsUniqueAsync(director.Alias))
-                    {
-                        await _repository.CreateItemAsync(director);
-                        Log.Information(
-                            $"User {_userManager.GetUserName(User)} added new entry: {director.Name}|{director.Alias}");
-                        return RedirectToAction("Index");
-                    }
+                    await _repository.CreateItemAsync(director);
+                    Log.Information(
+                        $"User {_userManager.GetUserName(User)} added new entry: {director.Name}|{director.Alias}");
+                    return RedirectToAction("Index");
 
-                    if (!await _repository.ItemNameIsUniqueAsync(director.Name))
-                    {
-                        ModelState.AddModelError("Name", _sharedLocalizer["ErrorDuplicateRecord"]);
-                    }
-
-                    if (!await _repository.ItemAliasIsUniqueAsync(director.Alias))
-                    {
-                        ModelState.AddModelError("Alias", _sharedLocalizer["ErrorDuplicateRecord"]);
-                    }
                 }
                 catch (DbUpdateException e)
                 {
