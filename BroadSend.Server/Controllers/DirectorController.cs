@@ -164,7 +164,6 @@ namespace BroadSend.Server.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(Director director)
         {
-            ViewBag.ErrorMessage = string.Empty;
 
             try
             {

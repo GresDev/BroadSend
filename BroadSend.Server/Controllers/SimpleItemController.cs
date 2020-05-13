@@ -44,6 +44,8 @@ namespace BroadSend.Server.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([Bind("Name")] T item)
         {
+            ViewBag.ErrorMessage = string.Empty;
+
             if (ModelState.IsValid)
             {
                 try
@@ -65,12 +67,13 @@ namespace BroadSend.Server.Controllers
                 }
             }
 
-            ViewBag.ErrorMessage = string.Empty;
             return View(item);
         }
 
         public async Task<IActionResult> Edit(int id)
         {
+            ViewBag.ErrorMessage = string.Empty;
+
             T item = await _repository.GetItemAsync(id);
 
             if (item == null)
@@ -79,13 +82,14 @@ namespace BroadSend.Server.Controllers
                 return View();
             }
 
-            ViewBag.ErrorMessage = string.Empty;
             return View(item);
         }
 
         [HttpPost]
         public async Task<IActionResult> Edit(T item)
         {
+            ViewBag.ErrorMessage = string.Empty;
+
             if (ModelState.IsValid)
             {
                 try
@@ -111,12 +115,13 @@ namespace BroadSend.Server.Controllers
                 }
             }
 
-            ViewBag.ErrorMessage = string.Empty;
             return View(item);
         }
 
         public async Task<IActionResult> Delete(int id)
         {
+            ViewBag.ErrorMessage = string.Empty;
+
             T item = await _repository.GetItemAsync(id);
 
             if (item == null)
@@ -125,7 +130,6 @@ namespace BroadSend.Server.Controllers
                 return View();
             }
 
-            ViewBag.ErrorMessage = string.Empty;
             return View(item);
         }
 

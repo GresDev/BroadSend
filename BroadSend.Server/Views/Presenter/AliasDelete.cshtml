@@ -17,6 +17,7 @@
 
     <form asp-action="AliasDelete" style="margin: 20px 0">
         <input type="hidden" asp-for="Id"/>
+        <input type="hidden" asp-for="PresenterId"/>
         <button type="submit" class="btn btn-danger"><i class="fa fa-times"></i>&nbsp; @SharedLocalizer["ButtonDelete"]</button>
         <a class="btn btn-secondary" asp-action="Aliases" asp-route-id="@Model.PresenterId">@SharedLocalizer["ButtonToAliases"]</a>
     </form>

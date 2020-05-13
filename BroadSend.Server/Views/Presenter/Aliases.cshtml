@@ -38,8 +38,13 @@ else
                 <tr>
                     <td>@alias.Alias</td>
                     <td>
-                        <a asp-action="AliasEdit" asp-route-id="@alias.Id">@SharedLocalizer["ButtonEdit"]</a> |
-                        <a asp-action="AliasDelete" asp-route-id="@alias.Id">@SharedLocalizer["ButtonDelete"]</a>
+                        <a asp-action="AliasEdit" asp-route-id="@alias.Id">@SharedLocalizer["ButtonEdit"]</a>
+
+                        @if (!ViewBag.OnlyOneAlias)
+                        {
+                           <a asp-action="AliasDelete" asp-route-id="@alias.Id" class="disabled"> | @SharedLocalizer["ButtonDelete"]</a>
+                        }
+
                     </td>
 
                 </tr>

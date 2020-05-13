@@ -35,7 +35,7 @@ namespace BroadSend.Server.Models.Repositories
             _appDbContext.Set<PresenterAlias>().Add(presenterAlias);
             await _appDbContext.SaveChangesAsync();
         }
-        
+
         public async Task<Presenter> GetItemAsync(int id)
         {
             return await _appDbContext.Set<Presenter>().AsNoTracking().FirstOrDefaultAsync(p => p.Id == id);
@@ -97,109 +97,5 @@ namespace BroadSend.Server.Models.Repositories
                 .FirstOrDefaultAsync(a => a.Alias == alias);
             return result == null ? true : false;
         }
-
-
-        //public IEnumerable<Presenter> AllPresenters
-        //{
-        //    get { return _appDbContext.Presenters.AsNoTracking().OrderBy(p => p.Name); }
-        //}
-
-
-        //public async Task CreateItemAsync(T item)
-        //{
-        //    AppDbContext.Add(item);
-        //    await AppDbContext.SaveChangesAsync();
-        //}
-
-
-        //public void CreatePresenter(Presenter newPresenter, string alias)
-        //{
-        //    _appDbContext.Presenters.Add(newPresenter);
-        //    _appDbContext.SaveChanges();
-
-        //    Presenter presenter = _appDbContext.Presenters.Single(x => x.Name == newPresenter.Name);
-        //    PresenterAlias presenterAlias = new PresenterAlias
-        //    {
-        //        Alias = alias,
-        //        PresenterId = presenter.Id
-        //    };
-
-        //    _appDbContext.PresenterAliases.Add(presenterAlias);
-        //    _appDbContext.SaveChanges();
-        //}
-
-        //public Presenter GetPresenter(int id)
-        //{
-        //    return _appDbContext.Presenters.AsNoTracking().Single(p => p.Id == id);
-        //}
-
-        //public void UpdatePresenter(Presenter presenter)
-        //{
-        //    _appDbContext.Presenters.Update(presenter);
-        //    _appDbContext.SaveChanges();
-        //}
-
-        //public void DeletePresenter(int id)
-        //{
-
-        //    Presenter presenter = _appDbContext.Presenters.Single(x => x.Id == id);
-        //    _appDbContext.Presenters.Remove(presenter);
-        //    _appDbContext.SaveChanges();
-        //}
-
-        //public void CreateAlias(PresenterAlias presenterAlias)
-        //{
-        //    _appDbContext.PresenterAliases.Add(presenterAlias);
-        //    _appDbContext.SaveChanges();
-        //}
-
-        //public PresenterAlias GetAlias(int id)
-        //{
-        //    return _appDbContext.PresenterAliases.AsNoTracking().Single(p => p.Id == id);
-        //}
-
-        //public List<PresenterAlias> GetAliases(int presenterId)
-        //{
-        //    var aliasList = from alias in _appDbContext.PresenterAliases where (alias.PresenterId == presenterId) select alias;
-        //    return aliasList.ToList();
-        //}
-
-        //public void UpdateAlias(PresenterAlias presenterAlias)
-        //{
-        //    _appDbContext.PresenterAliases.Update(presenterAlias);
-        //    _appDbContext.SaveChanges();
-        //}
-
-        //public void DeleteAlias(int id)
-        //{
-        //    PresenterAlias presenterAlias = _appDbContext.PresenterAliases.Single(p => p.Id == id);
-        //    _appDbContext.PresenterAliases.Remove(presenterAlias);
-        //    _appDbContext.SaveChanges();
-        //}
-
-
-        //public bool PresenterFullNameIsUnique(string fullName)
-        //{
-        //    if (_appDbContext.Presenters.AsNoTracking().FirstOrDefault(p => p.Name == fullName) == null)
-        //    {
-        //        return true;
-        //    }
-        //    else
-        //    {
-        //        return false;
-        //    }
-        //}
-
-        //public bool PresenterAliasIsUnique(string alias)
-        //{
-        //    if (_appDbContext.PresenterAliases.AsNoTracking().FirstOrDefault(p => p.Alias == alias) == null)
-        //    {
-        //        return true;
-        //    }
-        //    else
-        //    {
-        //        return false;
-        //    }
-        //}
     }
 }

@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Mvc;
+using BroadSend.Server.Utils;
 
 namespace BroadSend.Server.ViewModels
 {
@@ -8,12 +8,12 @@ namespace BroadSend.Server.ViewModels
 
         [Required(ErrorMessage = "NameRequired")]
         [StringLength(256, ErrorMessage = "NameLength", MinimumLength = 1)]
-        [Remote("CheckForItemNameIsUnique", "Presenter")]
+        [PresenterNameIsUnique]
         public string Name { get; set; }
 
         [Required(ErrorMessage = "AliasRequired")]
         [StringLength(64, ErrorMessage = "AliasLength", MinimumLength = 1)]
-        [Remote("CheckForItemAliasIsUnique", "Presenter")]
+        [PresenterAliasIsUnique]
         public string Alias { get; set; }
     }
 }
