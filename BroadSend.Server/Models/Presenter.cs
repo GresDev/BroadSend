@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace BroadSend.Server.Models
 {
@@ -6,8 +7,8 @@ namespace BroadSend.Server.Models
     {
         public int Id { get; set; }
 
-        //[Required(ErrorMessage = "NameRequired")]
-        //[StringLength(256, ErrorMessage = "NameLength", MinimumLength = 1)]
+        [Required(ErrorMessage = "NameRequired")]
+        [StringLength(512, ErrorMessage = "NameLength", MinimumLength = 1)]
         //[Remote("CheckForItemNameIsUnique", "Presenter")]
         public string Name { get; set; }
 

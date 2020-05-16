@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using BroadSend.Server.Models.Contracts;
-using BroadSend.Server.Utils;
+using BroadSend.Server.Utils.Attributes;
 
 namespace BroadSend.Server.Models
 {

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using BroadSend.Server.Models.Contracts;
-using BroadSend.Server.Utils;
+using BroadSend.Server.Utils.Attributes;
 
 namespace BroadSend.Server.Models
 {
@@ -8,7 +8,7 @@ namespace BroadSend.Server.Models
     {
         public int Id { get; set; }
 
-        [Required (ErrorMessage = "NameRequired")]
+        [Required(ErrorMessage = "NameRequired")]
         [StringLength(512, ErrorMessage = "NameLength", MinimumLength = 1)]
         [ComposerNameIsUnique]
         public string Name { get; set; }

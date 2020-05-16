@@ -1,44 +1,56 @@
 ﻿@inject IHtmlLocalizer<SharedResource> SharedLocalizer
 
-@model List<TitleAlias>
+@model IEnumerable<TitleAlias>
 
-<partial name="_TitleTitle"/>
+<partial name="_TitleTitle" />
+
+@if (ViewBag.ErrorMessage != string.Empty)
+{
+    <h3 class="alert-danger">@ViewBag.ErrorMessage</h3>
+    <a asp-controller="Title" asp-action="index" class="btn btn-secondary">@SharedLocalizer["ButtonBackToTitles"]</a>
+}
+else
+{
+    <h3>@ViewBag.TitleName</h3>
+    <h4>@SharedLocalizer["HeaderEditAliasesList"]</h4>
 
 
-<h3>@ViewBag.TitleName</h3>
-<h4>@SharedLocalizer["HeaderEditAliasesList"]</h4>
+    <div>
+        <a class="btn btn-success" asp-action="AliasCreate" asp-route-id="@ViewBag.TitleId" style="margin: 50px 0px">@SharedLocalizer["ButtonAdd"]</a>
+        <a class="btn btn-secondary" asp-action="Edit" asp-route-id="@ViewBag.TitleId" style="margin: 50px 0px">@SharedLocalizer["ButtonBack"]</a>
+    </div>
 
+    <div style="height: 500px; width: auto; margin-right: 250px; overflow: auto;">
 
-<div>
-    <a class="btn btn-success" asp-action="AliasCreate" asp-route-id="@ViewBag.PresenterId" style="margin: 50px 0px">@SharedLocalizer["ButtonAdd"]</a>
-    <a class="btn btn-secondary" asp-action="Edit" asp-route-id="@ViewBag.PresenterId" style="margin: 50px 0px">@SharedLocalizer["ButtonBack"]</a>
-</div>
+        <table class="table">
 
-<div style="height: 500px; width: auto; margin-right: 250px; overflow: auto;">
+            <thead class="thead-light text-left">
+                <tr>
+                    <th>@SharedLocalizer["TableHeaderAlias"]</th>
+                    <th></th>
+                </tr>
+            </thead>
 
-    <table class="table">
+            <tbody>
+                @foreach (var alias in Model)
+                {
+                    <tr>
+                        <td>@alias.Alias</td>
+                        <td>
+                            <a asp-action="AliasEdit" asp-route-id="@alias.Id">@SharedLocalizer["ButtonEdit"]</a>
 
-        <thead class="thead-light text-left">
-        <tr>
-            <th>@SharedLocalizer["TableHeaderAlias"]</th>
-            <th></th>
-        </tr>
-        </thead>
+                            @if (!ViewBag.OnlyOneAlias)
+                            {
+                                <a asp-action="AliasDelete" asp-route-id="@alias.Id" class="disabled"> | @SharedLocalizer["ButtonDelete"]</a>
+                            }
 
-        <tbody>
-        @foreach (var alias in Model)
-        {
-            <tr>
-                <td>@alias.Alias</td>
-                <td>
-                    <a asp-action="AliasEdit" asp-route-id="@alias.Id">@SharedLocalizer["ButtonEdit"]</a> |
-                    <a asp-action="AliasDelete" asp-route-id="@alias.Id">@SharedLocalizer["ButtonDelete"]</a>
-                </td>
+                        </td>
 
-            </tr>
-        }
-        </tbody>
+                    </tr>
+                }
+            </tbody>
 
-    </table>
+        </table>
 
-</div>
+    </div>
+}

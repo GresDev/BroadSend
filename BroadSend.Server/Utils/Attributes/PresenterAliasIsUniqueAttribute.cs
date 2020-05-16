@@ -4,7 +4,7 @@ using BroadSend.Server.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
 
-namespace BroadSend.Server.Utils
+namespace BroadSend.Server.Utils.Attributes
 {
     public class PresenterAliasIsUniqueAttribute : ValidationAttribute
     {

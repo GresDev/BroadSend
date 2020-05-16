@@ -181,7 +181,8 @@ namespace BroadSend.Server.Controllers
                 return View(new List<PresenterAlias>());
             }
 
-            ViewBag.OnlyOneAlias = aliasList.Count() == 1 ? true : false;
+            ViewBag.OnlyOneAlias = aliasList.Count() == 1;
+
             ViewBag.PresenterName = presenter.Name;
             ViewBag.PresenterId = id;
             return View(aliasList);
@@ -221,7 +222,8 @@ namespace BroadSend.Server.Controllers
                 return View(new PresenterAlias());
             }
 
-            ViewBag.PresenterName = presenter?.Name;
+            ViewBag.PresenterName = presenter.Name;
+
             if (ModelState.IsValid)
             {
                 try
@@ -329,7 +331,7 @@ namespace BroadSend.Server.Controllers
             if (presenterAlias == null)
             {
                 ViewBag.ErrorMessage = _sharedLocalizer["ErrorNotFound"];
-                return RedirectToAction("Aliases", new { id = presenterAlias.PresenterId });
+                return View();
             }
 
             Presenter presenter = await _repository.GetItemAsync(presenterAlias.PresenterId);
@@ -365,10 +367,7 @@ namespace BroadSend.Server.Controllers
                 return View(new PresenterAlias());
             }
 
-            return RedirectToAction("Aliases", new
-            {
-                id = presenterAlias.PresenterId
-            });
+            return RedirectToAction("Aliases", new { id = presenterAlias.PresenterId });
         }
     }
 }

@@ -4,7 +4,7 @@ using BroadSend.Server.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
 
-namespace BroadSend.Server.Utils
+namespace BroadSend.Server.Utils.Attributes
 {
     public class LanguageNameIsUniqueAttribute : ValidationAttribute
     {
@@ -14,10 +14,10 @@ namespace BroadSend.Server.Utils
             var localizer = (IStringLocalizer<SharedResource>)validationContext.GetService(typeof(IStringLocalizer<SharedResource>));
 
             var context = (AppDbContext)validationContext.GetService(typeof(AppDbContext));
-            var director = context?.Languages.AsNoTracking().SingleOrDefault(l => l.Name == value as string);
+            var language = context?.Languages.AsNoTracking().SingleOrDefault(l => l.Name == value as string);
 
 
-            return director != null ? new ValidationResult(localizer["ErrorDuplicateRecord"]) : ValidationResult.Success;
+            return language != null ? new ValidationResult(localizer["ErrorDuplicateRecord"]) : ValidationResult.Success;
         }
     }
 }

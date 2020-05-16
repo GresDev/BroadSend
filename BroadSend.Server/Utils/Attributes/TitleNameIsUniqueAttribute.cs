@@ -6,7 +6,7 @@ using Microsoft.Extensions.Localization;
 
 namespace BroadSend.Server.Utils.Attributes
 {
-    public class ComposerNameIsUniqueAttribute : ValidationAttribute
+    public class TitleNameIsUniqueAttribute : ValidationAttribute
     {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
@@ -14,10 +14,10 @@ namespace BroadSend.Server.Utils.Attributes
             var localizer = (IStringLocalizer<SharedResource>)validationContext.GetService(typeof(IStringLocalizer<SharedResource>));
 
             var context = (AppDbContext)validationContext.GetService(typeof(AppDbContext));
-            var composer = context?.Composers.AsNoTracking().SingleOrDefault(c => c.Name == value as string);
+            var title = context?.Titles.AsNoTracking().SingleOrDefault(t => t.Name == value as string);
 
 
-            return composer != null ? new ValidationResult(localizer["ErrorDuplicateRecord"]) : ValidationResult.Success;
+            return title != null ? new ValidationResult(localizer["ErrorDuplicateRecord"]) : ValidationResult.Success;
         }
     }
 }

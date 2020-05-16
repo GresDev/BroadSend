@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using BroadSend.Server.Utils;
+using BroadSend.Server.Utils.Attributes;
 
 namespace BroadSend.Server.ViewModels
 {
@@ -7,7 +7,7 @@ namespace BroadSend.Server.ViewModels
     {
 
         [Required(ErrorMessage = "NameRequired")]
-        [StringLength(256, ErrorMessage = "NameLength", MinimumLength = 1)]
+        [StringLength(512, ErrorMessage = "NameLength", MinimumLength = 1)]
         [PresenterNameIsUnique]
         public string Name { get; set; }
 

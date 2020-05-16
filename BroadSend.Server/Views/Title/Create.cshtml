@@ -2,7 +2,7 @@
 
 @model TitleCreateViewModel
 
-<partial name="_TitleTitle"/>
+<partial name="_TitleTitle" />
 
 <h3 style="margin: 0 0 50px">@SharedLocalizer["HeaderAddNewItem"]</h3>
 
@@ -15,20 +15,20 @@
     <form asp-controller="Title" asp-action="Create">
 
         <div class="form-group">
-            <label asp-for="@Model.Title.Name">@SharedLocalizer["TableHeaderTitleName"]</label>
-            <input asp-for="@Model.Title.Name" class="form-control" />
-            <span asp-validation-for="@Model.Title.Name" class="text-danger"></span>
+            <label asp-for="@Model.Name">@SharedLocalizer["TableHeaderTitleName"]</label>
+            <input asp-for="@Model.Name" class="form-control" />
+            <span asp-validation-for="@Model.Name" class="text-danger"></span>
         </div>
 
         <div class="form-group">
-            <label asp-for="@Model.TitleAlias">@SharedLocalizer["TableHeaderAlias"]</label>
-            <input asp-for="@Model.TitleAlias" class="form-control" />
-            <span asp-validation-for="@Model.TitleAlias" class="text-danger"></span>
+            <label asp-for="@Model.Alias">@SharedLocalizer["TableHeaderAlias"]</label>
+            <input asp-for="@Model.Alias" class="form-control" />
+            <span asp-validation-for="@Model.Alias" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="@Model.Title.Anons">@SharedLocalizer["TableHeaderAnons"]</label>
-            <textarea asp-for="@Model.Title.Anons" class="form-control" rows="5"></textarea>
-            <span asp-validation-for="@Model.Title.Anons" class="text-danger"></span>
+            <label asp-for="@Model.Anons">@SharedLocalizer["TableHeaderAnons"]</label>
+            <textarea asp-for="@Model.Anons" class="form-control" rows="5"></textarea>
+            <span asp-validation-for="@Model.Anons" class="text-danger"></span>
         </div>
 
         <div style="margin: 50px 0">

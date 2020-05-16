@@ -4,20 +4,28 @@
 
 <partial name="_TitleTitle" />
 
-<h3>@ViewBag.TitleName</h3>
-<h4>@SharedLocalizer["HeaderEditAliasesList"]</h4>
+@if (ViewBag.ErrorMessage != string.Empty)
+{
+    <partial name="_ErrorMessage" />
+}
+else
+{
+    <h3>@ViewBag.TitleName</h3>
+    <h4>@SharedLocalizer["HeaderEditAliasesList"]</h4>
 
-<partial name="_DeleteItem"/>
+    <partial name="_DeleteItem" />
 
-<div style="width: 50%">
+    <div style="width: 50%">
 
-    <div class="alert alert-info">
-        <h4>@Model.Alias</h4>
+        <div class="alert alert-info">
+            <h4>@Model.Alias</h4>
+        </div>
+
+        <form asp-action="AliasDelete" style="margin: 20px 0">
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="TitleId" />
+            <button type="submit" class="btn btn-danger"><i class="fa fa-times"></i>&nbsp; @SharedLocalizer["ButtonDelete"]</button>
+            <a class="btn btn-secondary" asp-action="Aliases" asp-route-id="@Model.TitleId">@SharedLocalizer["ButtonToAliases"]</a>
+        </form>
     </div>
-
-    <form asp-action="AliasDelete" style="margin: 20px 0">
-        <input type="hidden" asp-for="Id"/>
-        <button type="submit" class="btn btn-danger"><i class="fa fa-times"></i>&nbsp; @SharedLocalizer["ButtonDelete"]</button>
-        <a class="btn btn-secondary" asp-action="Aliases" asp-route-id="@Model.TitleId">@SharedLocalizer["ButtonToAliases"]</a>
-    </form>
-</div>
+}

@@ -1,12 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using BroadSend.Server.Models.Contracts;
+using System.Linq;
+using System.Threading.Tasks;
 using BroadSend.Server.Models;
+using BroadSend.Server.Models.Contracts;
+using BroadSend.Server.Utils;
 using BroadSend.Server.ViewModels;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Localization;
+using Serilog;
 
 namespace BroadSend.Server.Controllers
 {
@@ -17,15 +22,23 @@ namespace BroadSend.Server.Controllers
 
         private readonly IStringLocalizer<SharedResource> _sharedLocalizer;
 
-        public TitleController(ITitleRepository titleRepository, IStringLocalizer<SharedResource> sharedLocalizer)
+        private readonly UserManager<IdentityUser> _userManager;
+
+        private readonly LogMessages _logMessages = new LogMessages();
+
+        public TitleController(
+            ITitleRepository titleRepository,
+            IStringLocalizer<SharedResource> sharedLocalizer,
+            UserManager<IdentityUser> userManager)
         {
             _repository = titleRepository;
             _sharedLocalizer = sharedLocalizer;
+            _userManager = userManager;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View(_repository.AllTitles);
+            return View(await _repository.GetAllItemsAsync());
         }
 
         public IActionResult Create()
@@ -35,178 +48,273 @@ namespace BroadSend.Server.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(TitleCreateViewModel titleCreateViewModel)
+        public async Task<IActionResult> Create(TitleCreateViewModel titleCreateViewModel)
         {
-            if ((titleCreateViewModel.TitleAlias != null) &&
-                !_repository.TitleAliasIsUnique(titleCreateViewModel.TitleAlias))
-            {
-                ModelState.AddModelError("titleAlias",_sharedLocalizer["ErrorDuplicateRecord"]);
-            }
-
-            if (!_repository.TitleNameIsUnique(titleCreateViewModel.Title.Name))
-            {
-                ModelState.AddModelError("Title.Name",_sharedLocalizer["ErrorDuplicateRecord"]);
-            }
+            ViewBag.ErrorMessage = string.Empty;
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _repository.CreateTitle(titleCreateViewModel.Title,
-                        titleCreateViewModel.TitleAlias);
+                    await _repository.CreateItemAsync(new Title { Name = titleCreateViewModel.Name, Anons = titleCreateViewModel.Anons },
+                        titleCreateViewModel.Alias);
+                    Log.Information($"User {_userManager.GetUserName(User)} " +
+                                    $"added new entry: {titleCreateViewModel.Name}|{titleCreateViewModel.Alias}");
+                    return RedirectToAction("Index");
                 }
-                catch (DbUpdateException)
+                catch (DbUpdateException e)
                 {
+                    Log.Error(_logMessages.ErrorMessage(e, _userManager.GetUserName(User)));
                     ViewBag.ErrorMessage = _sharedLocalizer["ErrorDbUpdate"];
                     return View();
                 }
-
-                return RedirectToAction("Index");
             }
 
             return View(titleCreateViewModel);
         }
 
-        public IActionResult Edit(int id)
+        public async Task<IActionResult> Edit(int id)
         {
-            Title title = _repository.GetTitle(id);
+            ViewBag.ErrorMessage = string.Empty;
+
+            Title title = await _repository.GetItemAsync(id);
+
+            if (title == null)
+            {
+                ViewBag.ErrorMessage = _sharedLocalizer["ErrorNotFound"];
+                return View();
+            }
+
             return View(title);
         }
 
         [HttpPost]
-        public IActionResult Edit(Title title)
+        public async Task<IActionResult> Edit(Title title)
         {
+            ViewBag.ErrorMessage = string.Empty;
+
+
             if (ModelState.IsValid)
             {
-                Title _title = _repository.GetTitle(title.Id);
-                if (!_repository.TitleNameIsUnique(title.Name) &&
-                    _title.Name != title.Name)
-                {
-                    ModelState.AddModelError("Name",_sharedLocalizer["ErrorDuplicateRecord"]);
-                    return View(title);
-                }
-
                 try
                 {
-                    _repository.UpdateTitle(title);
+                    Title titleOriginal = await _repository.GetItemAsync(title.Id);
+
+                    if (titleOriginal == null)
+                    {
+                        ViewBag.ErrorMessage = _sharedLocalizer["ErrorNotFound"];
+                        return View();
+                    }
+
+                    if (!await _repository.ItemNameIsUniqueAsync(title.Name) &&
+                        titleOriginal.Name != title.Name)
+                    {
+                        ModelState.AddModelError("Name", _sharedLocalizer["ErrorDuplicateRecord"]);
+                        return View(title);
+                    }
+
+                    await _repository.UpdateItemAsync(title);
+                    Log.Information(
+                        $"User {_userManager.GetUserName(User)} edited entry: {titleOriginal.Name}" +
+                        $" -> {title.Name}");
                     return RedirectToAction("Index");
                 }
-                catch (DbUpdateException)
+                catch (DbUpdateException e)
                 {
+                    Log.Error(_logMessages.ErrorMessage(e, _userManager.GetUserName(User)));
                     ViewBag.ErrorMessage = _sharedLocalizer["ErrorDbUpdate"];
-                    return View(title);
+                    return View();
                 }
             }
 
             return View(title);
         }
 
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            Title title = _repository.GetTitle(id);
+            ViewBag.ErrorMessage = string.Empty;
+
+            Title title = await _repository.GetItemAsync(id);
+
+            if (title == null)
+            {
+                ViewBag.ErrorMessage = _sharedLocalizer["ErrorNotFound"];
+                return View();
+            }
+
             return View(title);
         }
 
         [HttpPost]
-        public IActionResult Delete(Title title)
+        public async Task<IActionResult> Delete(Title title)
         {
             try
             {
-                _repository.DeleteTitle(title.Id);
+                await _repository.DeleteItemAsync(title.Id);
+                Log.Information($"User {_userManager.GetUserName(User)} deleted entry: {title.Name}");
             }
-            catch (ArgumentNullException)
+            catch (ArgumentNullException e)
             {
-                ;
+                Log.Error(_logMessages.ErrorMessage(e, _userManager.GetUserName(User)));
+                ViewBag.ErrorMessage = _sharedLocalizer["ErrorDbUpdate"];
+                return View();
             }
 
             return RedirectToAction("Index");
         }
 
-        public IActionResult Aliases(int id)
+        public async Task<IActionResult> Aliases(int id)
         {
-            Title title = _repository.GetTitle(id);
+            ViewBag.ErrorMessage = string.Empty;
+
+            Title title = await _repository.GetItemAsync(id);
+            if (title == null)
+            {
+                ViewBag.ErrorMessage = _sharedLocalizer["ErrorNotFound"];
+                return View(new List<TitleAlias>());
+            }
+
+            IEnumerable<TitleAlias> aliasList = await _repository.GetItemAliasesAsync(title.Id);
+            if (aliasList == null)
+            {
+                ViewBag.ErrorMessage = _sharedLocalizer["ErrorNotFound"];
+                return View(new List<TitleAlias>());
+            }
+
+            ViewBag.OnlyOneAlias = aliasList.Count() == 1;
+
             ViewBag.TitleName = title.Name;
-            ViewBag.PresenterId = id;
-            List<TitleAlias> aliasList = _repository.GetAliases(title.Id);
+            ViewBag.TitleId = id;
+
             return View(aliasList);
         }
 
-        public IActionResult AliasEdit(int id)
+        public async Task<IActionResult> AliasEdit(int id)
         {
-            TitleAlias titleAlias = _repository.GetAlias(id);
-            ViewBag.TitleName = _repository.GetTitle(titleAlias.TitleId).Name;
+            ViewBag.ErrorMessage = string.Empty;
+
+            TitleAlias titleAlias = await _repository.GetItemAliasAsync(id);
+            if (titleAlias == null)
+            {
+                ViewBag.ErrorMessage = _sharedLocalizer["ErrorNotFound"];
+                return View(new TitleAlias());
+            }
+
+            Title title = await _repository.GetItemAsync(titleAlias.TitleId);
+            if (title == null)
+            {
+                ViewBag.ErrorMessage = _sharedLocalizer["ErrorNotFound"];
+                return View(new TitleAlias());
+            }
+
+            ViewBag.TitleName = title.Name;
             return View(titleAlias);
         }
 
         [HttpPost]
-        public IActionResult AliasEdit(TitleAlias titleAlias)
+        public async Task<IActionResult> AliasEdit(TitleAlias titleAlias)
         {
+            ViewBag.ErrorMessage = string.Empty;
+
+            Title title = await _repository.GetItemAsync(titleAlias.TitleId);
+            if (title == null)
+            {
+                ViewBag.ErrorMessage = _sharedLocalizer["ErrorNotFound"];
+                return View(new TitleAlias());
+            }
+
+            ViewBag.TitleName = title.Name;
             if (ModelState.IsValid)
             {
-                TitleAlias titleAliasPrev = _repository.GetAlias(titleAlias.Id);
-
-                if (!_repository.TitleAliasIsUnique(titleAlias.Alias) && titleAliasPrev.Alias != titleAlias.Alias)
-                {
-                    ModelState.AddModelError("Alias",_sharedLocalizer["ErrorDuplicateRecord"]);
-                    ViewBag.TitleName = _repository.GetTitle(titleAlias.TitleId).Name;
-                    return View(titleAlias);
-                }
-
-
                 try
                 {
-                    _repository.UpdateAlias(titleAlias);
-                    return RedirectToAction("Aliases", new {id = titleAlias.TitleId});
+                    TitleAlias titleAliasOriginal = await _repository.GetItemAliasAsync(titleAlias.Id);
+
+                    if (titleAliasOriginal == null)
+                    {
+                        ViewBag.ErrorMessage = _sharedLocalizer["ErrorNotFound"];
+                        return View(new TitleAlias());
+                    }
+
+                    if (!await _repository.ItemAliasIsUniqueAsync(titleAlias.Alias) &&
+                        titleAlias.Alias != titleAliasOriginal.Alias)
+                    {
+                        ModelState.AddModelError("Alias", _sharedLocalizer["ErrorDuplicateRecord"]);
+
+                        return View(titleAlias);
+                    }
+
+                    await _repository.UpdateItemAliasAsync(titleAlias);
+
+                    Log.Information(
+                        $"User {_userManager.GetUserName(User)} edited entry: {titleAliasOriginal.Alias}" +
+                        $" -> {titleAlias.Alias}");
+
+                    return RedirectToAction("Aliases", new { id = titleAlias.TitleId });
                 }
                 catch (DbUpdateException)
                 {
-                    ViewBag.TitleName = _repository.GetTitle(titleAlias.TitleId).Name;
                     ViewBag.ErrorMessage = _sharedLocalizer["ErrorDbUpdate"];
                     return View(titleAlias);
                 }
             }
 
-            ViewBag.TitleName = _repository.GetTitle(titleAlias.TitleId).Name;
             return View(titleAlias);
         }
 
-        public IActionResult AliasCreate(int id)
+        public async Task<IActionResult> AliasCreate(int id)
         {
+            ViewBag.ErrorMessage = string.Empty;
+
+            Title title = await _repository.GetItemAsync(id);
+            if (title == null)
+            {
+                ViewBag.ErrorMessage = _sharedLocalizer["ErrorNotFound"];
+                return View(new TitleAliasCreateViewModel());
+            }
+
             TitleAliasCreateViewModel titleAliasCreateViewModel = new TitleAliasCreateViewModel
             {
                 TitleId = id
             };
-            ViewBag.TitleName = _repository.GetTitle(id).Name;
+
+            ViewBag.TitleName = title.Name;
             return View(titleAliasCreateViewModel);
         }
 
         [HttpPost]
-        public IActionResult AliasCreate(TitleAliasCreateViewModel titleAliasCreateViewModel)
+        public async Task<IActionResult> AliasCreate(TitleAliasCreateViewModel titleAliasCreateViewModel)
         {
-            ViewBag.TitleName = _repository.GetTitle(titleAliasCreateViewModel.TitleId).Name;
+            ViewBag.ErrorMessage = string.Empty;
 
-            if (!_repository.TitleAliasIsUnique(titleAliasCreateViewModel.titleAlias))
+            Title title = await _repository.GetItemAsync(titleAliasCreateViewModel.TitleId);
+            if (title == null)
             {
-                ModelState.AddModelError("titleAlias",_sharedLocalizer["ErrorDuplicateRecord"]);
+                ViewBag.ErrorMessage = _sharedLocalizer["ErrorNotFound"];
+                return View(new TitleAliasCreateViewModel());
             }
-            
+
+            ViewBag.TitleFullName = title.Name;
+
             if (ModelState.IsValid)
             {
                 TitleAlias titleAlias = new TitleAlias
                 {
-                    Alias = titleAliasCreateViewModel.titleAlias,
+                    Alias = titleAliasCreateViewModel.Alias,
                     TitleId = titleAliasCreateViewModel.TitleId
                 };
 
                 try
                 {
-                    _repository.CreateAlias(titleAlias);
+                    await _repository.CreateItemAliasAsync(titleAlias);
+                    Log.Information(
+                        $"User {_userManager.GetUserName(User)} added new entry: {titleAlias.Alias}");
                     return RedirectToAction("Aliases", new { id = titleAliasCreateViewModel.TitleId });
                 }
-                catch (DbUpdateException)
+                catch (DbUpdateException e)
                 {
-
-                    ViewBag.Message = _sharedLocalizer["ErrorDbUpdate"];
+                    Log.Error(_logMessages.ErrorMessage(e, _userManager.GetUserName(User)));
+                    ViewBag.ErrorMessage = _sharedLocalizer["ErrorDbUpdate"];
                     return View(titleAliasCreateViewModel);
                 }
             }
@@ -214,25 +322,50 @@ namespace BroadSend.Server.Controllers
             return View(titleAliasCreateViewModel);
         }
 
-        public IActionResult AliasDelete(int id)
+        public async Task<IActionResult> AliasDelete(int id)
         {
-            ViewBag.TitleName = _repository.GetTitle(_repository.GetAlias(id).TitleId).Name;
-            return View(_repository.GetAlias(id));
+            ViewBag.ErrorMessage = string.Empty;
+
+            TitleAlias titleAlias = await _repository.GetItemAliasAsync(id);
+            if (titleAlias == null)
+            {
+                ViewBag.ErrorMessage = _sharedLocalizer["ErrorNotFound"];
+                return View(new TitleAlias());
+            }
+
+            Title title = await _repository.GetItemAsync(titleAlias.TitleId);
+            if (title == null)
+            {
+                ViewBag.ErrorMessage = _sharedLocalizer["ErrorNotFound"];
+                return View(new TitleAlias());
+            }
+
+            var titleAliases = await _repository.GetItemAliasesAsync(title.Id);
+            if (titleAliases?.Count() == 1)
+            {
+                return RedirectToAction("Aliases", new { id = title.Id });
+            }
+
+            ViewBag.TitleName = title.Name;
+            return View(titleAlias);
         }
 
         [HttpPost]
-        public IActionResult AliasDelete(TitleAlias titleAlias)
+        public async Task<IActionResult> AliasDelete(TitleAlias titleAlias)
         {
-            int titleId = _repository.GetAlias(titleAlias.Id).TitleId;
             try
             {
-                _repository.DeleteAlias(titleAlias.Id);
+                await _repository.DeleteItemAliasAsync(titleAlias.Id);
+                Log.Information($"User {_userManager.GetUserName(User)} deleted entry: {titleAlias.Alias}");
             }
-            catch
+            catch (ArgumentNullException e)
             {
+                Log.Error(_logMessages.ErrorMessage(e, _userManager.GetUserName(User)));
+                ViewBag.ErrorMessage = _sharedLocalizer["ErrorDbUpdate"];
+                return View(new TitleAlias());
             }
 
-            return RedirectToAction("Aliases", new {id = titleId});
+            return RedirectToAction("Aliases", new { id = titleAlias.TitleId });
         }
     }
 }

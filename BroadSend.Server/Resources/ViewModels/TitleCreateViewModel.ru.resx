@@ -125,4 +125,20 @@
     <value>Введите псевдоним для передачи</value>
     <comment>Введите псевдоним для передачи</comment>
   </data>
+  <data name="AnonsLength" xml:space="preserve">
+    <value>Анонс должен содержать от {2} до {1} символов</value>
+    <comment>Анонс должен содержать от {2} до {1} символов</comment>
+  </data>
+  <data name="AnonsRequired" xml:space="preserve">
+    <value>Введите анонс передачи</value>
+    <comment>Введите анонс передачи</comment>
+  </data>
+  <data name="NameLength" xml:space="preserve">
+    <value>Наименование передачи должно содержать от {2} до {1} символов</value>
+    <comment>Наименование передачи должно содержать от {2} до {1} символов</comment>
+  </data>
+  <data name="NameRequired" xml:space="preserve">
+    <value>Введите наименование передачи</value>
+    <comment>Введите наименование передачи</comment>
+  </data>
 </root>

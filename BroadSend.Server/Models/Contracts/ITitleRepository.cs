@@ -1,33 +1,58 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BroadSend.Server.Models.Contracts
 {
     public interface ITitleRepository
     {
-        IEnumerable<Title> AllTitles { get; }
+        Task<IEnumerable<Title>> GetAllItemsAsync();
 
-        bool TitleNameIsUnique(string fullName);
-        bool TitleAliasIsUnique(string alias);
+        Task CreateItemAsync(Title item, string itemAlias);
+
+        Task<Title> GetItemAsync(int id);
+
+        Task UpdateItemAsync(Title item);
+
+        Task DeleteItemAsync(int id);
+
+        Task CreateItemAliasAsync(TitleAlias itemAlias);
+
+        Task<TitleAlias> GetItemAliasAsync(int id);
+
+        Task<IEnumerable<TitleAlias>> GetItemAliasesAsync(int id);
+
+        Task UpdateItemAliasAsync(TitleAlias itemAlias);
+
+        Task DeleteItemAliasAsync(int id);
+
+        Task<bool> ItemNameIsUniqueAsync(string name);
+
+        Task<bool> ItemAliasIsUniqueAsync(string alias);
 
 
-        void CreateTitle(Title title, string titleAlias);
+        //IEnumerable<Title> AllTitles { get; }
 
-        Title GetTitle(int titleId);
-
-        void UpdateTitle(Title title);
-
-        void DeleteTitle(int titleId);
+        //bool TitleNameIsUnique(string fullName);
+        //bool TitleAliasIsUnique(string alias);
 
 
+        //void CreateTitle(Title title, string titleAlias);
 
-        void CreateAlias(TitleAlias titleAlias);
+        //Title GetTitle(int titleId);
 
-        TitleAlias GetAlias(int titleAiliasId);
+        //void UpdateTitle(Title title);
 
-        List<TitleAlias> GetAliases(int titleId);
+        //void DeleteTitle(int titleId);
 
-        void UpdateAlias(TitleAlias titleAlias);
 
-        void DeleteAlias(int aliasId);
+        //void CreateAlias(TitleAlias titleAlias);
+
+        //TitleAlias GetAlias(int titleAiliasId);
+
+        //List<TitleAlias> GetAliases(int titleId);
+
+        //void UpdateAlias(TitleAlias titleAlias);
+
+        //void DeleteAlias(int aliasId);
     }
 }

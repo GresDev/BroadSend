@@ -2,8 +2,7 @@
 
 @model IEnumerable<PresenterAlias>
 
-<partial name="_PresenterTitle"/>
-
+<partial name="_PresenterTitle" />
 
 @if (ViewBag.ErrorMessage != string.Empty)
 {
@@ -26,29 +25,29 @@ else
         <table class="table">
 
             <thead class="thead-light text-left">
-            <tr>
-                <th>@SharedLocalizer["TableHeaderAlias"]</th>
-                <th></th>
-            </tr>
+                <tr>
+                    <th>@SharedLocalizer["TableHeaderAlias"]</th>
+                    <th></th>
+                </tr>
             </thead>
 
             <tbody>
-            @foreach (var alias in Model)
-            {
-                <tr>
-                    <td>@alias.Alias</td>
-                    <td>
-                        <a asp-action="AliasEdit" asp-route-id="@alias.Id">@SharedLocalizer["ButtonEdit"]</a>
+                @foreach (var alias in Model)
+                {
+                    <tr>
+                        <td>@alias.Alias</td>
+                        <td>
+                            <a asp-action="AliasEdit" asp-route-id="@alias.Id">@SharedLocalizer["ButtonEdit"]</a>
 
-                        @if (!ViewBag.OnlyOneAlias)
-                        {
-                           <a asp-action="AliasDelete" asp-route-id="@alias.Id" class="disabled"> | @SharedLocalizer["ButtonDelete"]</a>
-                        }
+                            @if (!ViewBag.OnlyOneAlias)
+                            {
+                                <a asp-action="AliasDelete" asp-route-id="@alias.Id" class="disabled"> | @SharedLocalizer["ButtonDelete"]</a>
+                            }
 
-                    </td>
+                        </td>
 
-                </tr>
-            }
+                    </tr>
+                }
             </tbody>
 
         </table>

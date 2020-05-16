@@ -4,7 +4,7 @@ using BroadSend.Server.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
 
-namespace BroadSend.Server.Utils
+namespace BroadSend.Server.Utils.Attributes
 {
     public class VendorNameIsUniqueAttribute : ValidationAttribute
     {
@@ -14,10 +14,10 @@ namespace BroadSend.Server.Utils
             var localizer = (IStringLocalizer<SharedResource>)validationContext.GetService(typeof(IStringLocalizer<SharedResource>));
 
             var context = (AppDbContext)validationContext.GetService(typeof(AppDbContext));
-            var director = context?.Vendors.AsNoTracking().SingleOrDefault(v => v.Name == value as string);
+            var vendor = context?.Vendors.AsNoTracking().SingleOrDefault(v => v.Name == value as string);
 
 
-            return director != null ? new ValidationResult(localizer["ErrorDuplicateRecord"]) : ValidationResult.Success;
+            return vendor != null ? new ValidationResult(localizer["ErrorDuplicateRecord"]) : ValidationResult.Success;
         }
     }
 }
