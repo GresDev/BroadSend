@@ -10,6 +10,5 @@ namespace BroadSend.Server.Models.Contracts
         Task<T> GetItemAsync(int id);
         Task UpdateItemAsync(T item);
         Task DeleteItemAsync(int id);
-
     }
 }

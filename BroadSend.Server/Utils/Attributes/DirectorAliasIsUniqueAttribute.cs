@@ -17,8 +17,7 @@ namespace BroadSend.Server.Utils.Attributes
             var context = (AppDbContext)validationContext.GetService(typeof(AppDbContext));
 
             var director = context?.Directors.AsNoTracking().SingleOrDefault(d => d.Alias == value as string);
-
-
+            
             return director != null
                 ? new ValidationResult(localizer?["ErrorDuplicateRecord"])
                 : ValidationResult.Success;

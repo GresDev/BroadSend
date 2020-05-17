@@ -18,7 +18,6 @@ namespace BroadSend.Server.Utils.Attributes
 
             var country = context?.Countries.AsNoTracking().SingleOrDefault(c => c.Name == value as string);
 
-
             return country != null
                 ? new ValidationResult(localizer?["ErrorDuplicateRecord"])
                 : ValidationResult.Success;
