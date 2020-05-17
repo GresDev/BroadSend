@@ -236,6 +236,8 @@ namespace BroadSend.Server.Migrations
                     b.HasIndex("Alias")
                         .IsUnique();
 
+                    b.HasIndex("ParentId");
+
                     b.ToTable("PresenterAliases");
                 });
 
@@ -283,6 +285,8 @@ namespace BroadSend.Server.Migrations
 
                     b.HasIndex("Alias")
                         .IsUnique();
+
+                    b.HasIndex("ParentId");
 
                     b.ToTable("TitleAliases");
                 });
@@ -501,6 +505,24 @@ namespace BroadSend.Server.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("BroadSend.Server.Models.PresenterAlias", b =>
+                {
+                    b.HasOne("BroadSend.Server.Models.Presenter", null)
+                        .WithMany("PresenterAliases")
+                        .HasForeignKey("ParentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("BroadSend.Server.Models.TitleAlias", b =>
+                {
+                    b.HasOne("BroadSend.Server.Models.Title", null)
+                        .WithMany("TitleAliases")
+                        .HasForeignKey("ParentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

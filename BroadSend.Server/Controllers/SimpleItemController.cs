@@ -71,7 +71,7 @@ namespace BroadSend.Server.Controllers
         {
             ViewBag.ErrorMessage = string.Empty;
 
-            T item = await _repository.GetItemAsync(id);
+            var item = await _repository.GetItemAsync(id);
 
             if (item == null)
             {
@@ -87,12 +87,24 @@ namespace BroadSend.Server.Controllers
         {
             ViewBag.ErrorMessage = string.Empty;
 
+            var itemOriginal = await _repository.GetItemAsync(item.Id);
+
+            if (itemOriginal == null)
+            {
+                ViewBag.ErrorMessage = _sharedLocalizer["ErrorNotFound"];
+                return View();
+            }
+
+            if (itemOriginal.Name == item.Name)
+            {
+                ModelState.ClearValidationState("Name");
+                ModelState.MarkFieldValid("Name");
+            }
+
             if (ModelState.IsValid)
             {
                 try
                 {
-                    T itemOriginal = await _repository.GetItemAsync(item.Id);
-
                     await _repository.UpdateItemAsync(item);
                     Log.Information(
                         $"User {_userManager.GetUserName(User)} edited entry: {itemOriginal.Name} -> {item.Name}");
@@ -113,7 +125,7 @@ namespace BroadSend.Server.Controllers
         {
             ViewBag.ErrorMessage = string.Empty;
 
-            T item = await _repository.GetItemAsync(id);
+            var item = await _repository.GetItemAsync(id);
 
             if (item == null)
             {

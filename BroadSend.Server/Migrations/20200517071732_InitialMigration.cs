@@ -281,18 +281,17 @@ namespace BroadSend.Server.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Alias = table.Column<string>(maxLength: 64, nullable: false),
-                    ParentId = table.Column<int>(nullable: false),
-                    PresenterId = table.Column<int>(nullable: true)
+                    ParentId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PresenterAliases", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_PresenterAliases_Presenters_PresenterId",
-                        column: x => x.PresenterId,
+                        name: "FK_PresenterAliases_Presenters_ParentId",
+                        column: x => x.ParentId,
                         principalTable: "Presenters",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -302,18 +301,17 @@ namespace BroadSend.Server.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Alias = table.Column<string>(maxLength: 64, nullable: false),
-                    TitleId = table.Column<int>(nullable: true),
                     ParentId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TitleAliases", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TitleAliases_Titles_TitleId",
-                        column: x => x.TitleId,
+                        name: "FK_TitleAliases_Titles_ParentId",
+                        column: x => x.ParentId,
                         principalTable: "Titles",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -392,9 +390,9 @@ namespace BroadSend.Server.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_PresenterAliases_PresenterId",
+                name: "IX_PresenterAliases_ParentId",
                 table: "PresenterAliases",
-                column: "PresenterId");
+                column: "ParentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Presenters_Name",
@@ -409,9 +407,9 @@ namespace BroadSend.Server.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_TitleAliases_TitleId",
+                name: "IX_TitleAliases_ParentId",
                 table: "TitleAliases",
-                column: "TitleId");
+                column: "ParentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Titles_Name",

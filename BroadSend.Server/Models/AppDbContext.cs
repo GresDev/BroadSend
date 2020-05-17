@@ -44,8 +44,10 @@ namespace BroadSend.Server.Models
             modelBuilder.Entity<Language>().HasIndex(l => l.Name).IsUnique();
             modelBuilder.Entity<Presenter>().HasIndex(p => p.Name).IsUnique();
             modelBuilder.Entity<PresenterAlias>().HasIndex(p => p.Alias).IsUnique();
+            modelBuilder.Entity<Presenter>().HasMany(p => p.PresenterAliases).WithOne().HasForeignKey(fk => fk.ParentId);
             modelBuilder.Entity<Title>().HasIndex(t => t.Name).IsUnique();
             modelBuilder.Entity<TitleAlias>().HasIndex(t => t.Alias).IsUnique();
+            modelBuilder.Entity<Title>().HasMany(t => t.TitleAliases).WithOne().HasForeignKey(fk => fk.ParentId);
             modelBuilder.Entity<Composer>().HasIndex(c => c.Name).IsUnique();
             modelBuilder.Entity<Vendor>().HasIndex(v => v.Name).IsUnique();
         }

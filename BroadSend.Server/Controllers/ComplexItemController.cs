@@ -96,26 +96,24 @@ namespace BroadSend.Server.Controllers
         {
             ViewBag.ErrorMessage = string.Empty;
 
+            var itemOriginal = await _repository.GetItemAsync(item.Id);
+
+            if (itemOriginal == null)
+            {
+                ViewBag.ErrorMessage = _sharedLocalizer["ErrorNotFound"];
+                return View();
+            }
+
+            if (itemOriginal.Name == item.Name)
+            {
+                ModelState.ClearValidationState("Name");
+                ModelState.MarkFieldValid("Name");
+            }
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var itemOriginal = await _repository.GetItemAsync(item.Id);
-
-                    if (itemOriginal == null)
-                    {
-                        ViewBag.ErrorMessage = _sharedLocalizer["ErrorNotFound"];
-                        return View();
-                    }
-
-                    if (!await _repository.ItemNameIsUniqueAsync(item.Name) &&
-                        itemOriginal.Name != item.Name)
-                    {
-                        ModelState.AddModelError("Name", _sharedLocalizer["ErrorDuplicateRecord"]);
-                        return View(item);
-                    }
-
                     await _repository.UpdateItemAsync(item);
                     Log.Information(
                         $"User {_userManager.GetUserName(User)} edited entry: {itemOriginal.Name}" +
@@ -228,26 +226,24 @@ namespace BroadSend.Server.Controllers
 
             ViewBag.PresenterName = item.Name;
 
+            var parentAliasOriginal = await _repository.GetItemAliasAsync(itemAlias.Id);
+
+            if (parentAliasOriginal == null)
+            {
+                ViewBag.ErrorMessage = _sharedLocalizer["ErrorNotFound"];
+                return View(new T2());
+            }
+
+            if (parentAliasOriginal.Alias == itemAlias.Alias)
+            {
+                ModelState.ClearValidationState("Alias");
+                ModelState.MarkFieldValid("Alias");
+            }
+
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var parentAliasOriginal = await _repository.GetItemAliasAsync(itemAlias.Id);
-
-                    if (parentAliasOriginal == null)
-                    {
-                        ViewBag.ErrorMessage = _sharedLocalizer["ErrorNotFound"];
-                        return View(new T2());
-                    }
-
-                    if (!await _repository.ItemAliasIsUniqueAsync(itemAlias.Alias) &&
-                        itemAlias.Alias != parentAliasOriginal.Alias)
-                    {
-                        ModelState.AddModelError("Alias", _sharedLocalizer["ErrorDuplicateRecord"]);
-
-                        return View(itemAlias);
-                    }
-
                     await _repository.UpdateItemAliasAsync(itemAlias);
 
                     Log.Information(
