@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
+using BroadSend.Server.Models;
 using BroadSend.Server.Models.Contracts;
 using BroadSend.Server.Utils;
 using Microsoft.AspNetCore.Identity;
@@ -44,7 +45,7 @@ namespace BroadSend.Server.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([Bind("Name")] T item)
+        public async Task<IActionResult> Create(T item)
         {
             ViewBag.ErrorMessage = string.Empty;
 
@@ -100,6 +101,21 @@ namespace BroadSend.Server.Controllers
                 ModelState.ClearValidationState("Name");
                 ModelState.MarkFieldValid("Name");
             }
+
+            var property = typeof(T).GetProperty("Alias")?.ToString();
+
+            if (property == "System.String Alias")
+            {
+                var externalItem = item as Director;
+                var newItemOriginal = itemOriginal as Director;
+
+                if (newItemOriginal?.Alias == externalItem?.Alias)
+                {
+                    ModelState.ClearValidationState("Alias");
+                    ModelState.MarkFieldValid("Alias");
+                }
+            }
+
 
             if (ModelState.IsValid)
             {

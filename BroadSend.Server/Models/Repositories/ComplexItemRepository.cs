@@ -87,18 +87,5 @@ namespace BroadSend.Server.Models.Repositories
             _appDbContext.Remove(itemAlias);
             await _appDbContext.SaveChangesAsync();
         }
-
-        public async Task<bool> ItemNameIsUniqueAsync(string name)
-        {
-            var result = await _appDbContext.Set<T1>().AsNoTracking().FirstOrDefaultAsync(p => p.Name == name);
-            return result == null;
-        }
-
-        public async Task<bool> ItemAliasIsUniqueAsync(string alias)
-        {
-            var result = await _appDbContext.Set<T2>().AsNoTracking()
-                .FirstOrDefaultAsync(a => a.Alias == alias);
-            return result == null;
-        }
     }
 }

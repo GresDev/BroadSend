@@ -15,7 +15,5 @@ namespace BroadSend.Server.Models.Contracts
         Task<IEnumerable<T2>> GetItemAliasesAsync(int id);
         Task UpdateItemAliasAsync(T2 itemAlias);
         Task DeleteItemAliasAsync(int id);
-        Task<bool> ItemNameIsUniqueAsync(string name);
-        Task<bool> ItemAliasIsUniqueAsync(string alias);
     }
 }

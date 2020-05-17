@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using BroadSend.Server.Models.Contracts;
 
 namespace BroadSend.Server.Models.Repositories
 {
@@ -7,13 +6,6 @@ namespace BroadSend.Server.Models.Repositories
     {
         public DirectorRepository(AppDbContext appDbContext) : base(appDbContext)
         {
-        }
-
-        public async Task<bool> ItemAliasIsUniqueAsync(string alias)
-        {
-            var result = await AppDbContext.Set<Director>().AsNoTracking().FirstOrDefaultAsync(n => n.Alias == alias);
-
-            return result == null;
         }
     }
 }

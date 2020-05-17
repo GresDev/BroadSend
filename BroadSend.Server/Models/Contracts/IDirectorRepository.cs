@@ -1,10 +1,6 @@
-﻿using System.Threading.Tasks;
-using BroadSend.Server.Models.Contracts;
-
-namespace BroadSend.Server.Models
+﻿namespace BroadSend.Server.Models.Contracts
 {
     public interface IDirectorRepository : ISimpleItemRepository<Director>
     {
-        Task<bool> ItemAliasIsUniqueAsync(string alias);
     }
 }

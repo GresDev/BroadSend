@@ -40,12 +40,6 @@ namespace BroadSend.Server.Models.Repositories
             return await AppDbContext.Set<T>().AsNoTracking().FirstOrDefaultAsync(n => n.Id == id);
         }
 
-        public async Task<bool> ItemNameIsUniqueAsync(string name)
-        {
-            var result = await AppDbContext.Set<T>().AsNoTracking().FirstOrDefaultAsync(n => n.Name == name);
-            return result == null;
-        }
-
         public async Task UpdateItemAsync(T item)
         {
             AppDbContext.Set<T>().Update(item);
