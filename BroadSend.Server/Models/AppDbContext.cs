@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
 using Microsoft.Extensions.Configuration;
 
 namespace BroadSend.Server.Models
 {
-    public class AppDbContext : IdentityDbContext<IdentityUser>
+    public sealed class AppDbContext : IdentityDbContext<IdentityUser>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options, IConfiguration configuration) : base(options)
         {
@@ -15,8 +14,6 @@ namespace BroadSend.Server.Models
                 Database.Migrate();
             }
         }
-
-        public Exception DbContextException { get; }
 
         public DbSet<Director> Directors { get; set; }
 

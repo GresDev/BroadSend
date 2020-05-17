@@ -1,11 +1,11 @@
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
 using System;
 using BroadSend.Server.Models;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.DependencyInjection;
-using Serilog;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Serilog;
 
 namespace BroadSend.Server
 {
@@ -37,7 +37,7 @@ namespace BroadSend.Server
                 catch (Exception ex)
                 {
                     Log.Fatal(ex, "Initialization of Database has failed");
-;                }
+                }
             }
 
             try
@@ -53,7 +53,6 @@ namespace BroadSend.Server
             {
                 Log.CloseAndFlush();
             }
-
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

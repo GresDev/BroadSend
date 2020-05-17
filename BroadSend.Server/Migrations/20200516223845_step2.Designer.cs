@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BroadSend.Server.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20200509141735_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20200516223845_step2")]
+    partial class step2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -206,13 +206,14 @@ namespace BroadSend.Server.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(512)")
+                        .HasMaxLength(512);
 
                     b.HasKey("Id");
 
                     b.HasIndex("Name")
-                        .IsUnique()
-                        .HasFilter("[Name] IS NOT NULL");
+                        .IsUnique();
 
                     b.ToTable("Presenters");
                 });
@@ -229,15 +230,13 @@ namespace BroadSend.Server.Migrations
                         .HasColumnType("nvarchar(64)")
                         .HasMaxLength(64);
 
-                    b.Property<int>("PresenterId")
+                    b.Property<int>("ParentId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("Alias")
                         .IsUnique();
-
-                    b.HasIndex("PresenterId");
 
                     b.ToTable("PresenterAliases");
                 });
@@ -251,13 +250,13 @@ namespace BroadSend.Server.Migrations
 
                     b.Property<string>("Anons")
                         .IsRequired()
-                        .HasColumnType("nvarchar(2048)")
-                        .HasMaxLength(2048);
+                        .HasColumnType("nvarchar(max)")
+                        .HasMaxLength(4096);
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(64)")
-                        .HasMaxLength(64);
+                        .HasColumnType("nvarchar(512)")
+                        .HasMaxLength(512);
 
                     b.HasKey("Id");
 
@@ -279,15 +278,13 @@ namespace BroadSend.Server.Migrations
                         .HasColumnType("nvarchar(64)")
                         .HasMaxLength(64);
 
-                    b.Property<int>("TitleId")
+                    b.Property<int>("ParentId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("Alias")
                         .IsUnique();
-
-                    b.HasIndex("TitleId");
 
                     b.ToTable("TitleAliases");
                 });
@@ -506,24 +503,6 @@ namespace BroadSend.Server.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("BroadSend.Server.Models.PresenterAlias", b =>
-                {
-                    b.HasOne("BroadSend.Server.Models.Presenter", null)
-                        .WithMany("Aliases")
-                        .HasForeignKey("PresenterId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("BroadSend.Server.Models.TitleAlias", b =>
-                {
-                    b.HasOne("BroadSend.Server.Models.Title", "Title")
-                        .WithMany("TitleAliases")
-                        .HasForeignKey("TitleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

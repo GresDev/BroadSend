@@ -17,6 +17,5 @@ namespace BroadSend.Server.Models
         [StringLength(256, ErrorMessage = "NameLength", MinimumLength = 1)]
         [DirectorNameIsUnique]
         public string Name { get; set; }
-
     }
 }

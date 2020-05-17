@@ -1,5 +1,8 @@
+using System.Collections.Generic;
+using System.Globalization;
 using BroadSend.Server.Models;
 using BroadSend.Server.Models.Contracts;
+using BroadSend.Server.Models.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -9,9 +12,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
-using System.Collections.Generic;
-using System.Globalization;
-using BroadSend.Server.Models.Repositories;
 using Serilog;
 
 namespace BroadSend.Server
@@ -29,8 +29,8 @@ namespace BroadSend.Server
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-                services.AddDbContext<AppDbContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<AppDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
 
             services.AddScoped<IDirectorRepository, DirectorRepository>();

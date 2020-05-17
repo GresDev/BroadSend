@@ -4,14 +4,16 @@ using BroadSend.Server.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BroadSend.Server.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200516222155_InitialMigration")]
+    partial class InitialMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -231,10 +233,15 @@ namespace BroadSend.Server.Migrations
                     b.Property<int>("ParentId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("PresenterId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("Alias")
                         .IsUnique();
+
+                    b.HasIndex("PresenterId");
 
                     b.ToTable("PresenterAliases");
                 });
@@ -279,10 +286,15 @@ namespace BroadSend.Server.Migrations
                     b.Property<int>("ParentId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("TitleId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("Alias")
                         .IsUnique();
+
+                    b.HasIndex("TitleId");
 
                     b.ToTable("TitleAliases");
                 });
@@ -501,6 +513,20 @@ namespace BroadSend.Server.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("BroadSend.Server.Models.PresenterAlias", b =>
+                {
+                    b.HasOne("BroadSend.Server.Models.Presenter", null)
+                        .WithMany("Aliases")
+                        .HasForeignKey("PresenterId");
+                });
+
+            modelBuilder.Entity("BroadSend.Server.Models.TitleAlias", b =>
+                {
+                    b.HasOne("BroadSend.Server.Models.Title", "Title")
+                        .WithMany("TitleAliases")
+                        .HasForeignKey("TitleId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

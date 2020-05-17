@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BroadSend.Server.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20200516195801_UdatePresenterTitle")]
-    partial class UdatePresenterTitle
+    [Migration("20200516224445_step3")]
+    partial class step3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -230,15 +230,13 @@ namespace BroadSend.Server.Migrations
                         .HasColumnType("nvarchar(64)")
                         .HasMaxLength(64);
 
-                    b.Property<int>("PresenterId")
+                    b.Property<int>("ParentId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("Alias")
                         .IsUnique();
-
-                    b.HasIndex("PresenterId");
 
                     b.ToTable("PresenterAliases");
                 });
@@ -280,15 +278,13 @@ namespace BroadSend.Server.Migrations
                         .HasColumnType("nvarchar(64)")
                         .HasMaxLength(64);
 
-                    b.Property<int>("TitleId")
+                    b.Property<int>("ParentId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("Alias")
                         .IsUnique();
-
-                    b.HasIndex("TitleId");
 
                     b.ToTable("TitleAliases");
                 });
@@ -507,24 +503,6 @@ namespace BroadSend.Server.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("BroadSend.Server.Models.PresenterAlias", b =>
-                {
-                    b.HasOne("BroadSend.Server.Models.Presenter", null)
-                        .WithMany("Aliases")
-                        .HasForeignKey("PresenterId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("BroadSend.Server.Models.TitleAlias", b =>
-                {
-                    b.HasOne("BroadSend.Server.Models.Title", "Title")
-                        .WithMany("TitleAliases")
-                        .HasForeignKey("TitleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

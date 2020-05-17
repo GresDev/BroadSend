@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using BroadSend.Server.Models.Contracts;
 
 namespace BroadSend.Server.Models
 {
-    public class Title
+    public class Title : IComplexItem
     {
         public int Id { get; set; }
 
@@ -14,7 +14,5 @@ namespace BroadSend.Server.Models
         [Required(ErrorMessage = "AnonsRequired")]
         [StringLength(4096, ErrorMessage = "AnonsLength", MinimumLength = 1)]
         public string Anons { get; set; }
-
-        public ICollection<TitleAlias> TitleAliases { get; set; }
     }
 }

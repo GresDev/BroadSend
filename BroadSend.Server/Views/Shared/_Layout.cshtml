@@ -6,93 +6,93 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="windows-1251"/>
-    <meta name="viewport" content="width=device-width"/>
+    <meta charset="windows-1251" />
+    <meta name="viewport" content="width=device-width" />
 
-    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css"/>
-    <link rel="stylesheet" href="~/content/site.css"/>
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
+    <link rel="stylesheet" href="~/content/site.css" />
 
     <title>@ViewBag.Title</title>
 </head>
 <body>
 
-@if (SignInManager.IsSignedIn(User))
-{
-    <nav class="navbar fixed-top navbar-expand-lg" style="background-color: gainsboro">
-        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" style="color: black">
-            <i class="fa fa-home fa-lg"></i>
-        </a>
-        <partial name="_LoginPartial"/>
-        @if (User.IsInRole("Administrator"))
-        {
-            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Home" asp-action="UserManagement">@Localizer["Administration"]</a>
-        }
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <nav class="navbar fixed-top navbar-expand-lg" style="background-color: gainsboro">
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" style="color: black">
+                <i class="fa fa-home fa-lg"></i>
+            </a>
+            <partial name="_LoginPartial" />
+            @if (User.IsInRole("Administrator"))
+            {
+                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Home" asp-action="UserManagement">@Localizer["Administration"]</a>
+            }
 
+        </nav>
+
+        <div id="sidebar">
+
+            <div style="margin: 50px 10px 0 0">
+                <ul class="nav">
+                    <li class="nav-item; ">
+                        <div style="left: 0; width: 250px">
+                            <a asp-area="" asp-controller="Presenter" asp-action="Index" class="nav-link">@Localizer["Presenters"]</a>
+                        </div>
+                    </li>
+                    <li class="nav-item; ">
+                        <div style="left: 0; width: 250px">
+                            <a asp-area="" asp-controller="Title" asp-action="Index" class="nav-link">@Localizer["Titles"]</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <div style="left: 0; width: 250px">
+                            <a asp-area="" asp-controller="Director" asp-action="Index" class="nav-link">@Localizer["Directors"]</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <div style="left: 0; width: 250px">
+                            <a asp-area="" asp-controller="Country" asp-action="Index" class="nav-link">@Localizer["Countries"]</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <div style="left: 0; width: 250px">
+                            <a asp-area="" asp-controller="Language" asp-action="Index" class="nav-link">@Localizer["Languages"]</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <div style="left: 0; width: 250px">
+                            <a asp-area="" asp-controller="Vendor" asp-action="Index" class="nav-link">@Localizer["Vendors"]</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <div style="left: 0; width: 250px">
+                            <a asp-area="" asp-controller="Composer" asp-action="Index" class="nav-link">@Localizer["Composers"]</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+
+        </div>
+    }
+
+    <div id="main">
+        @RenderBody()
+    </div>
+
+    <nav class="navbar fixed-bottom  navbar-expand-lg text-center" id="footer">
+        <span class="navbar-text mx-auto">BroadSend, 2020</span>
     </nav>
 
-    <div id="sidebar">
+    <script type="text/javascript" src="~/lib/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="~/lib/jquery-validate/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 
-        <div style="margin: 50px 10px 0 0">
-            <ul class="nav">
-                <li class="nav-item; ">
-                    <div style="left: 0; width: 250px">
-                        <a asp-area="" asp-controller="Presenter" asp-action="Index" class="nav-link">@Localizer["Presenters"]</a>
-                    </div>
-                </li>
-                <li class="nav-item; ">
-                    <div style="left: 0; width: 250px">
-                        <a asp-area="" asp-controller="Title" asp-action="Index" class="nav-link">@Localizer["Titles"]</a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <div style="left: 0; width: 250px">
-                        <a asp-area="" asp-controller="Director" asp-action="Index" class="nav-link">@Localizer["Directors"]</a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <div style="left: 0; width: 250px">
-                        <a asp-area="" asp-controller="Country" asp-action="Index" class="nav-link">@Localizer["Countries"]</a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <div style="left: 0; width: 250px">
-                        <a asp-area="" asp-controller="Language" asp-action="Index" class="nav-link">@Localizer["Languages"]</a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <div style="left: 0; width: 250px">
-                        <a asp-area="" asp-controller="Vendor" asp-action="Index" class="nav-link">@Localizer["Vendors"]</a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <div style="left: 0; width: 250px">
-                        <a asp-area="" asp-controller="Composer" asp-action="Index" class="nav-link">@Localizer["Composers"]</a>
-                    </div>
-                </li>
-            </ul>
-        </div>
+    <script type="text/javascript" src="~/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/lib/font-awesome/js/all.min.js"></script>
 
-
-    </div>
-}
-
-<div id="main">
-    @RenderBody()
-</div>
-
-<nav class="navbar fixed-bottom  navbar-expand-lg text-center" id="footer">
-    <span class="navbar-text mx-auto">BroadSend, 2020</span>
-</nav>
-
-<script type="text/javascript" src="~/lib/jquery/jquery.min.js"></script>
-<script type="text/javascript" src="~/lib/jquery-validate/jquery.validate.min.js"></script>
-<script type="text/javascript" src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
-
-<script type="text/javascript" src="~/lib/bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="~/lib/font-awesome/js/all.min.js"></script>
-
-@RenderSection("Scripts", required: false)
+    @RenderSection("Scripts", required: false)
 
 </body>
 </html>

@@ -2,11 +2,11 @@
 
 @model ISimpleItem
 
-<partial name="_EditItem"/>
+<partial name="_EditItem" />
 
 @if (ViewBag.ErrorMessage != string.Empty)
 {
-    <partial name="_ErrorMessage"/>
+    <partial name="_ErrorMessage" />
 }
 else
 {
@@ -15,9 +15,9 @@ else
 
             <div class="form-group">
                 <label asp-for="Name">@SharedLocalizer[@ViewData["TabHeader"].ToString()]</label>
-                <input asp-for="Name" class="form-control"/>
+                <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
-                <input type="hidden" asp-for="Id"/>
+                <input type="hidden" asp-for="Id" />
             </div>
 
             <div style="margin: 50px 0">

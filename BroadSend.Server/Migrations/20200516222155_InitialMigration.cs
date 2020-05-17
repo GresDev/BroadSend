@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BroadSend.Server.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -134,7 +134,7 @@ namespace BroadSend.Server.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(maxLength: 512, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -147,8 +147,8 @@ namespace BroadSend.Server.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(maxLength: 64, nullable: false),
-                    Anons = table.Column<string>(maxLength: 2048, nullable: false)
+                    Name = table.Column<string>(maxLength: 512, nullable: false),
+                    Anons = table.Column<string>(maxLength: 4096, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -281,7 +281,8 @@ namespace BroadSend.Server.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Alias = table.Column<string>(maxLength: 64, nullable: false),
-                    PresenterId = table.Column<int>(nullable: false)
+                    ParentId = table.Column<int>(nullable: false),
+                    PresenterId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -291,7 +292,7 @@ namespace BroadSend.Server.Migrations
                         column: x => x.PresenterId,
                         principalTable: "Presenters",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -301,7 +302,8 @@ namespace BroadSend.Server.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Alias = table.Column<string>(maxLength: 64, nullable: false),
-                    TitleId = table.Column<int>(nullable: false)
+                    TitleId = table.Column<int>(nullable: true),
+                    ParentId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -311,7 +313,7 @@ namespace BroadSend.Server.Migrations
                         column: x => x.TitleId,
                         principalTable: "Titles",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -398,8 +400,7 @@ namespace BroadSend.Server.Migrations
                 name: "IX_Presenters_Name",
                 table: "Presenters",
                 column: "Name",
-                unique: true,
-                filter: "[Name] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_TitleAliases_Alias",

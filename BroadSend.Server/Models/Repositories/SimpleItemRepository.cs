@@ -1,12 +1,14 @@
-﻿using BroadSend.Server.Models.Contracts;
-using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BroadSend.Server.Models.Contracts;
+using Microsoft.EntityFrameworkCore;
 
 namespace BroadSend.Server.Models.Repositories
 {
-    public class SimpleItemRepository<T> : ISimpleItemRepository<T> where T : class, ISimpleItem
+    public class SimpleItemRepository<T> : ISimpleItemRepository<T>
+        where T : class, ISimpleItem
+
     {
         internal readonly AppDbContext AppDbContext;
 
@@ -30,7 +32,7 @@ namespace BroadSend.Server.Models.Repositories
 
         public async Task<IEnumerable<T>> GetAllItemsAsync()
         {
-            return await AppDbContext.Set<T>().AsNoTracking().OrderBy(n=>n.Name).ToListAsync();
+            return await AppDbContext.Set<T>().AsNoTracking().OrderBy(n => n.Name).ToListAsync();
         }
 
         public async Task<T> GetItemAsync(int id)
@@ -41,14 +43,13 @@ namespace BroadSend.Server.Models.Repositories
         public async Task<bool> ItemNameIsUniqueAsync(string name)
         {
             var result = await AppDbContext.Set<T>().AsNoTracking().FirstOrDefaultAsync(n => n.Name == name);
-            return result == null ? true : false;
+            return result == null;
         }
 
         public async Task UpdateItemAsync(T item)
         {
             AppDbContext.Set<T>().Update(item);
             await AppDbContext.SaveChangesAsync();
-
         }
     }
 }

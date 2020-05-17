@@ -2,7 +2,7 @@
 
 @model PresenterCreateViewModel
 
-<partial name="_PresenterTitle"/>
+<partial name="_PresenterTitle" />
 
 <h3 style="margin: 0 0 50px">@SharedLocalizer["HeaderAddNewItem"]</h3>
 
@@ -15,15 +15,15 @@
     <form asp-controller="Presenter" asp-action="Create">
 
         <div class="form-group">
-            <label asp-for="@Model.Name">@SharedLocalizer["TableHeaderFullName"]</label>
-            <input asp-for="@Model.Name" class="form-control" />
-            <span asp-validation-for="@Model.Name" class="text-danger"></span>
+            <label asp-for="@Model.ComplexItem.Name">@SharedLocalizer["TableHeaderFullName"]</label>
+            <input asp-for="@Model.ComplexItem.Name" class="form-control" />
+            <span asp-validation-for="@Model.ComplexItem.Name" class="text-danger"></span>
         </div>
 
         <div class="form-group">
-            <label asp-for="@Model.Alias">@SharedLocalizer["TableHeaderAlias"]</label>
-            <input asp-for="@Model.Alias" class="form-control" />
-            <span asp-validation-for="@Model.Alias" class="text-danger"></span>
+            <label asp-for="@Model.ComplexItemAlias.Alias">@SharedLocalizer["TableHeaderAlias"]</label>
+            <input asp-for="@Model.ComplexItemAlias.Alias" class="form-control" />
+            <span asp-validation-for="@Model.ComplexItemAlias.Alias" class="text-danger"></span>
         </div>
 
         <div style="margin: 50px 0">

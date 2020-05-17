@@ -2,6 +2,5 @@
 {
     public interface ILanguageRepository : ISimpleItemRepository<Language>
     {
-
     }
 }

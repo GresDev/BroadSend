@@ -11,22 +11,22 @@
 
     <table class="table">
         <thead class="thead-light text-left">
-        <tr>
-            <th>@SharedLocalizer[@ViewData["TabHeader"].ToString()]</th>
-            <th></th>
-        </tr>
+            <tr>
+                <th>@SharedLocalizer[@ViewData["TabHeader"].ToString()]</th>
+                <th></th>
+            </tr>
         </thead>
         <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.Name</td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">@SharedLocalizer["ButtonEdit"]</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">@SharedLocalizer["ButtonDelete"]</a>
-                </td>
-            </tr>
-        }
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">@SharedLocalizer["ButtonEdit"]</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">@SharedLocalizer["ButtonDelete"]</a>
+                    </td>
+                </tr>
+            }
         </tbody>
 
     </table>

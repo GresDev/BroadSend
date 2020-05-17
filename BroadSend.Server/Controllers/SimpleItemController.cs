@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using BroadSend.Server.Models.Contracts;
 using BroadSend.Server.Utils;
@@ -10,6 +11,7 @@ using Serilog;
 
 namespace BroadSend.Server.Controllers
 {
+    [SuppressMessage("ReSharper", "Mvc.ViewNotResolved")]
     public class SimpleItemController<T> : Controller where T : class, ISimpleItem
     {
         private readonly ISimpleItemRepository<T> _repository;

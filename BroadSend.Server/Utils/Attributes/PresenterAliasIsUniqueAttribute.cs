@@ -10,14 +10,19 @@ namespace BroadSend.Server.Utils.Attributes
     {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-
-            var localizer = (IStringLocalizer<SharedResource>)validationContext.GetService(typeof(IStringLocalizer<SharedResource>));
+            var localizer =
+                (IStringLocalizer<SharedResource>)validationContext.GetService(
+                    typeof(IStringLocalizer<SharedResource>));
 
             var context = (AppDbContext)validationContext.GetService(typeof(AppDbContext));
-            var presenterAlias = context?.PresenterAliases.AsNoTracking().SingleOrDefault(p => p.Alias == value as string);
+
+            var presenterAlias = context?.PresenterAliases.AsNoTracking()
+                .SingleOrDefault(p => p.Alias == value as string);
 
 
-            return presenterAlias != null ? new ValidationResult(localizer["ErrorDuplicateRecord"]) : ValidationResult.Success;
+            return presenterAlias != null
+                ? new ValidationResult(localizer?["ErrorDuplicateRecord"])
+                : ValidationResult.Success;
         }
     }
 }

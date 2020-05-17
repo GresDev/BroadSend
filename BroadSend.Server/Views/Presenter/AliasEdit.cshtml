@@ -25,13 +25,13 @@ else
                 <span asp-validation-for="@Model.Alias" class="text-danger"></span>
 
                 <input type="hidden" asp-for="@Model.Id"/>
-                <input type="hidden" asp-for="@Model.PresenterId"/>
+                <input type="hidden" asp-for="@Model.ParentId"/>
 
             </div>
 
             <div style="margin: 50px 0">
                 <button type="submit" class="btn btn-primary">@SharedLocalizer["ButtonSave"]</button>
-                <a asp-controller="Presenter" asp-action="Aliases" asp-route-id="@Model.PresenterId" class="btn btn-secondary">@SharedLocalizer["ButtonToAliases"]</a>
+                <a asp-controller="Presenter" asp-action="Aliases" asp-route-id="@Model.ParentId" class="btn btn-secondary">@SharedLocalizer["ButtonToAliases"]</a>
             </div>
 
         </form>

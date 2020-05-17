@@ -1,19 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
-using BroadSend.Server.Utils.Attributes;
+﻿using BroadSend.Server.Models;
+using BroadSend.Server.Models.Contracts;
 
 namespace BroadSend.Server.ViewModels
 {
-    public class PresenterCreateViewModel
+    public class PresenterCreateViewModel : IComplexItemCreateViewModel<Presenter, PresenterAlias>
     {
+        public Presenter ComplexItem { get; set; }
 
-        [Required(ErrorMessage = "NameRequired")]
-        [StringLength(512, ErrorMessage = "NameLength", MinimumLength = 1)]
-        [PresenterNameIsUnique]
-        public string Name { get; set; }
-
-        [Required(ErrorMessage = "AliasRequired")]
-        [StringLength(64, ErrorMessage = "AliasLength", MinimumLength = 1)]
-        [PresenterAliasIsUnique]
-        public string Alias { get; set; }
+        public PresenterAlias ComplexItemAlias { get; set; }
     }
 }

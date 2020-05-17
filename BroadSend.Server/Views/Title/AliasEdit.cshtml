@@ -2,7 +2,7 @@
 
 @model TitleAlias
 
-<partial name="_TitleTitle" />
+<partial name="_TitleTitle"/>
 
 <h3>@ViewBag.TitleName</h3>
 <h4>@SharedLocalizer["HeaderEditAliasesList"]</h4>
@@ -19,16 +19,16 @@
 
         <div class="form-group">
             <label asp-for="@Model.Alias">@SharedLocalizer["TableHeaderAlias"]</label>
-            <input asp-for="@Model.Alias" class="form-control" />
+            <input asp-for="@Model.Alias" class="form-control"/>
             <span asp-validation-for="@Model.Alias" class="text-danger"></span>
 
-            <input type="hidden" asp-for="@Model.Id" />
-            <input type="hidden" asp-for="@Model.TitleId" />
+            <input type="hidden" asp-for="@Model.Id"/>
+            <input type="hidden" asp-for="@Model.ParentId"/>
         </div>
 
         <div style="margin: 50px 0">
             <button type="submit" class="btn btn-primary">@SharedLocalizer["ButtonSave"]</button>
-            <a asp-controller="Title" asp-action="Aliases" asp-route-id="@Model.TitleId" class="btn btn-secondary">@SharedLocalizer["ButtonToAliases"]</a>
+            <a asp-controller="Title" asp-action="Aliases" asp-route-id="@Model.ParentId" class="btn btn-secondary">@SharedLocalizer["ButtonToAliases"]</a>
         </div>
 
     </form>

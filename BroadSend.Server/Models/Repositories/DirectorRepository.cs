@@ -13,7 +13,7 @@ namespace BroadSend.Server.Models.Repositories
         {
             var result = await AppDbContext.Set<Director>().AsNoTracking().FirstOrDefaultAsync(n => n.Alias == alias);
 
-            return result == null ? true : false;
+            return result == null;
         }
     }
 }

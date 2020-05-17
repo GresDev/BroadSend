@@ -12,6 +12,5 @@ namespace BroadSend.Server.Models
         [StringLength(512, ErrorMessage = "NameLength", MinimumLength = 1)]
         [VendorNameIsUnique]
         public string Name { get; set; }
-
     }
 }
