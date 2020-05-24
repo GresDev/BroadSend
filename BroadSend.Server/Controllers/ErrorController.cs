@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
@@ -9,7 +8,6 @@ namespace BroadSend.Server.Controllers
 {
     public class ErrorController : Controller
     {
-
         private readonly UserManager<IdentityUser> _userManager;
 
         private IStringLocalizer<SharedResource> _sharedLocalizer;
@@ -18,14 +16,12 @@ namespace BroadSend.Server.Controllers
         {
             _userManager = userManager;
             _sharedLocalizer = sharedLocalizer;
-            ;
         }
 
         [Route("ErrorPage92-4596-24956825862-54986-34687875-356-35867-8576")]
         [AllowAnonymous]
         public IActionResult Error()
         {
-            var exceptionDetails = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
             Log.Error($"User: {_userManager.GetUserName(User)} | Unhandled exception occured");
             return View();
         }
@@ -42,6 +38,7 @@ namespace BroadSend.Server.Controllers
                     ViewBag.ErrorMessage = _sharedLocalizer["ErrorHttpResponse"] + statusCode;
                     break;
             }
+
             return View("_HttpResponse");
         }
     }
