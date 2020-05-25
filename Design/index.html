@@ -5,8 +5,10 @@
   <meta charset="windows-1251" />
   <meta name="viewport" content="width=device-width" />
 
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+  <link rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+    crossorigin="anonymous" />
 
   <link rel="stylesheet" href="CSS/style.css" />
 
@@ -30,16 +32,14 @@
             <a href="#home" class="nav-link">В начало</a>
           </li>
           <li class="navbar-item">
-            <a href="#rules-head-section" class="nav-link">Персоналии</a>
-            <!--Авторы, ведущие, звукорежиссеры, гости-->
+            <a href="#persons-section" class="nav-link">Персоналии</a>
           </li>
           <li class="navbar-item">
             <a href="#rules-head-section" class="nav-link">География</a>
-            <!--Языки вещания, страны вещания-->
           </li>
-          <!-- <li class="navbar-item">
+          <li class="navbar-item">
             <a href="#contactModal" class="nav-link" data-toggle="modal">Регистрация</a>
-          </li> -->
+          </li>
         </ul>
       </div>
     </div>
@@ -89,22 +89,26 @@
                 <h3 class="font-weight-light">
                   Вход
                 </h3>
-                <h4 class="font-weight-light">для зарегистрированных пользователей</h4>
+                <h4 class="font-weight-light">для зарегистрированных
+                  пользователей</h4>
                 <br><br>
                 <form>
                   <div class="form-group">
-                    <input type="text" class="form-control form-control-lg" placeholder="Имя пользователя" />
+                    <input type="text" class="form-control form-control-lg"
+                      placeholder="Имя пользователя" />
                   </div>
                   <div class="form-group">
-                    <input type="password" class="form-control form-control-lg" placeholder="Пароль" />
+                    <input type="password" class="form-control form-control-lg"
+                      placeholder="Пароль" />
                   </div>
 
                   <div class="card-button">
-                    <input type="submit" value="Войти" class="btn btn-lg btn-outline-light btn-block " />
+                    <input type="submit" value="Войти"
+                      class="btn btn-lg btn-outline-light btn-block " />
                   </div>
 
                   <div class="card-button">
-                    <a href="#contactModal" class="btn btn-lg btn-outline-light btn-block"
+                    <a href="#contactModal" class="btn btn-lg btn-outline-warning btn-block"
                       data-toggle="modal">Регистрация</a>
                   </div>
 
@@ -117,21 +121,122 @@
     </div>
   </header>
 
-  <!-- EXPLORE HEAD-->
+  <!-- PERSON HEAD-->
 
-  <!-- <section id="rules-head-section">
-    <div class="containter">
+  <section id="persons-section-head">
+    <div class="container">
       <div class="col text-center py-4">
-        <h1 class="display-4">Explore</h1>
-        <p class="lead">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae
-          deserunt fugiat nobis autem illo iusto officia reprehenderit
-          dolores, ratione aspernatur!
+        <h1 class="display-4">Персоналии</h1>
+      </div>
+      <div class="col text-center pе-4">
+        <p class="lead mb-4">
+          Всегда актуальная информация, злободневные темы, истории из нашей жизни, интервью с
+          замечательными людьми, неординарными личностями, политиками, общественными деятелями - все
+          это благодаря людям, увлеченным своим делом
         </p>
-        <a href="#" class="btn btn-outline-secondary">Find out more</a>
+      </div>
+      <div class="col text-center pb-4">
+        <a href="#" class="btn btn-outline-secondary">Перейти к заполнению раздела</a>
       </div>
     </div>
-  </section> -->
+  </section>
+
+  <!-- PERSON SECTION-->
+
+  <section id="persons-section" class="bg-light text-muted py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <img src="Images/group-of-people-having-fun-together-under-the-sun-708392.jpg" alt=""
+            class="img-fluid md-3 rounded-circle" />
+        </div>
+        <div class="col-md-6">
+          <div class="d-flex">
+            <div class="p-4 align-self-start">
+              <i class="fas fa-check fa-2x"></i>
+            </div>
+            <div class="p-2 align-self-end">
+              <p class="lead"><strong>Авторы и ведущие программ</strong> - люди, создающие
+                уникальный контент и незабываемую атмосферу</p>
+            </div>
+          </div>
+          <div class="d-flex">
+            <div class="p-4 align-self-start">
+              <i class="fas fa-check fa-2x"></i>
+            </div>
+            <div class="p-2 align-self-end">
+              <p class="lead"><strong>Гости в студии</strong> - достоверная информация из первых уст
+              </p>
+            </div>
+          </div>
+          <div class="d-flex">
+            <div class="p-4 align-self-start">
+              <i class="fas fa-check fa-2x"></i>
+            </div>
+            <div class="p-2 align-self-end">
+              <p class="lead"><strong>Звукорежиссеры</strong> - непрекращающаяся забота о качестве
+                эфира
+              </p>
+            </div>
+          </div>
+        </div class="col-md-6">
+      </div>
+    </div>
+  </section>
+
+  <!--GEO SECTION HEAD-->
+
+  <section id="geo-section-head">
+    <div class="container">
+      <div class="col text-center py-4">
+        <h1 class="display-4">География</h1>
+      </div>
+      <div class="col text-center pи-4">
+        <p class="lead mb-4">
+          Вещание без границ - информированность, открытость новым идеям, объединение
+          единомышленников без языковых преград
+        </p>
+      </div>
+      <div class="col text-center pb-4">
+        <a href="#" class="btn btn-outline-secondary">Перейти к заполнению раздела</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- GEO SECTION-->
+
+  <section id="geo-section" class="bg-light text-muted py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <img src="Images/person-tossing-globe-1275393.jpg" alt=""
+            class="img-fluid md-3 rounded-circle" />
+        </div>
+        <div class="col-md-6">
+          <div class="d-flex">
+            <div class="p-4 align-self-start">
+              <i class="fas fa-check fa-2x"></i>
+            </div>
+            <div class="p-2 align-self-end">
+              <p class="lead"><strong>Языки вещания</strong> - разрушение языковых барьеров на пути
+                к актуальной информации о нашей жизни</p>
+            </div>
+          </div>
+          <div class="d-flex">
+            <div class="p-4 align-self-start">
+              <i class="fas fa-check fa-2x"></i>
+            </div>
+            <div class="p-2 align-self-end">
+              <p class="lead"><strong>Страны вещания</strong> - география слушателя не имеет
+                значения, актуальная информация для слушателя - вот, что по-настоящему важно
+              </p>
+            </div>
+          </div>
+        </div class="col-md-6">
+      </div>
+    </div>
+  </section>
+
 
   <!--EXPLORE SECTION-->
   <!--
@@ -225,21 +330,21 @@
         </div>
       </div>
     </div>
-  </div>
+    </>
 
-  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-    crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-    crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+      crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"></script>
 
-  <script>
-    $("#year").text(new Date().getFullYear());
-  </script>
+    <script>
+      $("#year").text(new Date().getFullYear());
+    </script>
 </body>
 
 </html>
