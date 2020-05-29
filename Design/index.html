@@ -20,7 +20,7 @@
 <body data-spy="scroll" data-target="#main-nav" id="home">
 
   <!-- Navbar section -->
-  <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top" id="main-nav">
+  <nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top" id="main-nav">
     <div class="container">
       <a href="index.html" class="navbar-brand">BroadSend</a>
       <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
@@ -32,10 +32,13 @@
             <a href="#home" class="nav-link">В начало</a>
           </li>
           <li class="navbar-item">
-            <a href="#persons-section" class="nav-link">Персоналии</a>
+            <a href="#programs-section-head" class="nav-link">Программы</a>
           </li>
           <li class="navbar-item">
-            <a href="#rules-head-section" class="nav-link">География</a>
+            <a href="#persons-section-head" class="nav-link">Персоналии</a>
+          </li>
+          <li class="navbar-item">
+            <a href="#geo-section-head" class="nav-link">География</a>
           </li>
           <li class="navbar-item">
             <a href="#contactModal" class="nav-link" data-toggle="modal">Регистрация</a>
@@ -91,7 +94,7 @@
                 </h3>
                 <h4 class="font-weight-light">для зарегистрированных
                   пользователей</h4>
-                <br><br>
+                <br>
                 <form>
                   <div class="form-group">
                     <input type="text" class="form-control form-control-lg"
@@ -121,22 +124,77 @@
     </div>
   </header>
 
-  <!-- PERSON HEAD-->
+  <!-- PROGRAMS SECTION HEAD-->
 
-  <section id="persons-section-head">
+  <section id="programs-section-head" class="py-4">
+    <div class="container">
+      <div class="col text-center py-4">
+        <h1 class="display-4">Программы</h1>
+      </div>
+      <div class="col text-center">
+        <p class="lead mb-4">
+          Политика, спорт, общественная жизнь, история, музыка, современный мир цифровых
+          технологий - передачи на любой вкус для самых взыскательных слушателей
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGRAMS SECTION -->
+
+  <section id="programs-section" class="bg-light text-muted py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <img src="Images/black-headset-on-condenser-microphone-3587478_resize.jpg" alt=""
+            class="img-fluid md-3 rounded-circle">
+        </div>
+        <div class="col-md-6">
+          <div class="d-flex">
+            <div class="p-4 align-self-start">
+              <i class="fas fa-check fa-2x"></i>
+            </div>
+            <div class="p-2 align-self-end">
+              <p class="lead">Взгляд на одни и те же проблемы с разных точек зрения </p>
+            </div>
+          </div>
+          <div class="d-flex">
+            <div class="p-4 align-self-start">
+              <i class="fas fa-check fa-2x"></i>
+            </div>
+            <div class="p-2 align-self-end">
+              <p class="lead">Делимся мнениями, обсуждаем насущные проблемы, изучаем факты</p>
+            </div>
+          </div>
+          <div class="d-flex">
+            <div class="p-4 align-self-start">
+              <i class="fas fa-check fa-2x"></i>
+            </div>
+            <div class="p-2 align-self-end">
+              <p class="lead">Наслаждаемся приятной атмосферой творческих эфиров</p>
+              <a href="#" class="btn btn-outline-secondary mt-4">Перейти к заполнению
+                раздела</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- PERSON SECTION HEAD-->
+
+  <section id="persons-section-head" class="py-4">
     <div class="container">
       <div class="col text-center py-4">
         <h1 class="display-4">Персоналии</h1>
       </div>
-      <div class="col text-center pе-4">
+      <div class="col text-center">
         <p class="lead mb-4">
           Всегда актуальная информация, злободневные темы, истории из нашей жизни, интервью с
           замечательными людьми, неординарными личностями, политиками, общественными деятелями - все
           это благодаря людям, увлеченным своим делом
         </p>
-      </div>
-      <div class="col text-center pb-4">
-        <a href="#" class="btn btn-outline-secondary">Перейти к заполнению раздела</a>
       </div>
     </div>
   </section>
@@ -158,15 +216,8 @@
             <div class="p-2 align-self-end">
               <p class="lead"><strong>Авторы и ведущие программ</strong> - люди, создающие
                 уникальный контент и незабываемую атмосферу</p>
-            </div>
-          </div>
-          <div class="d-flex">
-            <div class="p-4 align-self-start">
-              <i class="fas fa-check fa-2x"></i>
-            </div>
-            <div class="p-2 align-self-end">
-              <p class="lead"><strong>Гости в студии</strong> - достоверная информация из первых уст
-              </p>
+              <a href="#" class="btn btn-outline-secondary">Перейти к заполнению
+                раздела</a>
             </div>
           </div>
           <div class="d-flex">
@@ -177,6 +228,8 @@
               <p class="lead"><strong>Звукорежиссеры</strong> - непрекращающаяся забота о качестве
                 эфира
               </p>
+              <a href="#" class="btn btn-outline-secondary">Перейти к заполнению
+                раздела</a>
             </div>
           </div>
         </div class="col-md-6">
@@ -186,19 +239,16 @@
 
   <!--GEO SECTION HEAD-->
 
-  <section id="geo-section-head">
+  <section id="geo-section-head" class="py-4">
     <div class="container">
       <div class="col text-center py-4">
         <h1 class="display-4">География</h1>
       </div>
-      <div class="col text-center pи-4">
+      <div class="col text-center">
         <p class="lead mb-4">
           Вещание без границ - информированность, открытость новым идеям, объединение
           единомышленников без языковых преград
         </p>
-      </div>
-      <div class="col text-center pb-4">
-        <a href="#" class="btn btn-outline-secondary">Перейти к заполнению раздела</a>
       </div>
     </div>
   </section>
@@ -220,6 +270,8 @@
             <div class="p-2 align-self-end">
               <p class="lead"><strong>Языки вещания</strong> - разрушение языковых барьеров на пути
                 к актуальной информации о нашей жизни</p>
+              <a href="#" class="btn btn-outline-secondary">Перейти к заполнению
+                раздела</a>
             </div>
           </div>
           <div class="d-flex">
@@ -230,6 +282,8 @@
               <p class="lead"><strong>Страны вещания</strong> - география слушателя не имеет
                 значения, актуальная информация для слушателя - вот, что по-настоящему важно
               </p>
+              <a href="#" class="btn btn-outline-secondary">Перейти к заполнению
+                раздела</a>
             </div>
           </div>
         </div class="col-md-6">
@@ -238,66 +292,20 @@
   </section>
 
 
-  <!--EXPLORE SECTION-->
-  <!--
-    <section id="explore-section" class="bg-light text-muted py-5">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6">
-            <img
-              src="Images/8.jpg"
-              alt=""
-              class="img-fluid mb-3 rounded-circle"
-            />
-          </div>
-          <div class="col md-6">
-            <h3>Explore</h3>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti
-              vel doloribus tempore hic minus! Explicabo minus quam numquam
-              nihil aspernatur aliquid facilis, quia earum velit, voluptatem
-              magnam voluptatibus tenetur dolore?
-            </p>
-            <div class="d-flex">
-              <div class="p-4 align-self-start">
-                <i class="fas fa-check fa-2x"></i>
-              </div>
-              <div class="p-4 align-self-end">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Officiis voluptate aspernatur earum, distinctio et ut veniam sed
-                voluptas molestiae quam.
-              </div>
-            </div>
-            <div class="d-flex">
-              <div class="p-4 align-self-start">
-                <i class="fas fa-check fa-2x"></i>
-              </div>
-              <div class="p-4 align-self-end">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Officiis voluptate aspernatur earum, distinctio et ut veniam sed
-                voluptas molestiae quam.
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  -->
+
   <!-- FOOTER -->
-  <!--
-    <footer id="main-footer" class="bg-dark">
-      <div class="container">
-        <div class="row">
-          <div class="col text-center pt-2">
-            <h4>
-              BroadSend
-            </h4>
-            <p>Copyright &copy; <span id="year"></span></p>
-          </div>
+
+  <footer id="main-footer" class="bg-dark">
+    <div class="container">
+      <div class="row">
+        <div class="col text-center py-2">
+          <h5>BroadSend, Copyright &copy; <span id="year"></span></h5>
         </div>
       </div>
-    </footer>
-  -->
+    </div>
+    </div>
+  </footer>
+
   <!-- CONTACT MODAL-->
 
   <div class="modal fade text-dark" id="contactModal">
@@ -312,7 +320,7 @@
         <div class="modal-body">
           <form>
             <div class="form-group">
-              <label for="name">Name</label>
+              <label for="name">Ваше имя</label>
               <input type="text" class="form-control" />
             </div>
             <div class="form-group">
@@ -320,17 +328,17 @@
               <input type="email" class="form-control" />
             </div>
             <div class="form-group">
-              <label for="message">Message</label>
+              <label for="message">Сообщение</label>
               <textarea class="form-control"></textarea>
             </div>
           </form>
         </div>
         <div class="modal-footer">
-          <button class="btn btn-primary btn-block">Submit</button>
+          <button class="btn btn-secondary btn-block">Отправить</button>
         </div>
       </div>
     </div>
-    </>
+
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
       integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"

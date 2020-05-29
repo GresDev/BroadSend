@@ -1,19 +1,18 @@
 body {
   background: #333;
   color: #fff;
-  /* overflow-x: hidden; */
 }
 
 .navbar {
   border-bottom: #555 2px solid;
-  opacity: 1;
+  /* opacity: 0.8; */
 }
 
 #home-section {
   background: url(../images/close-up-photo-of-microphone-3710191.jpg);
   background-repeat: no-repeat;
   background-size: cover;
-  background-attachment: fixed;
+  /* background-attachment: fixed; */
   min-height: 700px;
   font-size: 1.3rem;
   font-weight: lighter;
@@ -24,12 +23,12 @@ body {
 }
 
 #home-section .dark-overlay {
-  position: absolute;
+  /* position: absolute; */
   top: 0;
   left: 0;
   width: 100%;
   min-height: 700px;
-  background: rgba(64, 64, 64, 0.6);
+  background: rgba(32, 32, 32, 0.7);
 }
 
 #home-section .home-inner {
@@ -40,6 +39,7 @@ body {
   height: 445px;
   background-color: rgba(252, 234, 181, 0.185);
   opacity: 0.7;
+  border: #bba 2px solid;
 }
 
 #home-section .card-button {
