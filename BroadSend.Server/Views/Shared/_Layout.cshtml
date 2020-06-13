@@ -15,75 +15,134 @@
 
     <title>@ViewBag.Title</title>
 </head>
-<body>
 
-    @if (SignInManager.IsSignedIn(User))
-    {
-        <nav class="navbar fixed-top navbar-expand-lg" style="background-color: gainsboro">
-            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" style="color: black">
-                <i class="fa fa-home fa-lg"></i>
-            </a>
+<body data-spy="scroll" data-target="#main-nav" id="home">
+
+    <!-- Navbar section -->
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top" id="main-nav">
+        <div class="container">
+            <a asp-controller="Home" asp-area="" asp-action="Index" class="navbar-brand">BroadSend</a> |
+
             <partial name="_LoginPartial" />
-            @if (User.IsInRole("Administrator"))
-            {
-                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Home" asp-action="UserManagement">@Localizer["Administration"]</a>
-            }
 
-        </nav>
-
-        <div id="sidebar">
-
-            <div style="margin: 50px 10px 0 0">
-                <ul class="nav">
-                    <li class="nav-item; ">
-                        <div style="left: 0; width: 250px">
-                            <a asp-area="" asp-controller="Presenter" asp-action="Index" class="nav-link">@Localizer["Presenters"]</a>
-                        </div>
+            <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="navbar-item">
+                        <a href="#home" class="nav-link scroll">В начало</a>
                     </li>
-                    <li class="nav-item; ">
-                        <div style="left: 0; width: 250px">
-                            <a asp-area="" asp-controller="Title" asp-action="Index" class="nav-link">@Localizer["Titles"]</a>
-                        </div>
+                    <li class="navbar-item">
+                        <a href="#programs-section-head" class="nav-link scroll">Программы</a>
                     </li>
-                    <li class="nav-item">
-                        <div style="left: 0; width: 250px">
-                            <a asp-area="" asp-controller="Director" asp-action="Index" class="nav-link">@Localizer["Directors"]</a>
-                        </div>
+                    <li class="navbar-item">
+                        <a href="#persons-section-head" class="nav-link scroll">Персоналии</a>
                     </li>
-                    <li class="nav-item">
-                        <div style="left: 0; width: 250px">
-                            <a asp-area="" asp-controller="Country" asp-action="Index" class="nav-link">@Localizer["Countries"]</a>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <div style="left: 0; width: 250px">
-                            <a asp-area="" asp-controller="Language" asp-action="Index" class="nav-link">@Localizer["Languages"]</a>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <div style="left: 0; width: 250px">
-                            <a asp-area="" asp-controller="Vendor" asp-action="Index" class="nav-link">@Localizer["Vendors"]</a>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <div style="left: 0; width: 250px">
-                            <a asp-area="" asp-controller="Composer" asp-action="Index" class="nav-link">@Localizer["Composers"]</a>
-                        </div>
+                    <li class="navbar-item">
+                        <a href="#geo-section-head" class="nav-link scroll">География</a>
                     </li>
                 </ul>
             </div>
-
-
         </div>
-    }
-
-    <div id="main">
-        @RenderBody()
-    </div>
-
-    <nav class="navbar fixed-bottom  navbar-expand-lg text-center" id="footer">
-        <span class="navbar-text mx-auto">BroadSend, 2020</span>
     </nav>
+
+    <!-- Home Section-->
+
+    <header id="home-section">
+        <div class="dark-overlay">
+            <div class="home-inner container">
+                <div class="row">
+                    @RenderBody()
+
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- PROGRAMS SECTION HEAD-->
+
+    <section id="programs-section-head" class="py-4">
+        <div class="container">
+            <div class="col text-center py-4">
+                <h1 class="display-4">Программы</h1>
+            </div>
+            <div class="col text-center">
+                <p class="lead mb-4">
+                    Политика, спорт, общественная жизнь, история, музыка, современный мир цифровых
+                    технологий - передачи на любой вкус для самых взыскательных слушателей
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROGRAMS SECTION -->
+    @*<section id="programs-section" class="bg-light text-muted py-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="~/images/black-headset-on-condenser-microphone-3587478_resize.jpg" alt=""
+                             class="img-fluid md-3 rounded-circle">
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex">
+                            <div class="p-4 align-self-start">
+                                <i class="fas fa-check fa-2x"></i>
+                            </div>
+                            <div class="p-2 align-self-end">
+                                <p class="lead">Делимся мнениями, обсуждаем насущные проблемы, изучаем факты</p>
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <div class="p-4 align-self-start">
+                                <i class="fas fa-check fa-2x"></i>
+                            </div>
+                            <div class="p-2 align-self-end">
+                                <p class="lead">Наслаждаемся приятной атмосферой творческих эфиров</p>
+                                @if (SignInManager.IsSignedIn(User))
+                                {
+                                    <a asp-area="" asp-controller="Title" asp-action="Index" class="btn btn-outline-secondary">Перейти к заполнению раздела</a>
+                                }
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <div class="p-4 align-self-start">
+                                <i class="fas fa-check fa-2x"></i>
+                            </div>
+                            <div class="p-2 align-self-end">
+                                <p class="lead">
+                                    <strong>Производители</strong> - открытость к плодотворному
+                                    сотрудничеству
+                                </p>
+                                @if (SignInManager.IsSignedIn(User))
+                                {
+                                    <a asp-area="" asp-controller="Vendor" asp-action="Index" class="btn btn-outline-secondary">Перейти к заполнению раздела</a>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>*@
+
+
+
+
+
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col text-center py-2">
+                    <h5>BroadSend, Copyright &copy; <span id="year"></span></h5>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
 
     <script type="text/javascript" src="~/lib/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="~/lib/jquery-validate/jquery.validate.min.js"></script>
@@ -91,6 +150,10 @@
 
     <script type="text/javascript" src="~/lib/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="~/lib/font-awesome/js/all.min.js"></script>
+
+    <script>
+        $("#year").text(new Date().getFullYear());
+    </script>
 
     @RenderSection("Scripts", required: false)
 

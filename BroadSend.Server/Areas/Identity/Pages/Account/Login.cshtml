@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "Авторизация";
-    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
 }
 @using Microsoft.Extensions.Localization
 
@@ -10,16 +10,17 @@
 
 @model LoginModel
 
+
+<h3 class="font-weight-light">Вход</h3>
+<h4 class="font-weight-light">для зарегистрированных пользователей</h4>
+<br>
+
 <div class="container">
     <div>
         <section>
             <form id="account" method="post">
-                @*<h4>@Localizer["EnterAccountData"]</h4>*@
-                <h1 class="w-100" style="background-color: aquamarine"><span class="text-justify"><i class="fa fa-users"></i></span></h1>
-                <hr />
 
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
 
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -54,18 +55,18 @@
                     </label>
 
                 </div>
-
+                <br />
                 <div class="form-group mt-2">
-                    <button type="submit" class="btn btn-primary btn-block">@Localizer["LogIn"]</button>
+                    <button type="submit" class="btn btn-outline-light btn-block">@Localizer["LogIn"]</button>
                 </div>
                 @*<div class="form-group">
-            <p>
-                <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
-            </p>
-            <p>
-                <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
-            </p>
-        </div>*@
+                        <p>
+                            <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
+                        </p>
+                        <p>
+                            <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
+                        </p>
+                    </div>*@
             </form>
         </section>
     </div>

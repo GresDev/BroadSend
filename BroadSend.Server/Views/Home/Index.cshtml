@@ -1,1 +1,19 @@
-﻿<h1>BroadSend application</h1>
+﻿@page
+
+@{
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+
+
+<div class="container">
+    <div>
+        <h4 class="font-weight-light">Перейти к заполнению разделов</h4>
+    </div>
+    <a asp-area="" asp-controller="Title" asp-action="Index" class="btn btn-outline-light btn-block">Программы</a>
+    <a asp-area="" asp-controller="Presenter" asp-action="Index" class="btn btn-outline-light btn-block">Авторы и ведущие</a>
+    <a asp-area="" asp-controller="Director" asp-action="Index" class="btn btn-outline-light btn-block">Звукорежиссеры</a>
+    <a asp-area="" asp-controller="Country" asp-action="Index" class="btn btn-outline-light btn-block">Страны вещания</a>
+    <a asp-area="" asp-controller="Language" asp-action="Index" class="btn btn-outline-light btn-block">Языки вещания</a>
+    <a asp-area="" asp-controller="Composer" asp-action="Index" class="btn btn-outline-light btn-block">Композиторы</a>
+    <a asp-area="" asp-controller="Vendor" asp-action="Index" class="btn btn-outline-light btn-block">Производители</a>
+</div>
