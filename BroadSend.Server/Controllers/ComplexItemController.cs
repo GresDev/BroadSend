@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Threading.Tasks;
-using BroadSend.Server.Models.Contracts;
+﻿using BroadSend.Server.Models.Contracts;
 using BroadSend.Server.Utils;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
 using Serilog;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace BroadSend.Server.Controllers
 {
@@ -208,7 +208,7 @@ namespace BroadSend.Server.Controllers
                 return View(new T2());
             }
 
-            ViewBag.PresenterName = item.Name;
+            ViewBag.ParentName = item.Name;
             return View(parentAlias);
         }
 
@@ -278,7 +278,7 @@ namespace BroadSend.Server.Controllers
                 ParentId = id
             };
 
-            ViewBag.PresenterName = item.Name;
+            ViewBag.ParentName = item.Name;
             return View(itemAliasCreateViewModel);
         }
 

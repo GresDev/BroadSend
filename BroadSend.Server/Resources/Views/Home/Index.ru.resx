@@ -117,8 +117,36 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Title" xml:space="preserve">
+  <data name="Categories" xml:space="preserve">
+    <value>Перейти к заполнению разделов</value>
+    <comment>Перейти к заполнению разделов</comment>
+  </data>
+  <data name="Composers" xml:space="preserve">
+    <value>Композиторы</value>
+    <comment>Композиторы</comment>
+  </data>
+  <data name="Countries" xml:space="preserve">
+    <value>Страны вещания</value>
+    <comment>Страны вещания</comment>
+  </data>
+  <data name="Directors" xml:space="preserve">
+    <value>Звукорежиссеры</value>
+    <comment>Звукорежиссеры</comment>
+  </data>
+  <data name="Languages" xml:space="preserve">
+    <value>Языки вещания</value>
+    <comment>Языки вещания</comment>
+  </data>
+  <data name="Presenters" xml:space="preserve">
+    <value>Авторы и ведущие</value>
+    <comment>Авторы и ведущие</comment>
+  </data>
+  <data name="Programs" xml:space="preserve">
     <value>Программы</value>
-    <comment>Передачи</comment>
+    <comment>Программы</comment>
+  </data>
+  <data name="Vendors" xml:space="preserve">
+    <value>Производители</value>
+    <comment>Производители</comment>
   </data>
 </root>

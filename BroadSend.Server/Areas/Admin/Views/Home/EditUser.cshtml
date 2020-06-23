@@ -6,11 +6,15 @@
 
 <partial name="_EditItem" />
 
+<h2 class="font-weight-light mt-3">@ViewBag.UserName</h2>
+<h5 class="font-weight-light mb-3">@ViewBag.UserEmail</h5>
+
+
 @if (ViewBag.Message != string.Empty)
 {
     <h3 class="alert-danger">@ViewBag.Message</h3>
 }
-<div style="width: 50%">
+<div>
     <form asp-area="Admin" asp-controller="Home" asp-action="EditUser">
 
         <partial name="_EditUserCard" />

@@ -1,25 +1,27 @@
 ﻿html {
     position: relative;
-    min-height: 100%;
+    height: 100%;
 }
 
 body {
-    background: #333;
-    color: #fff;
-    margin-bottom: 60px;
+    background: url(../images/close-up-photo-of-microphone-3710191.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    height: 100%;
+    overflow-y: auto;
 }
 
 .navbar {
     border-bottom: #555 2px solid;
+    color: ivory;
 }
 
 #home-section {
-    background: url(../images/close-up-photo-of-microphone-3710191.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
     min-height: 700px;
     font-size: 1.3rem;
     font-weight: lighter;
+    color: ivory;
 }
 
 #home-section .card-body {
@@ -34,12 +36,41 @@ body {
     background: rgba(32, 32, 32, 0.7);
 }
 
+#programs-section-head, #persons-section-head, #geo-section-head .dark-overlay {
+
+    background: rgba(32, 32, 32, 0.9);
+    color: ivory;
+}
+
+#main-section {
+    background: rgba(32, 32, 32, 0.7);
+}
+
+#main-section h1 {
+    margin-bottom: 20px;
+    font-weight: lighter;
+}
+
+#main-section .content-table .table .thead-dark th {
+    color: ivory;
+    font-weight: normal;
+    background-color: #343a40;
+}
+
+#main-section .table {
+    margin-bottom: 0;
+}
+
+#programs-section, #persons-section, #geo-section {
+    background-color: ivory;
+}
+
 #home-section .home-inner {
     padding-top: 150px;
 }
 
 #home-section .card-form {
-    height: 445px;
+    height: auto;
     background-color: rgba(252, 234, 181, 0.185);
     opacity: 0.7;
     border: #bba 2px solid;
@@ -49,16 +80,21 @@ body {
     padding-top: 10px;
 }
 
-
 .required-field {
     color: #f00;
 }
 
-.footer {
-    position: absolute;
-    bottom: 0;
-    display: block;
-    height: 50px;
-    line-height: 50px;
+#main-section .container {
+    background: ivory;
+    opacity: 0.9;
+    padding-top: 80px;
+    min-height: 100vh;
 }
+
+.validation-message {
+    height: 20px;
+}
+
+
+
 

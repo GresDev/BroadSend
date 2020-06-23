@@ -11,20 +11,20 @@
 }
 else
 {
-    <h3>@ViewBag.PresenterName</h3>
+    <h2 class="font-weight-light">@ViewBag.ParentName</h2>
     <h4>@SharedLocalizer["HeaderEditAliasesList"]</h4>
 
 
     <div>
-        <a class="btn btn-success" asp-action="AliasCreate" asp-route-id="@ViewBag.ParentId" style="margin: 50px 0">@SharedLocalizer["ButtonAdd"]</a>
-        <a class="btn btn-secondary" asp-action="Edit" asp-route-id="@ViewBag.ParentId" style="margin: 50px 0">@SharedLocalizer["ButtonBack"]</a>
+        <a class="btn btn-outline-secondary" asp-action="AliasCreate" asp-route-id="@ViewBag.ParentId" style="margin: 50px 0">@SharedLocalizer["ButtonAdd"]</a>
+        <a class="btn btn-outline-secondary" asp-action="Edit" asp-route-id="@ViewBag.ParentId" style="margin: 50px 0">@SharedLocalizer["ButtonBack"]</a>
     </div>
 
-    <div style="height: 500px; width: auto; margin-right: 250px; overflow: auto;">
+    <div>
 
         <table class="table">
 
-            <thead class="thead-light text-left">
+            <thead class="thead-dark text-left">
                 <tr>
                     <th>@SharedLocalizer["TableHeaderAlias"]</th>
                     <th></th>
@@ -36,12 +36,16 @@ else
                 {
                     <tr>
                         <td>@alias.Alias</td>
-                        <td>
-                            <a asp-action="AliasEdit" asp-route-id="@alias.Id">@SharedLocalizer["ButtonEdit"]</a>
+                        <td class="d-flex justify-content-end">
+                            <a asp-action="AliasEdit" asp-route-id="@alias.Id" class="btn btn-outline-secondary btn-sm mr-1">@SharedLocalizer["ButtonEdit"]</a>
 
-                            @if (!ViewBag.OnlyOneAlias)
+                            @if (ViewBag.OnlyOneAlias)
                             {
-                                <a asp-action="AliasDelete" asp-route-id="@alias.Id" class="disabled"> | @SharedLocalizer["ButtonDelete"]</a>
+                                <a asp-action="AliasDelete" asp-route-id="@alias.Id" class="disabled btn btn-outline-secondary btn-sm">@SharedLocalizer["ButtonDelete"]</a>
+                            }
+                            else
+                            {
+                                <a asp-action="AliasDelete" asp-route-id="@alias.Id" class="btn btn-outline-secondary btn-sm">@SharedLocalizer["ButtonDelete"]</a>
                             }
 
                         </td>

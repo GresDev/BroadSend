@@ -7,10 +7,10 @@
 <partial name="_UserManagementTitle" />
 
 
-<div style="width: 50%">
-    @if (ViewBag.Error == false)
+<div>
+    @if (ViewBag.SingleAdmin == false)
     {
-    <partial name="_DeleteItem" />
+        <partial name="_DeleteItem" />
     }
     else
     {
@@ -18,7 +18,7 @@
             <h4 style="margin: 20px 0">@ViewBag.ErrorMessage</h4>
         </div>
     }
-    <div class="alert alert-info">
+    <div class="alert alert-dark">
         <h4>@Model.UserName</h4>
         <h6>@Model.Email</h6>
     </div>
@@ -26,11 +26,11 @@
     <form asp-area="Admin" asp-controller="Home" asp-action="DeleteUser" style="margin: 20px 0">
         <input type="hidden" asp-for="Id" />
 
-        @if (ViewBag.Error == false)
+        @if (ViewBag.SingleAdmin == false)
         {
-            <button type="submit" class="btn btn-danger"><i class="fa fa-times"></i>&nbsp; @SharedLocalizer["ButtonDelete"]</button>
+            <button type="submit" class="btn btn-outline-danger"><i class="fa fa-times"></i>&nbsp; @SharedLocalizer["ButtonDelete"]</button>
         }
 
-        <a class="btn btn-secondary" asp-area="Admin" asp-controller="Home" asp-action="UserManagement">@SharedLocalizer["ButtonBackToList"]</a>
+        <a class="btn btn-outline-secondary" asp-area="Admin" asp-controller="Home" asp-action="UserManagement">@SharedLocalizer["ButtonBackToList"]</a>
     </form>
 </div>

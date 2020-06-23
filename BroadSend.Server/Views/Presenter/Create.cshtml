@@ -11,24 +11,28 @@
     <h3 class="alert-danger">@ViewBag.ErrorMessage</h3>
 }
 
-<div style="width: 50%">
+<div>
     <form asp-controller="Presenter" asp-action="Create">
 
         <div class="form-group">
             <label asp-for="@Model.ComplexItem.Name">@SharedLocalizer["TableHeaderFullName"]</label>
             <input asp-for="@Model.ComplexItem.Name" class="form-control" />
-            <span asp-validation-for="@Model.ComplexItem.Name" class="text-danger"></span>
+            <div class="validation-message">
+                <span asp-validation-for="@Model.ComplexItem.Name" class="text-danger"></span>
+            </div>
         </div>
 
         <div class="form-group">
             <label asp-for="@Model.ComplexItemAlias.Alias">@SharedLocalizer["TableHeaderAlias"]</label>
             <input asp-for="@Model.ComplexItemAlias.Alias" class="form-control" />
-            <span asp-validation-for="@Model.ComplexItemAlias.Alias" class="text-danger"></span>
+            <div class="validation-message">
+                <span asp-validation-for="@Model.ComplexItemAlias.Alias" class="text-danger"></span>
+            </div>
         </div>
 
         <div style="margin: 50px 0">
-            <button type="submit" class="btn btn-primary">@SharedLocalizer["ButtonSave"]</button>
-            <a asp-controller="Presenter" asp-action="Index" class="btn btn-secondary">@SharedLocalizer["ButtonBackToList"]</a>
+            <button type="submit" class="btn btn-outline-secondary">@SharedLocalizer["ButtonSave"]</button>
+            <a asp-controller="Presenter" asp-action="Index" class="btn btn-outline-secondary">@SharedLocalizer["ButtonBackToList"]</a>
         </div>
 
     </form>

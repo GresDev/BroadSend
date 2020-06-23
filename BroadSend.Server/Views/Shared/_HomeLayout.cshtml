@@ -19,42 +19,7 @@
 <body data-spy="scroll" data-target="#main-nav" id="home">
 
     <!-- Navbar section -->
-    <nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top" id="main-nav">
-        <div class="container">
-            <a asp-controller="Home" asp-area="" asp-action="Index" class="navbar-brand">BroadSend</a> |
-            @if (SignInManager.IsSignedIn(User))
-            {
-                <partial name="_LoginPartial" />
-            }
-            else
-            {
-                <ul class="navbar-nav">
-                    <li class="navbar-item">
-                        <a href="#contactModal" class="nav-link" data-toggle="modal">Регистрация</a>
-                    </li>
-                </ul>
-            }
-            <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <ul class="navbar-nav ml-auto">
-                    <li class="navbar-item">
-                        <a href="#home" class="nav-link scroll">В начало</a>
-                    </li>
-                    <li class="navbar-item">
-                        <a href="#programs-section-head" class="nav-link scroll">Программы</a>
-                    </li>
-                    <li class="navbar-item">
-                        <a href="#persons-section-head" class="nav-link scroll">Персоналии</a>
-                    </li>
-                    <li class="navbar-item">
-                        <a href="#geo-section-head" class="nav-link scroll">География</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <partial name="_NavBar" />
 
     <!-- Home Section-->
 
@@ -108,28 +73,31 @@
 
     <!-- PROGRAMS SECTION HEAD-->
 
-    <section id="programs-section-head" class="py-4">
-        <div class="container">
-            <div class="col text-center py-4">
-                <h1 class="display-4">Программы</h1>
-            </div>
-            <div class="col text-center">
-                <p class="lead mb-4">
-                    Политика, спорт, общественная жизнь, история, музыка, современный мир цифровых
-                    технологий - передачи на любой вкус для самых взыскательных слушателей
-                </p>
+    <section id="programs-section-head">
+        <div class="dark-overlay">
+            <div style="height: 50px"></div>
+            <div class="container">
+                <div class="col text-center ">
+                    <h1 class="display-4">Программы</h1>
+                </div>
+                <div class="col text-center py-4">
+                    <p class="lead">
+                        Политика, спорт, общественная жизнь, история, музыка, современный мир цифровых
+                        технологий - передачи на любой вкус для самых взыскательных слушателей
+                    </p>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- PROGRAMS SECTION -->
 
-    <section id="programs-section" class="bg-light text-muted py-5">
+    <section id="programs-section" class=" text-muted py-5">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
                     <img src="~/images/black-headset-on-condenser-microphone-3587478_resize.jpg" alt=""
-                         class="img-fluid md-3 rounded-circle">
+                         class="img-fluid rounded-circle">
                 </div>
                 <div class="col-md-6">
                     <div class="d-flex">
@@ -148,7 +116,7 @@
                             <p class="lead">Наслаждаемся приятной атмосферой творческих эфиров</p>
                             @if (SignInManager.IsSignedIn(User))
                             {
-                                <a asp-area="" asp-controller="Title" asp-action="Index" class="btn btn-outline-secondary">Перейти к заполнению раздела</a>
+                                <a asp-area="" asp-controller="Title" asp-action="Index" class="btn btn-outline-secondary">@Localizer["LinkToCategory"]</a>
                             }
                         </div>
                     </div>
@@ -158,12 +126,11 @@
                         </div>
                         <div class="p-2 align-self-end">
                             <p class="lead">
-                                <strong>Производители</strong> - открытость к плодотворному
-                                сотрудничеству
+                                <strong>Производители</strong> - открытость к плодотворному сотрудничеству
                             </p>
                             @if (SignInManager.IsSignedIn(User))
                             {
-                                <a asp-area="" asp-controller="Vendor" asp-action="Index" class="btn btn-outline-secondary">Перейти к заполнению раздела</a>
+                                <a asp-area="" asp-controller="Vendor" asp-action="Index" class="btn btn-outline-secondary">@Localizer["LinkToCategory"]</a>
                             }
                         </div>
                     </div>
@@ -175,29 +142,32 @@
 
     <!-- PERSON SECTION HEAD-->
 
-    <section id="persons-section-head" class="py-4">
-        <div class="container">
-            <div class="col text-center py-4">
-                <h1 class="display-4">Персоналии</h1>
-            </div>
-            <div class="col text-center">
-                <p class="lead mb-4">
-                    Всегда актуальная информация, злободневные темы, истории из нашей жизни, интервью с
-                    замечательными людьми, неординарными личностями, политиками, общественными деятелями - все
-                    это благодаря людям, увлеченным своим делом
-                </p>
+    <section id="persons-section-head">
+        <div class="dark-overlay">
+            <div style="height: 50px"></div>
+            <div class="container">
+                <div class="col text-center">
+                    <h1 class="display-4">Персоналии</h1>
+                </div>
+                <div class="col text-center py-4">
+                    <p class="lead">
+                        Всегда актуальная информация, злободневные темы, истории из нашей жизни, интервью с
+                        замечательными людьми, неординарными личностями, политиками, общественными деятелями - все
+                        это благодаря людям, увлеченным своим делом
+                    </p>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- PERSON SECTION-->
 
-    <section id="persons-section" class="bg-light text-muted py-5">
+    <section id="persons-section" class="text-muted py-5">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
                     <img src="~/images/group-of-people-having-fun-together-under-the-sun-708392.jpg" alt=""
-                         class="img-fluid md-3 rounded-circle" />
+                         class="img-fluid rounded-circle" />
                 </div>
                 <div class="col-md-6">
                     <div class="d-flex">
@@ -206,12 +176,11 @@
                         </div>
                         <div class="p-2 align-self-end">
                             <p class="lead">
-                                <strong>Авторы и ведущие программ</strong> - люди, создающие
-                                уникальный контент и незабываемую атмосферу
+                                <strong>Авторы и ведущие программ</strong> - люди, создающие уникальный контент и незабываемую атмосферу
                             </p>
                             @if (SignInManager.IsSignedIn(User))
                             {
-                                <a asp-area="" asp-controller="Presenter" asp-action="Index" class="btn btn-outline-secondary">Перейти к заполнению раздела</a>
+                                <a asp-area="" asp-controller="Presenter" asp-action="Index" class="btn btn-outline-secondary">@Localizer["LinkToCategory"]</a>
                             }
                         </div>
                     </div>
@@ -226,7 +195,7 @@
                             </p>
                             @if (SignInManager.IsSignedIn(User))
                             {
-                                <a asp-area="" asp-controller="Director" asp-action="Index" class="btn btn-outline-secondary">Перейти к заполнению раздела</a>
+                                <a asp-area="" asp-controller="Director" asp-action="Index" class="btn btn-outline-secondary">@Localizer["LinkToCategory"]</a>
                             }
                         </div>
                     </div>
@@ -236,12 +205,11 @@
                         </div>
                         <div class="p-2 align-self-end">
                             <p class="lead">
-                                <strong>Композиторы</strong> - эмоции и вдохновение, выраженные в
-                                музыке
+                                <strong>Композиторы</strong> - эмоции и вдохновение, выраженные в музыке
                             </p>
                             @if (SignInManager.IsSignedIn(User))
                             {
-                                <a asp-area="" asp-controller="Composer" asp-action="Index" class="btn btn-outline-secondary">Перейти к заполнению раздела</a>
+                                <a asp-area="" asp-controller="Composer" asp-action="Index" class="btn btn-outline-secondary">@Localizer["LinkToCategory"]</a>
                             }
                         </div>
                     </div>
@@ -252,28 +220,30 @@
 
     <!--GEO SECTION HEAD-->
 
-    <section id="geo-section-head" class="py-4">
-        <div class="container">
-            <div class="col text-center py-4">
-                <h1 class="display-4">География</h1>
-            </div>
-            <div class="col text-center">
-                <p class="lead mb-4">
-                    Вещание без границ - информированность, открытость новым идеям, объединение
-                    единомышленников без языковых преград
-                </p>
+    <section id="geo-section-head">
+        <div class="dark-overlay">
+            <div style="height: 50px"></div>
+            <div class="container">
+                <div class="col text-center">
+                    <h1 class="display-4">География</h1>
+                </div>
+                <div class="col text-center py-4">
+                    <p class="lead">
+                        Вещание без границ - информированность, открытость новым идеям, объединение единомышленников без языковых преград
+                    </p>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- GEO SECTION-->
 
-    <section id="geo-section" class="bg-light text-muted py-5">
+    <section id="geo-section" class="text-muted py-5">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
                     <img src="~/images/person-tossing-globe-1275393.jpg" alt=""
-                         class="img-fluid md-3 rounded-circle" />
+                         class="img-fluid rounded-circle" />
                 </div>
                 <div class="col-md-6">
                     <div class="d-flex">
@@ -282,12 +252,11 @@
                         </div>
                         <div class="p-2 align-self-end">
                             <p class="lead">
-                                <strong>Языки вещания</strong> - разрушение языковых барьеров на пути
-                                к актуальной информации о нашей жизни
+                                <strong>Языки вещания</strong> - разрушение языковых барьеров на пути к актуальной информации о нашей жизни
                             </p>
                             @if (SignInManager.IsSignedIn(User))
                             {
-                                <a asp-area="" asp-controller="Language" asp-action="Index" class="btn btn-outline-secondary">Перейти к заполнению раздела</a>
+                                <a asp-area="" asp-controller="Language" asp-action="Index" class="btn btn-outline-secondary">@Localizer["LinkToCategory"]</a>
                             }
                         </div>
                     </div>
@@ -297,12 +266,11 @@
                         </div>
                         <div class="p-2 align-self-end">
                             <p class="lead">
-                                <strong>Страны вещания</strong> - география слушателя не имеет
-                                значения, актуальная информация для слушателя - вот, что по-настоящему важно
+                                <strong>Страны вещания</strong> - география слушателя не имеет значения, актуальная информация для слушателя - вот, что по-настоящему важно
                             </p>
                             @if (SignInManager.IsSignedIn(User))
                             {
-                                <a asp-area="" asp-controller="Country" asp-action="Index" class="btn btn-outline-secondary">Перейти к заполнению раздела</a>
+                                <a asp-area="" asp-controller="Country" asp-action="Index" class="btn btn-outline-secondary">@Localizer["LinkToCategory"]</a>
                             }
                         </div>
                     </div>
@@ -310,20 +278,6 @@
             </div>
         </div>
     </section>
-
-
-
-    <!-- FOOTER -->
-
-    <footer id="main-footer" class="bg-dark">
-        <div class="container">
-            <div class="row">
-                <div class="col text-center py-2">
-                    <h5>BroadSend, Copyright &copy; <span id="year"></span></h5>
-                </div>
-            </div>
-        </div>
-    </footer>
 
     <!-- CONTACT MODAL-->
 
@@ -352,8 +306,7 @@
                         </div>
                         <div>
                             <p>
-                                <span class="required-field">*</span> - поля, обязательные для
-                                заполнения
+                                <span class="required-field">*</span> - поля, обязательные для заполнения
                             </p>
                         </div>
                     </form>
@@ -371,10 +324,12 @@
 
     <script type="text/javascript" src="~/lib/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="~/lib/font-awesome/js/all.min.js"></script>
+    <script type="text/javascript" src="~/lib/smooth-scroll/smooth-scroll.polyfills.min.js"></script>
 
     <script>
-        $("#year").text(new Date().getFullYear());
+        var scroll = new SmoothScroll('a[href*="#"]');
     </script>
+
 
     @RenderSection("Scripts", required: false)
 

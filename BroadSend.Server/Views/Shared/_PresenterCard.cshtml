@@ -6,13 +6,15 @@
 <div class="form-group">
     <label asp-for="@Model.Name">@SharedLocalizer["TableHeaderFullName"]</label>
     <input asp-for="@Model.Name" class="form-control" />
-    <span asp-validation-for="@Model.Name" class="text-danger"></span>
+    <div class="validation-message">
+        <span asp-validation-for="@Model.Name" class="text-danger"></span>
+    </div>
 
     <input type="hidden" asp-for="@Model.Id" />
 </div>
 
 <div style="margin: 50px 0">
-    <button type="submit" class="btn btn-primary">@SharedLocalizer["ButtonSave"]</button>
-    <a class="btn btn-primary" asp-controller="Presenter" asp-action="Aliases" asp-route-Id="@Model.Id">@SharedLocalizer["ButtonToAliases"]</a>
-    <a asp-controller="Presenter" asp-action="Index" class="btn btn-secondary">@Localizer["ButtonToPresenters"]</a>
+    <button type="submit" class="btn btn-outline-secondary">@SharedLocalizer["ButtonSave"]</button>
+    <a asp-controller="Presenter" asp-action="Aliases" asp-route-Id="@Model.Id" class="btn btn-outline-secondary">@SharedLocalizer["ButtonToAliases"]</a>
+    <a asp-controller="Presenter" asp-action="Index" class="btn btn-outline-secondary">@Localizer["ButtonToPresenters"]</a>
 </div>

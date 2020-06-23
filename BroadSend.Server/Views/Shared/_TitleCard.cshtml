@@ -5,19 +5,23 @@
 <div class="form-group">
     <label asp-for="@Model.Name">@SharedLocalizer["TableHeaderTitleName"]</label>
     <input asp-for="@Model.Name" class="form-control" />
-    <span asp-validation-for="@Model.Name" class="text-danger"></span>
+    <div class="validation-message">
+        <span asp-validation-for="@Model.Name" class="text-danger"></span>
+    </div>
 </div>
 
 <div class="form-group">
     <label asp-for="@Model.Anons">@SharedLocalizer["TableHeaderAnons"]</label>
     <textarea asp-for="@Model.Anons" class="form-control" rows="4"></textarea>
-    <span asp-validation-for="@Model.Anons" class="text-danger"></span>
+    <div class="validation-message">
+        <span asp-validation-for="@Model.Anons" class="text-danger"></span>
+    </div>
 </div>
 
 <input type="hidden" asp-for="@Model.Id" />
 
 <div style="margin: 50px 0">
-    <button type="submit" class="btn btn-primary">@SharedLocalizer["ButtonSave"]</button>
-    <a class="btn btn-primary" asp-controller="Title" asp-action="Aliases" asp-route-Id="@Model.Id">@SharedLocalizer["ButtonToAliases"]</a>
-    <a asp-controller="Title" asp-action="Index" class="btn btn-secondary">@SharedLocalizer["ButtonBackToTitles"]</a>
+    <button type="submit" class="btn btn-outline-secondary">@SharedLocalizer["ButtonSave"]</button>
+    <a class="btn btn-outline-secondary" asp-controller="Title" asp-action="Aliases" asp-route-Id="@Model.Id">@SharedLocalizer["ButtonToAliases"]</a>
+    <a asp-controller="Title" asp-action="Index" class="btn btn-outline-secondary">@SharedLocalizer["ButtonBackToTitles"]</a>
 </div>

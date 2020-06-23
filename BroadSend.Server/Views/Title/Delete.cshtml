@@ -2,26 +2,26 @@
 
 @model Title
 
-<partial name="_TitleTitle"/>
+<partial name="_TitleTitle" />
 
 <h3>@ViewBag.TitleName</h3>
 
-<partial name="_DeleteItem"/>
+<partial name="_DeleteItem" />
 
-<div style="width: 50%">
+<div>
 
-    <div class="alert alert-info">
+    <div class="alert alert-dark shadow-sm">
         <h4>@Model.Name</h4>
     </div>
 
-    <div class="alert alert-warning">
+    <div class="alert alert-warning shadow-sm">
         <h6>@SharedLocalizer["HeaderDeleteAllAliases"]</h6>
     </div>
 
     <form asp-action="Delete" style="margin: 20px 0">
-        <input type="hidden" asp-for="Id"/>
-        <button type="submit" class="btn btn-danger"><i class="fa fa-times"></i>&nbsp; @SharedLocalizer["ButtonDelete"]</button>
-        <a class="btn btn-secondary" asp-action="Index">@SharedLocalizer["ButtonBackToList"]</a>
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-outline-danger"><i class="fa fa-times"></i>&nbsp; @SharedLocalizer["ButtonDelete"]</button>
+        <a class="btn btn-outline-secondary" asp-action="Index">@SharedLocalizer["ButtonBackToList"]</a>
     </form>
 
 </div>

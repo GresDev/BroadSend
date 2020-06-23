@@ -19,128 +19,16 @@
 <body data-spy="scroll" data-target="#main-nav" id="home">
 
     <!-- Navbar section -->
-    <nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top" id="main-nav">
+    <partial name="_NavBar" />
+
+    <!-- Main Section-->
+
+    <header id="main-section" class="font-weight-light">
         <div class="container">
-            <a asp-controller="Home" asp-area="" asp-action="Index" class="navbar-brand">BroadSend</a> |
-
-            <partial name="_LoginPartial" />
-
-            <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <ul class="navbar-nav ml-auto">
-                    <li class="navbar-item">
-                        <a href="#home" class="nav-link scroll">В начало</a>
-                    </li>
-                    <li class="navbar-item">
-                        <a href="#programs-section-head" class="nav-link scroll">Программы</a>
-                    </li>
-                    <li class="navbar-item">
-                        <a href="#persons-section-head" class="nav-link scroll">Персоналии</a>
-                    </li>
-                    <li class="navbar-item">
-                        <a href="#geo-section-head" class="nav-link scroll">География</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Home Section-->
-
-    <header id="home-section">
-        <div class="dark-overlay">
-            <div class="home-inner container">
-                <div class="row">
-                    @RenderBody()
-
-                </div>
-            </div>
+            @RenderBody()
         </div>
     </header>
 
-    <!-- PROGRAMS SECTION HEAD-->
-
-    <section id="programs-section-head" class="py-4">
-        <div class="container">
-            <div class="col text-center py-4">
-                <h1 class="display-4">Программы</h1>
-            </div>
-            <div class="col text-center">
-                <p class="lead mb-4">
-                    Политика, спорт, общественная жизнь, история, музыка, современный мир цифровых
-                    технологий - передачи на любой вкус для самых взыскательных слушателей
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- PROGRAMS SECTION -->
-    @*<section id="programs-section" class="bg-light text-muted py-5">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6">
-                        <img src="~/images/black-headset-on-condenser-microphone-3587478_resize.jpg" alt=""
-                             class="img-fluid md-3 rounded-circle">
-                    </div>
-                    <div class="col-md-6">
-                        <div class="d-flex">
-                            <div class="p-4 align-self-start">
-                                <i class="fas fa-check fa-2x"></i>
-                            </div>
-                            <div class="p-2 align-self-end">
-                                <p class="lead">Делимся мнениями, обсуждаем насущные проблемы, изучаем факты</p>
-                            </div>
-                        </div>
-                        <div class="d-flex">
-                            <div class="p-4 align-self-start">
-                                <i class="fas fa-check fa-2x"></i>
-                            </div>
-                            <div class="p-2 align-self-end">
-                                <p class="lead">Наслаждаемся приятной атмосферой творческих эфиров</p>
-                                @if (SignInManager.IsSignedIn(User))
-                                {
-                                    <a asp-area="" asp-controller="Title" asp-action="Index" class="btn btn-outline-secondary">Перейти к заполнению раздела</a>
-                                }
-                            </div>
-                        </div>
-                        <div class="d-flex">
-                            <div class="p-4 align-self-start">
-                                <i class="fas fa-check fa-2x"></i>
-                            </div>
-                            <div class="p-2 align-self-end">
-                                <p class="lead">
-                                    <strong>Производители</strong> - открытость к плодотворному
-                                    сотрудничеству
-                                </p>
-                                @if (SignInManager.IsSignedIn(User))
-                                {
-                                    <a asp-area="" asp-controller="Vendor" asp-action="Index" class="btn btn-outline-secondary">Перейти к заполнению раздела</a>
-                                }
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>*@
-
-
-
-
-
-
-    <!-- FOOTER -->
-
-    <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col text-center py-2">
-                    <h5>BroadSend, Copyright &copy; <span id="year"></span></h5>
-                </div>
-            </div>
-        </div>
-    </footer>
 
 
 
@@ -149,11 +37,9 @@
     <script type="text/javascript" src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 
     <script type="text/javascript" src="~/lib/bootstrap/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="~/lib/font-awesome/js/all.min.js"></script>
+    <script type="text/javascript" src="~/lib/font-awesome/js/regular.min.js"></script>
+    <script type="text/javascript" src="~/lib/font-awesome/js/solid.min.js"></script>
 
-    <script>
-        $("#year").text(new Date().getFullYear());
-    </script>
 
     @RenderSection("Scripts", required: false)
 

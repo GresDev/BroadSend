@@ -1,14 +1,14 @@
-﻿using System.Linq;
-using BroadSend.Server.Areas.Admin.ViewModels;
+﻿using BroadSend.Server.Areas.Admin.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
+using System.Linq;
 
 namespace BroadSend.Server.Areas.Admin.Controllers
 {
     [Authorize(Roles = "Administrator")]
-    [Area( "Admin")]
+    [Area("Admin")]
     public class HomeController : Controller
     {
         private readonly UserManager<IdentityUser> _userManager;
@@ -98,25 +98,13 @@ namespace BroadSend.Server.Areas.Admin.Controllers
         {
             IdentityUser user = _userManager.FindByIdAsync(userId).Result;
 
-            int adminCount = 0;
+            ViewBag.ErrorMessage = string.Empty;
 
-            foreach (var identityUser in _userManager.Users)
-            {
-                if (_userManager.IsInRoleAsync(identityUser, "Administrator").Result)
-                {
-                    adminCount++;
-                }
-            }
+            ViewBag.SingleAdmin = CheckForSingleAdmin() & _userManager.IsInRoleAsync(user, "Administrator").Result;
 
-            if (_userManager.IsInRoleAsync(user, "Administrator").Result && adminCount == 1)
+            if (ViewBag.SingleAdmin)
             {
                 ViewBag.ErrorMessage = _sharedLocalizer["ErrorCantDeleteUniqueAdmin"];
-                ViewBag.Error = true;
-            }
-            else
-            {
-                ViewBag.ErrorMessage = string.Empty;
-                ViewBag.Error = false;
             }
 
             return View(user);
@@ -158,24 +146,10 @@ namespace BroadSend.Server.Areas.Admin.Controllers
             };
             editUserViewModel.CurrentRole = _userManager.GetRolesAsync(user).Result.FirstOrDefault();
 
-            int adminCount = 0;
+            ViewBag.SingleAdmin = CheckForSingleAdmin() && _userManager.IsInRoleAsync(user, "Administrator").Result;
 
-            foreach (var identityUser in _userManager.Users)
-            {
-                if (_userManager.IsInRoleAsync(identityUser, "Administrator").Result)
-                {
-                    adminCount++;
-                }
-            }
-
-            if (_userManager.IsInRoleAsync(user, "Administrator").Result && adminCount == 1)
-            {
-                ViewBag.Error = true;
-            }
-            else
-            {
-               ViewBag.Error = false;
-            }
+            ViewBag.UserName = user.UserName;
+            ViewBag.UserEmail = user.Email;
 
             return View(editUserViewModel);
         }
@@ -183,6 +157,11 @@ namespace BroadSend.Server.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult EditUser(EditUserViewModel editUserViewModel)
         {
+
+            IdentityUser originalUser = _userManager.FindByIdAsync(editUserViewModel.Id).Result;
+            ViewBag.UserName = originalUser.UserName;
+            ViewBag.UserEmail = originalUser.Email;
+
             editUserViewModel.Roles = _roleManager.Roles;
             if (ModelState.IsValid)
             {
@@ -196,8 +175,8 @@ namespace BroadSend.Server.Areas.Admin.Controllers
                 {
                     if (editUserViewModel.CurrentRole != editUserViewModel.SelectedRole && editUserViewModel.SelectedRole != null)
                     {
-                        var removeRoleResult = _userManager.RemoveFromRoleAsync(user, editUserViewModel.CurrentRole).Result;
-                        var addRoleResult = _userManager.AddToRoleAsync(user, editUserViewModel.SelectedRole).Result;
+                        _ = _userManager.RemoveFromRoleAsync(user, editUserViewModel.CurrentRole).Result;
+                        _ = _userManager.AddToRoleAsync(user, editUserViewModel.SelectedRole).Result;
                     }
 
                     return RedirectToAction("UserManagement", _userManager.Users);
@@ -257,16 +236,16 @@ namespace BroadSend.Server.Areas.Admin.Controllers
                     var passwordHasher =
                         HttpContext.RequestServices.GetService(typeof(IPasswordHasher<IdentityUser>)) as
                             IPasswordHasher<IdentityUser>;
-                    user.PasswordHash = passwordHasher.HashPassword(user, changePasswordViewModel.Password);
+                    user.PasswordHash = passwordHasher?.HashPassword(user, changePasswordViewModel.Password);
 
-                    IdentityResult result = passwordValidator
+                    IdentityResult result = passwordValidator?
                         .ValidateAsync(_userManager, user, changePasswordViewModel.Password).Result;
 
                     // IdentityResult result = _userManager.UpdateAsync(user).Result;
 
                     if (result.Succeeded)
                     {
-                        user.PasswordHash = passwordHasher.HashPassword(user, changePasswordViewModel.Password);
+                        user.PasswordHash = passwordHasher?.HashPassword(user, changePasswordViewModel.Password);
                         _userManager.UpdateAsync(user);
                         return RedirectToAction("UserManagement", _userManager.Users);
                     }
@@ -286,9 +265,9 @@ namespace BroadSend.Server.Areas.Admin.Controllers
         }
 
         [AcceptVerbs("GET", "POST")]
-        public IActionResult CheckIfUserNameIsUnique(string UserName)
+        public IActionResult CheckIfUserNameIsUnique(string userName)
         {
-            var user = _userManager.FindByNameAsync(UserName).Result;
+            var user = _userManager.FindByNameAsync(userName).Result;
             return user == null ? Json(true) : Json(_sharedLocalizer["ErrorDuplicateRecord"]);
         }
 
@@ -415,6 +394,21 @@ namespace BroadSend.Server.Areas.Admin.Controllers
         {
             var role = _roleManager.FindByNameAsync(name).Result;
             return role == null ? Json(true) : Json(_sharedLocalizer["ErrorDuplicateRecord"]);
+        }
+
+        private bool CheckForSingleAdmin()
+        {
+            int adminCount = 0;
+
+            foreach (var identityUser in _userManager.Users)
+            {
+                if (_userManager.IsInRoleAsync(identityUser, "Administrator").Result)
+                {
+                    adminCount++;
+                }
+            }
+
+            return adminCount == 1;
         }
     }
 }

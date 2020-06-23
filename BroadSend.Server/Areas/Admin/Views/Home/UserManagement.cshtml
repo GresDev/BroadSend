@@ -2,18 +2,18 @@
 
 @model IEnumerable<IdentityUser>
 
-<partial name="_AdminTitle"/>
+<partial name="_AdminTitle" />
 
-<partial name="_UserManagementTitle"/>
+<partial name="_UserManagementTitle" />
 
 <div>
-    <a class="btn btn-success" asp-action="AddUser" style="margin: 50px 0px">@SharedLocalizer["ButtonAdd"]</a>
+    <a class="btn btn-outline-secondary" asp-action="AddUser" style="margin: 50px 0px">@SharedLocalizer["ButtonAdd"]</a>
 </div>
 
-<div style="height: 500px; width: auto; margin-right: 250px; overflow: auto;">
+<div class="content-table">
 
     <table class="table">
-        <thead class="thead-light text-left">
+        <thead class="thead-dark text-left">
             <tr>
                 <th>@SharedLocalizer["TableHeaderUserName"]</th>
                 <th>@SharedLocalizer["TableHeaderEmail"]</th>
@@ -26,11 +26,11 @@
                 <tr>
                     <td>@identityUser.UserName</td>
                     <td>@identityUser.Email</td>
-                    <td>
+                    <td class="d-flex justify-content-end">
                         <input type="hidden" asp-for="@identityUser.Id" />
-                        <a asp-action="EditUser" asp-route-userId="@identityUser.Id">@SharedLocalizer["ButtonEdit"]</a> |
-                        <a asp-action="ChangePassword" asp-route-userId="@identityUser.Id">@SharedLocalizer["ButtonChangePassword"]</a> |
-                        <a asp-action="DeleteUser" asp-route-userId="@identityUser.Id">@SharedLocalizer["ButtonDelete"]</a>
+                        <a asp-action="EditUser" asp-route-userId="@identityUser.Id" class="btn btn-outline-secondary btn-sm mr-1">@SharedLocalizer["ButtonEdit"]</a>
+                        <a asp-action="ChangePassword" asp-route-userId="@identityUser.Id" class="btn btn-outline-secondary btn-sm mr-1">@SharedLocalizer["ButtonChangePassword"]</a>
+                        <a asp-action="DeleteUser" asp-route-userId="@identityUser.Id" class="btn btn-outline-secondary btn-sm">@SharedLocalizer["ButtonDelete"]</a>
                     </td>
                 </tr>
             }

@@ -1,17 +1,17 @@
-﻿<partial name="_DirectorTitle"/>
+﻿<partial name="_DirectorTitle" />
 
-<partial name="_EditItem"/>
+<partial name="_EditItem" />
 
 @if (ViewBag.ErrorMessage != string.Empty)
 {
-    <partial name="_ErrorMessage"/>
+    <partial name="_ErrorMessage" />
 }
 else
 {
-    <div style="width: 50%">
+    <div>
         <form asp-controller="Director" asp-action="Edit">
 
-            <partial name="_DirectorCard"/>
+            <partial name="_DirectorCard" />
 
         </form>
     </div>

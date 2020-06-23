@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ButtonAdd" xml:space="preserve">
-    <value>Добавить</value>
+    <value>Добавить запись</value>
     <comment>Кнопка "Добавить"</comment>
   </data>
   <data name="ButtonBack" xml:space="preserve">
@@ -190,11 +190,11 @@
     <comment>Общая ошибка приложения</comment>
   </data>
   <data name="HeaderAddNewItem" xml:space="preserve">
-    <value>Добавить новую запись</value>
+    <value>Добавление новой записи</value>
     <comment>Заголовок "Добавить новую запись"</comment>
   </data>
   <data name="HeaderDeleteAllAliases" xml:space="preserve">
-    <value>Также, будут удалены все псевдонимы, относящиеся к выбранной записи</value>
+    <value>Также будут удалены все псевдонимы, относящиеся к выбранной записи</value>
     <comment>Также, будут удалены все псевдонимы, относящиеся к выбранной записи</comment>
   </data>
   <data name="HeaderDeleteItem" xml:space="preserve">
@@ -214,7 +214,7 @@
     <comment>Заголовок таблицы "Псевдоним"</comment>
   </data>
   <data name="TableHeaderAnons" xml:space="preserve">
-    <value>Анонс передачи</value>
+    <value>Анонс программы</value>
     <comment>Заголовок таблицы "Анонс передачи"</comment>
   </data>
   <data name="TableHeaderEmail" xml:space="preserve">
@@ -250,7 +250,7 @@
     <comment>Заголовок таблицы "Наименование"</comment>
   </data>
   <data name="TableHeaderTitleName" xml:space="preserve">
-    <value>Название передачи</value>
+    <value>Название программы</value>
     <comment>Заголовок таблицы "Название передачи"</comment>
   </data>
   <data name="TableHeaderUserName" xml:space="preserve">

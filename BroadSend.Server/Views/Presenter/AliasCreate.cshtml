@@ -2,11 +2,11 @@
 
 @model PresenterAliasCreateViewModel
 
-<partial name="_PresenterTitle"/>
+<partial name="_PresenterTitle" />
 
-<h3>@ViewBag.PresenterName</h3>
+<h2 class="font-weight-light">@ViewBag.ParentName</h2>
 <h4>@SharedLocalizer["HeaderEditAliasesList"]</h4>
-<h4>@SharedLocalizer["HeaderAddNewItem"]</h4>
+<h4 class="mb-4">@SharedLocalizer["HeaderAddNewItem"]</h4>
 
 @if (ViewBag.ErrorMessage != string.Empty)
 {
@@ -15,20 +15,22 @@
 }
 else
 {
-    <div style="width: 50%">
+    <div>
         <form asp-controller="Presenter" asp-action="AliasCreate">
 
             <div class="form-group">
                 <label asp-for="Alias">@SharedLocalizer["TableHeaderAlias"]</label>
-                <input asp-for="Alias" class="form-control"/>
-                <span asp-validation-for="Alias" class="text-danger"></span>
+                <input asp-for="Alias" class="form-control" />
+                <div class="validation-message">
+                    <span asp-validation-for="Alias" class="text-danger"></span>
+                </div>
             </div>
 
-            <input type="hidden" asp-for="ParentId"/>
+            <input type="hidden" asp-for="ParentId" />
 
             <div style="margin: 50px 0">
-                <button type="submit" class="btn btn-primary">@SharedLocalizer["ButtonSave"]</button>
-                <a asp-controller="Presenter" asp-action="Aliases" asp-route-id="@Model.ParentId" class="btn btn-secondary">@SharedLocalizer["ButtonToAliases"]</a>
+                <button type="submit" class="btn btn-outline-secondary">@SharedLocalizer["ButtonSave"]</button>
+                <a asp-controller="Presenter" asp-action="Aliases" asp-route-id="@Model.ParentId" class="btn btn-outline-secondary">@SharedLocalizer["ButtonToAliases"]</a>
             </div>
 
         </form>

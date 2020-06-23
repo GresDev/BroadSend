@@ -2,13 +2,15 @@
 
 <partial name="_TitleTitle"/>
 
+<h2 class="font-weight-light">@Model.Name</h2>
+
 <partial name="_EditItem"/>
 
 @if (ViewBag.ErrorMessage != string.Empty)
 {
     <h3 class="alert-danger">@ViewBag.ErrorMessage</h3>
 }
-<div style="width: 50%">
+<div>
     <form asp-controller="Title" asp-action="Edit">
 
         <partial name="_TitleCard"/>

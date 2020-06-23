@@ -1,4 +1,10 @@
-﻿<partial name="_PresenterTitle" />
+﻿@model Presenter
+
+<partial name="_PresenterTitle" />
+
+<div>
+    <h2 class="font-weight-light">@Model.Name</h2>
+</div>
 
 <partial name="_EditItem" />
 
@@ -8,7 +14,7 @@
 }
 else
 {
-    <div style="width: 50%">
+    <div>
         <form asp-controller="Presenter" asp-action="Edit">
 
             <partial name="_PresenterCard" />

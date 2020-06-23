@@ -2,35 +2,35 @@
 
 @model IEnumerable<Director>
 
-<partial name="_DirectorTitle"/>
+<partial name="_DirectorTitle" />
 
 <div>
-    <a class="btn btn-success" asp-action="Create" style="margin-bottom: 50px">@SharedLocalizer["ButtonAdd"]</a>
+    <a class="btn btn-outline-secondary" asp-action="Create" style="margin-bottom: 50px">@SharedLocalizer["ButtonAdd"]</a>
 </div>
 
-<div style="height: 500px; width: auto; margin-right: 250px; overflow: auto;">
+<div class="content-table">
 
     <table class="table">
-        <thead class="thead-light text-left">
-        <tr>
-            <th>@SharedLocalizer["TableHeaderAlias"]</th>
-            <th>@SharedLocalizer["TableHeaderFullName"]</th>
-            <th></th>
-        </tr>
+        <thead class="thead-dark text-left">
+            <tr>
+                <th>@SharedLocalizer["TableHeaderAlias"]</th>
+                <th>@SharedLocalizer["TableHeaderFullName"]</th>
+                <th></th>
+            </tr>
         </thead>
         <tbody>
-        @foreach (var director in Model)
-        {
-            <tr>
-                <td>@director.Alias</td>
-                <td>@director.Name</td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@director.Id">@SharedLocalizer["ButtonEdit"]</a> |
-                    <a asp-action="Delete" asp-route-id="@director.Id">@SharedLocalizer["ButtonDelete"]</a>
-                </td>
+            @foreach (var director in Model)
+            {
+                <tr>
+                    <td>@director.Alias</td>
+                    <td>@director.Name</td>
+                    <td class="d-flex justify-content-end">
+                        <a asp-action="Edit" asp-route-id="@director.Id" class="btn btn-outline-secondary btn-sm mr-1">@SharedLocalizer["ButtonEdit"]</a>
+                        <a asp-action="Delete" asp-route-id="@director.Id" class="btn btn-outline-secondary btn-sm">@SharedLocalizer["ButtonDelete"]</a>
+                    </td>
 
-            </tr>
-        }
+                </tr>
+            }
         </tbody>
 
     </table>

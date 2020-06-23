@@ -2,7 +2,7 @@
 
 @model TitleCreateViewModel
 
-<partial name="_TitleTitle"/>
+<partial name="_TitleTitle" />
 
 <h3 style="margin: 0 0 50px">@SharedLocalizer["HeaderAddNewItem"]</h3>
 
@@ -11,29 +11,35 @@
     <h3 class="alert-danger">@ViewBag.ErrorMessage</h3>
 }
 
-<div style="width: 50%">
+<div>
     <form asp-controller="Title" asp-action="Create">
 
         <div class="form-group">
             <label asp-for="@Model.ComplexItem.Name">@SharedLocalizer["TableHeaderTitleName"]</label>
-            <input asp-for="@Model.ComplexItem.Name" class="form-control"/>
-            <span asp-validation-for="@Model.ComplexItem.Name" class="text-danger"></span>
+            <input asp-for="@Model.ComplexItem.Name" class="form-control" />
+            <div class="validation-message">
+                <span asp-validation-for="@Model.ComplexItem.Name" class="text-danger"></span>
+            </div>
         </div>
 
         <div class="form-group">
             <label asp-for="@Model.ComplexItemAlias.Alias">@SharedLocalizer["TableHeaderAlias"]</label>
-            <input asp-for="@Model.ComplexItemAlias.Alias" class="form-control"/>
-            <span asp-validation-for="@Model.ComplexItemAlias.Alias" class="text-danger"></span>
+            <input asp-for="@Model.ComplexItemAlias.Alias" class="form-control" />
+            <div class="validation-message">
+                <span asp-validation-for="@Model.ComplexItemAlias.Alias" class="text-danger"></span>
+            </div>
         </div>
         <div class="form-group">
             <label asp-for="@Model.ComplexItem.Anons">@SharedLocalizer["TableHeaderAnons"]</label>
             <textarea asp-for="@Model.ComplexItem.Anons" class="form-control" rows="5"></textarea>
-            <span asp-validation-for="@Model.ComplexItem.Anons" class="text-danger"></span>
+            <div class="validation-message">
+                <span asp-validation-for="@Model.ComplexItem.Anons" class="text-danger"></span>
+            </div>
         </div>
 
         <div style="margin: 50px 0">
-            <button type="submit" class="btn btn-primary">@SharedLocalizer["ButtonSave"]</button>
-            <a asp-controller="Title" asp-action="Index" class="btn btn-secondary">@SharedLocalizer["ButtonBackToList"]</a>
+            <button type="submit" class="btn btn-outline-secondary">@SharedLocalizer["ButtonSave"]</button>
+            <a asp-controller="Title" asp-action="Index" class="btn btn-outline-secondary">@SharedLocalizer["ButtonBackToList"]</a>
         </div>
 
     </form>
