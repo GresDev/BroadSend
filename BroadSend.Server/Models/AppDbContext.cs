@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using BroadSend.Server.Utils;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -34,6 +35,8 @@ namespace BroadSend.Server.Models
 
         public DbSet<Broadcast> Broadcasts { get; set; }
 
+        public DbSet<Schedule> Schedules { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -50,6 +53,9 @@ namespace BroadSend.Server.Models
             modelBuilder.Entity<Title>().HasMany(t => t.TitleAliases).WithOne().HasForeignKey(fk => fk.ParentId);
             modelBuilder.Entity<Composer>().HasIndex(c => c.Name).IsUnique();
             modelBuilder.Entity<Vendor>().HasIndex(v => v.Name).IsUnique();
+            modelBuilder.Entity<Schedule>().HasIndex(s => s.Date).IsUnique();
+
+            modelBuilder.Seed();
         }
     }
 }

@@ -4,8 +4,14 @@
 
 <partial name="_DirectorTitle" />
 
-<div>
-    <a class="btn btn-outline-secondary" asp-action="Create" style="margin-bottom: 50px">@SharedLocalizer["ButtonAdd"]</a>
+<div class="d-inline-flex">
+    <div>
+        <a class="btn btn-outline-secondary" asp-action="Create" style="margin-bottom: 50px">@SharedLocalizer["ButtonAdd"]</a>
+    </div>
+
+    <div>
+        <a asp-area="" asp-controller="DirectorSchedule" asp-action="Index" class="btn btn-outline-secondary">Перейти к расписанию звукорежиссёров</a>
+    </div>
 </div>
 
 <div class="content-table">

@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Globalization;
 using BroadSend.Server.Models;
 using BroadSend.Server.Models.Contracts;
 using BroadSend.Server.Models.Repositories;
@@ -13,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Serilog;
+using System.Collections.Generic;
+using System.Globalization;
 
 namespace BroadSend.Server
 {
@@ -40,6 +40,7 @@ namespace BroadSend.Server
             services.AddScoped<ITitleRepository, TitleRepository>();
             services.AddScoped<IComposerRepository, ComposerRepository>();
             services.AddScoped<IVendorRepository, VendorRepository>();
+            services.AddScoped<IScheduleRepository, ScheduleRepository>();
 
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<AppDbContext>()

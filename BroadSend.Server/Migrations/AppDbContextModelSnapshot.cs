@@ -4,6 +4,7 @@ using BroadSend.Server.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BroadSend.Server.Migrations
 {
@@ -173,6 +174,98 @@ namespace BroadSend.Server.Migrations
                         .IsUnique();
 
                     b.ToTable("Directors");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Alias = "Ростовцева",
+                            Name = "(Ростовцева) Чернявская  Светлана Германовна"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Alias = "Рябочкина",
+                            Name = "(Рябочкина) Гололобова Ольга Алексеевна"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Alias = "Якушева",
+                            Name = "(Якушева) Кайгородова Наталия Владимировна"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Alias = "Антипов",
+                            Name = "Антипов Василий Владимирович"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Alias = "Бурсин",
+                            Name = "Бурсин Кирилл Владимирович"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Alias = "Бурсина",
+                            Name = "Бурсина Мария Владимировна"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Alias = "Игнатов",
+                            Name = "Игнатов Сергей Юрьевич"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Alias = "Котов",
+                            Name = "Котов Николай Викторович"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Alias = "Крылов",
+                            Name = "Крылов Илья Сергеевич"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Alias = "Кузнецов",
+                            Name = "Кузнецов Сергей Александрович"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Alias = "Кузьмина",
+                            Name = "Кузьмина Наталья Алексеевна"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Alias = "Лелякова",
+                            Name = "Лелякова  Марина Георгиевна"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Alias = "Селиванова",
+                            Name = "Селиванова Наталья Викторовна"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Alias = "Смирнов",
+                            Name = "Смирнов Александр Геннадиевич"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Alias = "Цернес",
+                            Name = "Цернес Александр Владимирович"
+                        });
                 });
 
             modelBuilder.Entity("BroadSend.Server.Models.Language", b =>
@@ -238,6 +331,46 @@ namespace BroadSend.Server.Migrations
                     b.HasIndex("ParentId");
 
                     b.ToTable("PresenterAliases");
+                });
+
+            modelBuilder.Entity("BroadSend.Server.Models.Schedule", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Date")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(10)")
+                        .HasMaxLength(10);
+
+                    b.Property<int?>("Interval01Id")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Interval02Id")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Interval03Id")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Interval04Id")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Date")
+                        .IsUnique();
+
+                    b.HasIndex("Interval01Id");
+
+                    b.HasIndex("Interval02Id");
+
+                    b.HasIndex("Interval03Id");
+
+                    b.HasIndex("Interval04Id");
+
+                    b.ToTable("Schedules");
                 });
 
             modelBuilder.Entity("BroadSend.Server.Models.Title", b =>
@@ -513,6 +646,25 @@ namespace BroadSend.Server.Migrations
                         .HasForeignKey("ParentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("BroadSend.Server.Models.Schedule", b =>
+                {
+                    b.HasOne("BroadSend.Server.Models.Director", "Interval01")
+                        .WithMany()
+                        .HasForeignKey("Interval01Id");
+
+                    b.HasOne("BroadSend.Server.Models.Director", "Interval02")
+                        .WithMany()
+                        .HasForeignKey("Interval02Id");
+
+                    b.HasOne("BroadSend.Server.Models.Director", "Interval03")
+                        .WithMany()
+                        .HasForeignKey("Interval03Id");
+
+                    b.HasOne("BroadSend.Server.Models.Director", "Interval04")
+                        .WithMany()
+                        .HasForeignKey("Interval04Id");
                 });
 
             modelBuilder.Entity("BroadSend.Server.Models.TitleAlias", b =>

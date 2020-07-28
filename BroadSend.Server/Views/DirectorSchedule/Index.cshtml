@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Schedule>
+<h1>Расписание звукорежиссеров</h1>
+
+
+
+<div class="content-table">
+
+    <table class="table">
+        <thead class="thead-dark text-left">
+            <tr>
+                <th>Дата</th>
+                <th>День недели</th>
+                <th>00:00 - 7:59</th>
+                <th>8:00 - 14:59</th>
+                <th>15:00 - 21:59</th>
+                <th>22:00 - 23:59</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in @Model)
+            {
+                <tr>
+                    <td>@item.Date</td>
+                    <td>@CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(DateTime.Parse(item.Date).DayOfWeek)</td>
+                    <td>@(item.Interval01?.Alias ?? "-")</td>
+                    <td>@(item.Interval02?.Alias ?? "-")</td>
+                    <td>@(item.Interval03?.Alias ?? "-")</td>
+                    <td>@(item.Interval04?.Alias ?? "-")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
