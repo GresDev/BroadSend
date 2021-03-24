@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace BroadSend.Server.Models.Repositories
 {
@@ -16,7 +17,7 @@ namespace BroadSend.Server.Models.Repositories
             AppDbContext = appDbContext;
         }
 
-        public IEnumerable<Schedule> GetScheduleList(int year, int month)
+        public async Task<IEnumerable<Schedule>> GetScheduleListAsync(int year, int month)
         {
 
             List<Schedule> scheduleList = new List<Schedule>();
@@ -27,7 +28,7 @@ namespace BroadSend.Server.Models.Repositories
             {
                 var selectedDate = year.ToString("0000") + "/" + month.ToString("00") + "/" + i.ToString("00");
 
-                var result = AppDbContext.Set<Schedule>().AsNoTracking().FirstOrDefault(s => s.Date == selectedDate);
+                var result = await AppDbContext.Set<Schedule>().AsNoTracking().FirstOrDefaultAsync(s => s.Date == selectedDate);
 
                 if (result == null)
                 {
@@ -38,7 +39,7 @@ namespace BroadSend.Server.Models.Repositories
 
                     result = schedule;
 
-                    AppDbContext.Set<Schedule>().Add(result);
+                    await AppDbContext.Set<Schedule>().AddAsync(result);
 
                 }
 
@@ -54,7 +55,7 @@ namespace BroadSend.Server.Models.Repositories
                 scheduleList.Add(result);
             }
 
-            AppDbContext.SaveChanges();
+            await AppDbContext.SaveChangesAsync();
 
             return scheduleList;
         }

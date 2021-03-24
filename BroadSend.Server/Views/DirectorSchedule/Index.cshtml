@@ -1,33 +1,166 @@
-﻿@model IEnumerable<Schedule>
+﻿@model ScheduleViewModel
+
 <h1>Расписание звукорежиссеров</h1>
 
+<div class="d-inline-flex">
+    <p class="lead mr-3">@Model.MonthList[Model.Month - 1]</p>
+    <p class="lead">@Model.Year года</p>
 
-
-<div class="content-table">
-
-    <table class="table">
-        <thead class="thead-dark text-left">
-            <tr>
-                <th>Дата</th>
-                <th>День недели</th>
-                <th>00:00 - 7:59</th>
-                <th>8:00 - 14:59</th>
-                <th>15:00 - 21:59</th>
-                <th>22:00 - 23:59</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in @Model)
-            {
-                <tr>
-                    <td>@item.Date</td>
-                    <td>@CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(DateTime.Parse(item.Date).DayOfWeek)</td>
-                    <td>@(item.Interval01?.Alias ?? "-")</td>
-                    <td>@(item.Interval02?.Alias ?? "-")</td>
-                    <td>@(item.Interval03?.Alias ?? "-")</td>
-                    <td>@(item.Interval04?.Alias ?? "-")</td>
-                </tr>
-            }
-        </tbody>
-    </table>
 </div>
+
+
+<div class="mb-5">
+    <form asp-controller="DirectorSchedule" asp-action="Index">
+
+        <div class="d-inline-flex">
+            <div class="mr-2">
+                <select class="form-control" asp-for="Year">
+                    @for (int i = 2015; i <= DateTime.Now.Year + 1; i++)
+                    {
+                        @if (i == @Model.Year)
+                        {
+                            <option selected>@i</option>
+                        }
+                        else
+                        {
+                            <option>@i</option>
+                        }
+                    }
+                </select>
+            </div>
+
+            <div>
+                <select class="form-control" asp-for="Month">
+                    @foreach (var month in @Model.MonthList)
+                    {
+
+                        if (DateTime.ParseExact(month, "MMMM", CultureInfo.CurrentCulture).Month == @Model.Month)
+                        {
+                            <option selected>@month</option>
+                        }
+                        else
+                        {
+                            <option>@month</option>
+                        }
+                    }
+                </select>
+            </div>
+
+            <div>
+                <button type="submit" class="btn btn-outline-secondary ml-2">Перейти</button>
+            </div>
+        </div>
+    </form>
+    <div>
+        <button type="submit" class="btn btn-outline-secondary ml-2" form="scheduleTable">Сохранить</button>
+    </div>
+</div>
+
+
+
+
+<form id="scheduleTable" asp-area="" asp-controller="DirectorSchedule" asp-action="UpdateSchedule">
+    <div class="content-table">
+        <input asp-for="Year" /><p>@Model.Year</p>
+        <input asp-for="@Model.Month" /><p>@Model.Month</p>
+        <table class="table">
+            <thead class="thead-dark text-left">
+                <tr>
+                    <th rowspan="2" class="lead">Дата</th>
+                    <th rowspan="2" class="lead">День недели</th>
+                    <th colspan="4">Интервалы</th>
+                </tr>
+                <tr>
+                    <th>00:00 - 7:59</th>
+                    <th>8:00 - 14:59</th>
+                    <th>15:00 - 21:59</th>
+                    <th>22:00 - 23:59</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in @Model.DirectorSchedule)
+                {
+                    <tr>
+                        <td>@item.Date</td>
+                        <td>@CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(DateTime.Parse(item.Date).DayOfWeek)</td>
+                        @*<td>@(item.Interval01?.Alias ?? "-")</td>*@
+                        @*<td>@(item.Interval02?.Alias ?? "-")</td>
+                            <td>@(item.Interval03?.Alias ?? "-")</td>
+                            <td>@(item.Interval04?.Alias ?? "-")</td>*@
+
+                        <td>
+                            <select class="form-control">
+                                <option selected>-</option>
+                                @foreach (var director in @Model.Directors)
+                                {
+                                    if (item.Interval01?.Alias != null && director.Alias == item.Interval01?.Alias)
+                                    {
+                                        <option selected>@director.Alias</option>
+                                    }
+                                    else
+                                    {
+                                        <option>@director.Alias</option>
+                                    }
+
+                                }
+                            </select>
+                        </td>
+                        <td>
+                            <select class="form-control">
+                                <option selected>-</option>
+                                @foreach (var director in @Model.Directors)
+                                {
+                                    if (item.Interval02?.Alias != null && director.Alias == item.Interval02?.Alias)
+                                    {
+                                        <option selected>@director.Alias</option>
+                                    }
+                                    else
+                                    {
+                                        <option>@director.Alias</option>
+                                    }
+
+                                }
+                            </select>
+                        </td>
+                        <td>
+                            <select class="form-control">
+                                <option selected>-</option>
+                                @foreach (var director in @Model.Directors)
+                                {
+                                    if (item.Interval03?.Alias != null && director.Alias == item.Interval03?.Alias)
+                                    {
+                                        <option selected>@director.Alias</option>
+                                    }
+                                    else
+                                    {
+                                        <option>@director.Alias</option>
+                                    }
+
+                                }
+                            </select>
+                        </td>
+                        <td>
+                            <select class="form-control">
+                                <option selected>-</option>
+                                @foreach (var director in @Model.Directors)
+                                {
+                                    if (item.Interval04?.Alias != null && director.Alias == item.Interval04?.Alias)
+                                    {
+                                        <option selected>@director.Alias</option>
+                                    }
+                                    else
+                                    {
+                                        <option>@director.Alias</option>
+                                    }
+
+                                }
+                            </select>
+                        </td>
+
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</form>
